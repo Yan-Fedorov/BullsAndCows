@@ -7,7 +7,7 @@ namespace BullsAndCows
         Equal = 1, Less, More
     }
 
-    public class Solwer
+    public class Solwer : IGame
     {
         public void Run()
         {
