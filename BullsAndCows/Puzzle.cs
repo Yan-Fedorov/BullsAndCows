@@ -42,7 +42,7 @@ namespace BullsAndCows
             Console.ReadLine();
         }
 
-        private static int GetNumber()
+        public static int GetNumber()
         {
             while (true)
             {

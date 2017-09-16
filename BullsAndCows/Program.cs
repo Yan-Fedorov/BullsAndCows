@@ -5,7 +5,7 @@ namespace BullsAndCows
 {
     public enum Game
     {
-        Solver = 1, Puzzle
+        Solver = 1, Puzzle = 2, TrueBullsAndCowsPuzzle
     }
 
     public class Program
@@ -28,6 +28,9 @@ namespace BullsAndCows
                     case Game.Puzzle:
                         new Puzzle().Run();
                         break;
+                    case Game.TrueBullsAndCowsPuzzle:
+                        new TrueBullsAndCowsPuzzle().Run();
+                        break;
 
                     case null:
                         Console.WriteLine("Как жаль что вы уже уходите.");
@@ -47,14 +50,15 @@ namespace BullsAndCows
             Console.WriteLine(@"Укажите вариант игры:
 1 - компьютер отгадывает число
 2 - компьютер загадывает число
-3 - выход");
+3 - компьютер загадывает число и играет в быков и коров
+4 - выход");
 
             while (true)
             {
                 var key = Console.ReadLine();
 
-                if (int.TryParse(key, out var num) && num > 0 && num < 4)
-                    return num == 3 ? (Game?)null : (Game)num;
+                if (int.TryParse(key, out var num) && num > 0 && num < 5)
+                    return num == 4 ? (Game?)null : (Game)num;
             }
         }
     }

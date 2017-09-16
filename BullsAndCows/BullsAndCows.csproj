@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>BullsAndCows</RootNamespace>
     <AssemblyName>BullsAndCows</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Puzzle.cs" />
     <Compile Include="Solwer.cs" />
+    <Compile Include="TrueBullsAndCowsPuzzle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
