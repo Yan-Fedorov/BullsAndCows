@@ -7,10 +7,10 @@ using BullsAndCows.Oop.Puzzle;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
-    public class GamerConsoleOutput : IPuzzleOutput
+    public class GamerConsoleOutput : IPuzzleOutput, ISolwerOutput
     {
         #region IPuzzleOutput
-        public void Greating()
+        public void PuzzleGreating()
         {
             Console.WriteLine("Я загадал 3-х значное число, угадывай )");
         }
@@ -27,6 +27,27 @@ namespace BullsAndCows.Oop.GamerConsol
                 ? $"Верно, я загадывал {number}"
                 : $"К сожалению у вас закончились попытки. Я загадывал {number}"
             );
+        }
+        #endregion
+
+
+
+        #region ISolwerOutput
+        public void SolwerGreating()
+        {
+            Console.WriteLine("Загадайте 3-х значное число и нажмите любую клавишу");
+        }
+
+        public void Assumption(int assumption)
+        {
+            Console.WriteLine($"Вы загадали {assumption} ?");
+        }
+
+        public void ResaultAssumption(bool guessed)
+        {
+            Console.WriteLine(guessed
+                ? "Ура, я угадал )))"
+                : "Ой какое сложное число вы загадали");
         }
         #endregion
     }

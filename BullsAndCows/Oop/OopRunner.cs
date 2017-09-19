@@ -25,7 +25,7 @@ namespace BullsAndCows.Oop
                 switch (game)
                 {
                     case Game.Solver:
-                        new Solwer().Run();
+                        new OopSolwer(gamerConsoleInput, gamerConsoleOutput).Run();
                         break;
 
                     case Game.Puzzle:

@@ -2,7 +2,7 @@
 {
     public interface IPuzzleOutput
     {
-        void Greating();
+        void PuzzleGreating();
         void ShowEstimation(int assumption, bool isAssumptionBigger);
         void ShowResult(int number, bool isGuessed);
     }

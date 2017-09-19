@@ -9,8 +9,8 @@ namespace BullsAndCows
     {
         public static void Main()
         {
-            new Runner().Run();
-            //new OopRunner().Run();
+             // new Runner().Run();
+            new OopRunner().Run();
         }
     }
 }

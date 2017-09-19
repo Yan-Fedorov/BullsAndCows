@@ -21,7 +21,7 @@ namespace BullsAndCows.Oop.Puzzle
 
             var number = new Random().Next(100, 999);
 
-            _output.Greating();
+            _output.PuzzleGreating();
 
             var iteration = 0;
             do
