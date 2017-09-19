@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BullsAndCows", "BullsAndCows\BullsAndCows.csproj", "{F8297195-8051-47ED-8905-2B71D9165143}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C2C97606-B0A2-482C-8345-0089DB105899}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{7680CE00-615C-49BA-97D8-4FF4FA893A85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{F8297195-8051-47ED-8905-2B71D9165143}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8297195-8051-47ED-8905-2B71D9165143}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8297195-8051-47ED-8905-2B71D9165143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7680CE00-615C-49BA-97D8-4FF4FA893A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7680CE00-615C-49BA-97D8-4FF4FA893A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7680CE00-615C-49BA-97D8-4FF4FA893A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7680CE00-615C-49BA-97D8-4FF4FA893A85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7680CE00-615C-49BA-97D8-4FF4FA893A85} = {C2C97606-B0A2-482C-8345-0089DB105899}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F3AB8B5B-77C0-46B5-A450-9095D5445C8B}

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BullsAndCows.Oop.Puzzle;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
-    public class GamerConsoleInput: IPuzzleInput, ISolwerInput
+    public interface IGamerConsoleInput : IPuzzleInput, ISolwerInput { }
+
+    public class GamerConsoleInput: IGamerConsoleInput
     {
         public int GetNumber()
         {

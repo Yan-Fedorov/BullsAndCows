@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace BullsAndCows.Oop.Puzzle
 {
@@ -17,8 +16,6 @@ namespace BullsAndCows.Oop.Puzzle
 
         public void Run()
         {
-            Console.OutputEncoding = Encoding.UTF8;
-
             var number = new Random().Next(100, 999);
 
             _output.PuzzleGreating();
