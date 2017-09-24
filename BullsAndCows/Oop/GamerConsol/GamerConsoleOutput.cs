@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BullsAndCows.Oop.Puzzle;
+using BullsAndCows.Oop.Solwer;
+using BullsAndCows.Oop;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
-    public class GamerConsoleOutput : IPuzzleOutput, ISolwerOutput
+    public class GamerConsoleOutput : IPuzzleOutput, ISolwerOutput, IOopRunnerOutput
     {
         #region IPuzzleOutput
         public void PuzzleGreating()
@@ -48,6 +50,18 @@ namespace BullsAndCows.Oop.GamerConsol
             Console.WriteLine(guessed
                 ? "Ура, я угадал )))"
                 : "Ой какое сложное число вы загадали");
+        }
+        #endregion
+
+        #region OopRunner
+        public void ByeBye()
+        {
+            Console.WriteLine("Как жаль что вы уже уходите.");
+            Console.ReadLine();
+        }
+         public void CheckTheGame()
+        {
+
         }
         #endregion
     }

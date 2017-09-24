@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BullsAndCows
+namespace BullsAndCows.Oop.Solwer
 {
     public enum OopEstimation
     {
         Equal = 1, Less, More
     }
-    class OopSolwer
+    public class OopSolwer
     {
         private readonly ISolwerInput _input;
         private readonly ISolwerOutput _output;

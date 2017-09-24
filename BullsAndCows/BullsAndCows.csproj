@@ -44,12 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IGame.cs" />
+    <Compile Include="Oop\Runner\IOopRunnerOutput.cs" />
+    <Compile Include="Oop\Runner\IOopRunnerInput.cs" />
     <Compile Include="Oop\Solwer\OopSolwer.cs" />
     <Compile Include="Oop\Solwer\ISolwerOutput.cs" />
     <Compile Include="Oop\Solwer\ISolwerInput.cs" />
     <Compile Include="Oop\GamerConsol\GamerConsoleInput.cs" />
     <Compile Include="Oop\GamerConsol\GamerConsoleOutput.cs" />
-    <Compile Include="Oop\OopRunner.cs" />
+    <Compile Include="Oop\Runner\OopRunner.cs" />
     <Compile Include="Oop\Puzzle\IPuzzleInput.cs" />
     <Compile Include="Oop\Puzzle\IPuzzleOutput.cs" />
     <Compile Include="Oop\Puzzle\OopPuzzle.cs" />

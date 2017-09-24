@@ -5,17 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows.Oop.Puzzle;
+using BullsAndCows.Oop.Solwer;
 
 namespace BullsAndCows.Oop
 {
     public class OopRunner
     {
+        private readonly IGamerConsoleInput _input;
+        private readonly IOopRunnerOutput _output;
+
+        public OopRunner(IGamerConsoleInput input = null, IOopRunnerOutput output = null)
+        {
+            _input = input ?? new GamerConsoleInput();
+            _output = output ?? new GamerConsoleOutput();
+        }
+       
+
+
         public void Run()
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var gamerConsoleInput = new GamerConsoleInput();
-            var gamerConsoleOutput = new GamerConsoleOutput();
+            
 
             while (true)
             {
@@ -25,16 +36,17 @@ namespace BullsAndCows.Oop
                 switch (game)
                 {
                     case Game.Solver:
-                        new OopSolwer(gamerConsoleInput, gamerConsoleOutput).Run();
+                        new OopSolwer(_input, _output as ISolwerOutput).Run();
                         break;
 
                     case Game.Puzzle:
-                        new OopPuzzle(gamerConsoleInput, gamerConsoleOutput).Run();
+                        new OopPuzzle(_input, _output as IPuzzleOutput).Run();
                         break;
 
                     case null:
-                        Console.WriteLine("Как жаль что вы уже уходите.");
-                        Console.ReadLine();
+                        _output.ByeBye();
+                        //Console.WriteLine("Как жаль что вы уже уходите.");
+                        //Console.ReadLine();
                         return;
 
                     default:
