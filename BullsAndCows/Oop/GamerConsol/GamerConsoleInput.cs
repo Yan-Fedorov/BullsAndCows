@@ -1,7 +1,7 @@
 ﻿using System;
 using BullsAndCows.Oop.Puzzle;
 using BullsAndCows.Oop.Solwer;
-using BullsAndCows.Oop;
+using BullsAndCows.Oop.Runner;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
@@ -36,6 +36,29 @@ namespace BullsAndCows.Oop.GamerConsol
                 if (int.TryParse(key, out var num) && num > 0 && num <= 3)
                     return (OopEstimation)num;
             }
+        }
+
+        public Game? SelectGame()
+        {
+            Console.Clear();
+            Console.WriteLine(@"Укажите вариант игры:
+1 - компьютер отгадывает число
+2 - компьютер загадывает число
+3 - выход");
+
+            while (true)
+            {
+                var key = Console.ReadLine();
+
+                if (int.TryParse(key, out var num) && num > 0 && num < 4)
+                    return num == 3 ? (Game?)null : (Game)num;
+            }
+        }
+
+        public void PressAnyKey()
+        {
+            Console.Write("Нажмите любую клавишу...");
+            Console.ReadKey(true);
         }
     }
 }

@@ -1,15 +1,4 @@
-﻿using System;
-using System.Text;
-using BullsAndCows.Oop;
-using BullsAndCows.Oop.GamerConsol;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BullsAndCows.Oop.GamerConsol;
-using BullsAndCows.Oop.Puzzle;
-using BullsAndCows.Oop.Solwer;
+﻿using BullsAndCows.Oop.Runner;
 
 namespace BullsAndCows
 {

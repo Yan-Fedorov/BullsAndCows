@@ -18,33 +18,30 @@ namespace UnitTests.Oop
             _output = Substitute.For<ISolwerOutput>();
 
             _puzzle = new OopSolwer(_input, _output);
-
         }
+
         [Fact]
         public void CheckIfItGoTo10()
         {
             
-            _input.GetEstimation().Returns((OopEstimation)2);
+            _input.GetEstimation().Returns(OopEstimation.More);
 
             _puzzle.Run();
 
             _output.Received(10).Assumption(Arg.Any<int>());
         }
 
-        // public void ItCanFindNumber()
-        //{
-        //    int checkValue = 300;
-        //    _input.GetEstimation().Returns(if(checkValue ==a );
-        //    _output.Received(10);
-        //}
-        public void Demo()
+        [Theory]
+        [InlineData(125)]
+        [InlineData(750)]
+        public void SolwerУгадаетЧисла(int secret)
         {
             int assumption = 0;
 
             var input = Substitute.For<ISolwerInput>();
-            input.GetEstimation().Returns(x => assumption == 500
+            input.GetEstimation().Returns(x => assumption == secret
                 ? OopEstimation.Equal
-                : OopEstimation.Less);
+                : (secret > assumption  ? OopEstimation.More : OopEstimation.Less));
 
             var output = Substitute.For<ISolwerOutput>();
             output
@@ -53,6 +50,12 @@ namespace UnitTests.Oop
                 {
                     assumption = x.Arg<int>();
                 });
+
+            var solwer = new OopSolwer(input, output);
+            solwer.Run();
+
+
+            output.Received().ResaultAssumption(guessed:true);
         }
 
 

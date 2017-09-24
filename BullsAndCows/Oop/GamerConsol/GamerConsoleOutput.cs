@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BullsAndCows.Oop.Puzzle;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop;
+using BullsAndCows.Oop.Runner;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
@@ -53,15 +54,12 @@ namespace BullsAndCows.Oop.GamerConsol
         }
         #endregion
 
+
+
         #region OopRunner
         public void ByeBye()
         {
             Console.WriteLine("Как жаль что вы уже уходите.");
-            Console.ReadLine();
-        }
-         public void CheckTheGame()
-        {
-
         }
         #endregion
     }
