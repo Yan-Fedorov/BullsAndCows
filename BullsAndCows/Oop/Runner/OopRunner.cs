@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text;
-using BullsAndCows.Oop.GamerConsol;
-using BullsAndCows.Oop.Thinker;
-using BullsAndCows.Oop.Solwer;
+﻿using BullsAndCows.Oop.GamerConsol;
 
 namespace BullsAndCows.Oop.Runner
 {
@@ -10,45 +6,31 @@ namespace BullsAndCows.Oop.Runner
     {
         private readonly IGamerConsoleInput _input;
         private readonly IOopRunnerOutput _output;
+        private readonly IBuilder _builder;
 
-        public OopRunner(IGamerConsoleInput input = null, IOopRunnerOutput output = null)
+        public OopRunner(IBuilder builder, IGamerConsoleInput input, IOopRunnerOutput output)
         {
-            _input = input ?? new GamerConsoleInput();
-            _output = output ?? new GamerConsoleOutput();
+            _builder = builder;
+            _input = input;
+            _output = output;
         }
        
 
 
         public void Run()
         {
-            Console.OutputEncoding = Encoding.UTF8;
-
-            
-
             while (true)
             {                
                 var game = _input.SelectGame();
 
-                switch (game)
+                if (game == null)
                 {
-                    case Game.Solver:
-                        new OopSolwer(_input, _output as ISolwerOutput).Run();
-                        _input.PressAnyKey();
-                        break;
-
-                    case Game.Puzzle:
-                        new OopPuzzle(_input, _output as IThinkerOutput).Run();
-                        _input.PressAnyKey();
-                        break;
-
-                    case null:
-                        _output.ByeBye();
-                        _input.PressAnyKey();
-                        return;
-
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    _output.ByeBye();
+                    _input.PressAnyKey();
+                    return;
                 }
+
+                _builder.GetGame(game.Value).Run();
             }
         }
     }

@@ -2,12 +2,12 @@
 
 namespace BullsAndCows.Oop.Thinker
 {
-    public class OopPuzzle
+    public class OopThinker: IGame
     {
         private readonly IThinkerInput _input;
         private readonly IThinkerOutput _output;
 
-        public OopPuzzle(IThinkerInput input, IThinkerOutput output)
+        public OopThinker(IThinkerInput input, IThinkerOutput output)
         {
             _input = input;
             _output = output;

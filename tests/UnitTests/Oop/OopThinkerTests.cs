@@ -8,7 +8,7 @@ namespace UnitTests.Oop
     {
         private readonly IThinkerInput _input;
         private readonly IThinkerOutput _output;
-        private readonly OopPuzzle _puzzle;
+        private readonly OopThinker _thinker;
 
         public OopPuzzleTests()
         {
@@ -16,7 +16,7 @@ namespace UnitTests.Oop
 
             _output = Substitute.For<IThinkerOutput>();
 
-            _puzzle = new OopPuzzle(_input, _output);
+            _thinker = new OopThinker(_input, _output);
 
         }
 
@@ -26,7 +26,7 @@ namespace UnitTests.Oop
             _input.GetNumber().Returns(-1);
 
 
-            _puzzle.Run();
+            _thinker.Run();
 
 
             _output.Received(10).ShowEstimation(Arg.Any<int>(), false);
@@ -39,7 +39,7 @@ namespace UnitTests.Oop
             _input.GetNumber().Returns(100);
 
 
-            _puzzle.Run();
+            _thinker.Run();
 
 
             _output.DidNotReceiveWithAnyArgs().ShowEstimation(Arg.Any<int>(), Arg.Any<bool>());

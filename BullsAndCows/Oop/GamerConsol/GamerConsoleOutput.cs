@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
-using BullsAndCows.Oop;
 using BullsAndCows.Oop.Runner;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
     public class GamerConsoleOutput : IThinkerOutput, ISolwerOutput, IOopRunnerOutput
     {
+        public GamerConsoleOutput()
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+        }
+
+
         #region IPuzzleOutput
         public void PuzzleGreating()
         {

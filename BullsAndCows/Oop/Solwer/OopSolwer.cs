@@ -5,7 +5,7 @@ namespace BullsAndCows.Oop.Solwer
     {
         Equal = 1, Less, More
     }
-    public class OopSolwer
+    public class OopSolwer: IGame
     {
         private readonly ISolwerInput _input;
         private readonly ISolwerOutput _output;

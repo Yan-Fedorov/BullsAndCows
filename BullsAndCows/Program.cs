@@ -1,4 +1,5 @@
-﻿using BullsAndCows.Oop.Runner;
+﻿using BullsAndCows.Oop;
+using BullsAndCows.Oop.Runner;
 
 namespace BullsAndCows
 {
@@ -7,10 +8,11 @@ namespace BullsAndCows
     {
         public static void Main()
         { 
-        
-
         // new Runner().Run();
-        new OopRunner().Run();
+
+            new Builder()
+                .GetRunner()
+                .Run();
         }
     }
 }
