@@ -55,7 +55,7 @@ namespace BullsAndCows.Oop.Solwer
 
             } while (iteration > 0 && !guessed);
 
-            _output.ResaultAssumption(guessed);
+            _output.DisplayingResultOfGame(guessed);
 
         }
     }

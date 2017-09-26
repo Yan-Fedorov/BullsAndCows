@@ -1,4 +1,4 @@
-﻿using BullsAndCows.Oop.Puzzle;
+﻿using BullsAndCows.Oop.Thinker;
 using NSubstitute;
 using Xunit;
 
@@ -6,15 +6,15 @@ namespace UnitTests.Oop
 {
     public class OopPuzzleTests
     {
-        private readonly IPuzzleInput _input;
-        private readonly IPuzzleOutput _output;
+        private readonly IThinkerInput _input;
+        private readonly IThinkerOutput _output;
         private readonly OopPuzzle _puzzle;
 
         public OopPuzzleTests()
         {
-            _input = Substitute.For<IPuzzleInput>();
+            _input = Substitute.For<IThinkerInput>();
 
-            _output = Substitute.For<IPuzzleOutput>();
+            _output = Substitute.For<IThinkerOutput>();
 
             _puzzle = new OopPuzzle(_input, _output);
 

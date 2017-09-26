@@ -3,7 +3,7 @@ using System.Text;
 
 namespace BullsAndCows
 {
-    public class Puzzle : IGame
+    public class Thinker : IGame
     {
         public void Run()
         {

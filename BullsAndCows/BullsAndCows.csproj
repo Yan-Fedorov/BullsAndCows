@@ -52,12 +52,12 @@
     <Compile Include="Oop\GamerConsol\GamerConsoleInput.cs" />
     <Compile Include="Oop\GamerConsol\GamerConsoleOutput.cs" />
     <Compile Include="Oop\Runner\OopRunner.cs" />
-    <Compile Include="Oop\Puzzle\IPuzzleInput.cs" />
-    <Compile Include="Oop\Puzzle\IPuzzleOutput.cs" />
-    <Compile Include="Oop\Puzzle\OopPuzzle.cs" />
+    <Compile Include="Oop\Thinker\IThinkerInput.cs" />
+    <Compile Include="Oop\Thinker\IThinkerOutput.cs" />
+    <Compile Include="Oop\Thinker\OopThinker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Puzzle.cs" />
+    <Compile Include="Thinker.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="Solwer.cs" />
   </ItemGroup>

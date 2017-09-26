@@ -32,16 +32,16 @@ namespace UnitTests.Oop
         }
 
         [Theory]
-        [InlineData(125)]
-        [InlineData(750)]
-        public void SolwerУгадаетЧисла(int secret)
+        [InlineData(999, false)]
+        [InlineData(750, true)]
+        public void SolwerУгадаетЧисла(int secret, bool resaultOfSeach)
         {
             int assumption = 0;
 
             var input = Substitute.For<ISolwerInput>();
             input.GetEstimation().Returns(x => assumption == secret
                 ? OopEstimation.Equal
-                : (secret > assumption  ? OopEstimation.More : OopEstimation.Less));
+                : (secret > assumption ? OopEstimation.More : OopEstimation.Less));
 
             var output = Substitute.For<ISolwerOutput>();
             output
@@ -55,8 +55,9 @@ namespace UnitTests.Oop
             solwer.Run();
 
 
-            output.Received().ResaultAssumption(guessed:true);
+            output.Received().DisplayingResultOfGame(guessed: resaultOfSeach);
         }
+
 
 
     }

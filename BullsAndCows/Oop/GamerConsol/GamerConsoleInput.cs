@@ -1,11 +1,11 @@
 ﻿using System;
-using BullsAndCows.Oop.Puzzle;
+using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Runner;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
-    public interface IGamerConsoleInput : IPuzzleInput, ISolwerInput, IOopRunnerInput { }
+    public interface IGamerConsoleInput : IThinkerInput, ISolwerInput, IOopRunnerInput { }
 
     public class GamerConsoleInput: IGamerConsoleInput
     {

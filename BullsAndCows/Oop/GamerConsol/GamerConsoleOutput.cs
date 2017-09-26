@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BullsAndCows.Oop.Puzzle;
+using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop;
 using BullsAndCows.Oop.Runner;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
-    public class GamerConsoleOutput : IPuzzleOutput, ISolwerOutput, IOopRunnerOutput
+    public class GamerConsoleOutput : IThinkerOutput, ISolwerOutput, IOopRunnerOutput
     {
         #region IPuzzleOutput
         public void PuzzleGreating()
@@ -46,7 +46,7 @@ namespace BullsAndCows.Oop.GamerConsol
             Console.WriteLine($"Вы загадали {assumption} ?");
         }
 
-        public void ResaultAssumption(bool guessed)
+        public void DisplayingResultOfGame(bool guessed)
         {
             Console.WriteLine(guessed
                 ? "Ура, я угадал )))"

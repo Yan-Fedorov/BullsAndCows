@@ -29,7 +29,7 @@ namespace BullsAndCows
                         break;
 
                     case Game.Puzzle:
-                        new Puzzle().Run();
+                        new Thinker().Run();
                         break;
 
                     case null:

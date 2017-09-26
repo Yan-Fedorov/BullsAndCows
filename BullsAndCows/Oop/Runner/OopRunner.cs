@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using BullsAndCows.Oop.GamerConsol;
-using BullsAndCows.Oop.Puzzle;
+using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
 
 namespace BullsAndCows.Oop.Runner
@@ -37,7 +37,7 @@ namespace BullsAndCows.Oop.Runner
                         break;
 
                     case Game.Puzzle:
-                        new OopPuzzle(_input, _output as IPuzzleOutput).Run();
+                        new OopPuzzle(_input, _output as IThinkerOutput).Run();
                         _input.PressAnyKey();
                         break;
 

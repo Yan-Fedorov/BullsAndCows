@@ -4,6 +4,6 @@
     {
         void SolwerGreating();
         void Assumption(int assumption);
-        void ResaultAssumption(bool guessed);
+        void DisplayingResultOfGame(bool guessed);
     }
 }

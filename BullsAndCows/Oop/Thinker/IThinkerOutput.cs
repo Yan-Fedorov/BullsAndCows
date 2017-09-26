@@ -1,6 +1,6 @@
-﻿namespace BullsAndCows.Oop.Puzzle
+﻿namespace BullsAndCows.Oop.Thinker
 {
-    public interface IPuzzleOutput
+    public interface IThinkerOutput
     {
         void PuzzleGreating();
         void ShowEstimation(int assumption, bool isAssumptionBigger);

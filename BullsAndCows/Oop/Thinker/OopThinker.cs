@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace BullsAndCows.Oop.Puzzle
+namespace BullsAndCows.Oop.Thinker
 {
     public class OopPuzzle
     {
-        private readonly IPuzzleInput _input;
-        private readonly IPuzzleOutput _output;
+        private readonly IThinkerInput _input;
+        private readonly IThinkerOutput _output;
 
-        public OopPuzzle(IPuzzleInput input, IPuzzleOutput output)
+        public OopPuzzle(IThinkerInput input, IThinkerOutput output)
         {
             _input = input;
             _output = output;
