@@ -13,9 +13,15 @@ namespace BullsAndCows.Oop
     }
 
     public class Builder: IBuilder
-    {
-        private readonly GamerConsoleInput _consoleInput = new GamerConsoleInput();
-        private readonly GamerConsoleOutput _consoleOutput = new GamerConsoleOutput();
+    {       
+        private readonly IGamerConsoleInput _consoleInput;
+        private readonly IGamerConsoleOutput _consoleOutput;
+
+        public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null)
+        {
+            _consoleInput = consoleInput ?? new GamerConsoleInput();
+            _consoleOutput = consoleOutput ?? new GamerConsoleOutput();
+        }
 
 
         public OopRunner GetRunner()

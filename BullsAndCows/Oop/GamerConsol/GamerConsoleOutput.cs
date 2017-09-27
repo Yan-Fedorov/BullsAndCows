@@ -6,7 +6,9 @@ using BullsAndCows.Oop.Runner;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
-    public class GamerConsoleOutput : IThinkerOutput, ISolwerOutput, IOopRunnerOutput
+    public interface IGamerConsoleOutput : IThinkerOutput, ISolwerOutput, IOopRunnerOutput { }
+
+    public class GamerConsoleOutput : IGamerConsoleOutput
     {
         public GamerConsoleOutput()
         {
