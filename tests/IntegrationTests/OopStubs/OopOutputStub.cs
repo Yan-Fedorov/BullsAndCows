@@ -6,7 +6,7 @@ namespace IntegrationTests.OopStubs
 {
     public class OopOutputStub : IGamerConsoleOutput, IDisposable
     {
-        private const int TimeoutMs = 500;
+        private int TimeoutMs => System.Diagnostics.Debugger.IsAttached ? int.MaxValue : 500;
 
 
         public void PuzzleGreating()
