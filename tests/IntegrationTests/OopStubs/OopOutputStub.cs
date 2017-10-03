@@ -12,6 +12,7 @@ namespace IntegrationTests.OopStubs
 
         public void ThinkerGreating()
         {
+            _isGuessed = null;
             _receiveThinkerGreating.Set();
         }
 
@@ -21,44 +22,65 @@ namespace IntegrationTests.OopStubs
                 throw new Exception($"{nameof(WaitSolwerGreating)} timeout");
         }
         
-        private int _assumptionThinker;
-        private bool _isAssumptionBiggerThinker;
+
+
+        private bool? _isAssumptionBiggerThinker;
+        private bool _isWaitThinkerEstimation;
 
         private readonly AutoResetEvent _receiveAssumptionThinker = new AutoResetEvent(false);
 
         public void ShowEstimationThinker(int assumption, bool isAssumptionBigger)
         {
-            _assumptionThinker = assumption;
             _isAssumptionBiggerThinker = isAssumptionBigger;
             _receiveAssumptionThinker.Set();
         }
 
-        public bool WaitShowEstimationThinker()
+        public bool? WaitShowEstimationThinker()
         {
-            if (!_receiveAssumptionThinker.WaitOne(TimeoutMs))
-                throw new Exception($"{nameof(WaitShowEstimationThinker)} timeout");
+            lock (_receiveShowResultThinker)
+            {
+                if (_isGuessed.HasValue)
+                    return null;
 
+
+                _isWaitThinkerEstimation = true;
+            }
+
+            if (!_receiveAssumptionThinker.WaitOne(TimeoutMs))
+                    throw new Exception($"{nameof(WaitShowEstimationThinker)} timeout");            
+
+            _isWaitThinkerEstimation = false;
             return _isAssumptionBiggerThinker;
         }
 
-        private int _number;
-        private bool _isGuessed;
+
+
+        private bool? _isGuessed;
 
         private readonly AutoResetEvent _receiveShowResultThinker = new AutoResetEvent(false);
 
         public void ShowResultThinker(int number, bool isGuessed)
         {
-            _number = number;
-            _isGuessed = isGuessed;
-            _receiveShowResultThinker.Set();
-           
+            lock (_receiveShowResultThinker)
+            {
+                _isGuessed = isGuessed;
 
+                if (_isWaitThinkerEstimation)
+                {
+                    _isAssumptionBiggerThinker = null;
+                    _receiveAssumptionThinker.Set();
+                }
+
+                _receiveShowResultThinker.Set();
+            }
         }
 
-        public bool? WaitShowResultThinker(int timeout)
+        public bool? WaitShowResultThinker()
         {
-            return _receiveShowResultThinker.WaitOne(timeout)
-                ? (bool?)_isGuessed : null;
+            if(!_receiveShowResultThinker.WaitOne(TimeoutMs))
+                throw new Exception($"{nameof(WaitShowResultThinker)} timeout");
+
+            return _isGuessed;
         }
 
 

@@ -44,23 +44,24 @@ namespace IntegrationTests
             {
                 var line = 500;
                 var assumption = line;
-            bool? isGuessed;
+                bool? isGuessed;
                 while (true)
                 {
                     _input.SendNumber(assumption);
 
-                    isGuessed = _output.WaitShowResultThinker(100);
-                    if (isGuessed.HasValue)
+                    var isAssumptionBigger = _output.WaitShowEstimationThinker();
+                    if(isAssumptionBigger == null)
                         break;
 
-                    var isAssumptionBigger = _output.WaitShowEstimationThinker();
-
                     line /= 2;
-                    assumption = isAssumptionBigger
-                    ? assumption - line
-                    : assumption + line;
+                    assumption = isAssumptionBigger == true
+                        ? assumption - line
+                        : assumption + line;
 
                 }
+
+
+                isGuessed = _output.WaitShowResultThinker();
             });
 
             "Exit".x(() =>
