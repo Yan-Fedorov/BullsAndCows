@@ -36,7 +36,7 @@ namespace BullsAndCows.Oop
                 case Game.Solver:
                     return new OopSolwer(_consoleInput, _consoleOutput);
 
-                case Game.Puzzle:
+                case Game.Thinker:
                     return new OopThinker(_consoleInput, _consoleOutput);
 
                 default:

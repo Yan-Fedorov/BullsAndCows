@@ -16,9 +16,9 @@ namespace BullsAndCows.Oop.Thinker
 
         public void Run()
         {
-            var number = new Random().Next(100, 999);
+            var number = 591;// new Random().Next(100, 999);
 
-            _output.PuzzleGreating();
+            _output.ThinkerGreating();
 
             var iteration = 0;
             do
@@ -28,12 +28,12 @@ namespace BullsAndCows.Oop.Thinker
                 if(assumption == number)
                     break;                
 
-                _output.ShowEstimation(assumption, assumption > number);
+                _output.ShowEstimationThinker(assumption, assumption > number);
 
                 iteration++;
             } while (iteration < 10);
 
-            _output.ShowResult(number, iteration < 10);
+            _output.ShowResultThinker(number, iteration < 10);
         }
     }
 }

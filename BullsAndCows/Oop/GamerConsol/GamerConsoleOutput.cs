@@ -16,18 +16,18 @@ namespace BullsAndCows.Oop.GamerConsol
         }
 
 
-        #region IPuzzleOutput
-        public void PuzzleGreating()
+        #region IThinkerOutput
+        public void ThinkerGreating()
         {
             Console.WriteLine("Я загадал 3-х значное число, угадывай )");
         }
 
-        public void ShowEstimation(int assumption, bool isAssumptionBigger)
+        public void ShowEstimationThinker(int assumption, bool isAssumptionBigger)
         {
             Console.WriteLine($"Число {assumption} {(isAssumptionBigger ? "больше" : "меньше")} загаданного");
         }
 
-        public void ShowResult(int number, bool isGuessed)
+        public void ShowResultThinker(int number, bool isGuessed)
         {
             Console.WriteLine();
             Console.WriteLine(isGuessed

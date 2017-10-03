@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BullsAndCows;
 using BullsAndCows.Oop;
-using BullsAndCows.Oop.Solwer;
+using BullsAndCows.Oop.Thinker;
 using IntegrationTests.OopStubs;
 using Xbehave;
 using Xunit;
@@ -18,51 +18,49 @@ namespace IntegrationTests
             _input = new OopInputStub();
             _output = new OopOutputStub();
         }
-
         [Scenario]
         public void S1()
         {
+
             "Given game with faked console".x(() =>
-                {
-                    Task.Run(() =>
-                    {
-                        new Builder(_input, _output)
-                            .GetRunner()
-                            .Run();
-                    });
-                });
-
-
-            "Select Thinker game".x(() =>
             {
-                _input.SendGame(Game.Solver);
-                _output.WaitSolwerGreating();
+                Task.Run(() =>
+                {
+                    new Builder(_input, _output)
+                        .GetRunner()
+                        .Run();
+                });
+            });
+
+
+            "Select Solwer game".x(() =>
+            {
+                _input.SendGame(Game.Thinker);
+                _output.WaitThinkerGreating();
             });
 
 
             "Make game".x(() =>
             {
+                var line = 500;
+                var assumption = line;
+            bool? isGuessed;
                 while (true)
                 {
-                    var assumption = _output.WaitAssumption();
-                    var estimation = assumption == 320
-                        ? OopEstimation.Equal
-                        : (assumption < 320
-                            ? OopEstimation.More
-                            : OopEstimation.Less);
+                    _input.SendNumber(assumption);
 
-                    _input.SendEstimation(estimation);
-
-                    if (estimation == OopEstimation.Equal)
+                    isGuessed = _output.WaitShowResultThinker(100);
+                    if (isGuessed.HasValue)
                         break;
+
+                    var isAssumptionBigger = _output.WaitShowEstimationThinker();
+
+                    line /= 2;
+                    assumption = isAssumptionBigger
+                    ? assumption - line
+                    : assumption + line;
+
                 }
-            });
-
-
-            "Werify result".x(() =>
-            {
-                var isGuessed = _output.WaitGuessed();
-                Assert.Equal(true, isGuessed);
             });
 
             "Exit".x(() =>

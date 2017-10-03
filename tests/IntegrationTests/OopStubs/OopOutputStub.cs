@@ -8,20 +8,57 @@ namespace IntegrationTests.OopStubs
     {
         private int TimeoutMs => System.Diagnostics.Debugger.IsAttached ? int.MaxValue : 500;
 
+        private readonly AutoResetEvent _receiveThinkerGreating = new AutoResetEvent(false);
 
-        public void PuzzleGreating()
+        public void ThinkerGreating()
         {
-            throw new NotImplementedException();
+            _receiveThinkerGreating.Set();
         }
 
-        public void ShowEstimation(int assumption, bool isAssumptionBigger)
+        public void WaitThinkerGreating()
         {
-            throw new NotImplementedException();
+            if (!_receiveThinkerGreating.WaitOne(TimeoutMs))
+                throw new Exception($"{nameof(WaitSolwerGreating)} timeout");
+        }
+        
+        private int _assumptionThinker;
+        private bool _isAssumptionBiggerThinker;
+
+        private readonly AutoResetEvent _receiveAssumptionThinker = new AutoResetEvent(false);
+
+        public void ShowEstimationThinker(int assumption, bool isAssumptionBigger)
+        {
+            _assumptionThinker = assumption;
+            _isAssumptionBiggerThinker = isAssumptionBigger;
+            _receiveAssumptionThinker.Set();
         }
 
-        public void ShowResult(int number, bool isGuessed)
+        public bool WaitShowEstimationThinker()
         {
-            throw new NotImplementedException();
+            if (!_receiveAssumptionThinker.WaitOne(TimeoutMs))
+                throw new Exception($"{nameof(WaitShowEstimationThinker)} timeout");
+
+            return _isAssumptionBiggerThinker;
+        }
+
+        private int _number;
+        private bool _isGuessed;
+
+        private readonly AutoResetEvent _receiveShowResultThinker = new AutoResetEvent(false);
+
+        public void ShowResultThinker(int number, bool isGuessed)
+        {
+            _number = number;
+            _isGuessed = isGuessed;
+            _receiveShowResultThinker.Set();
+           
+
+        }
+
+        public bool? WaitShowResultThinker(int timeout)
+        {
+            return _receiveShowResultThinker.WaitOne(timeout)
+                ? (bool?)_isGuessed : null;
         }
 
 
@@ -41,21 +78,21 @@ namespace IntegrationTests.OopStubs
 
 
 
-        private int _assumption;
-        private readonly AutoResetEvent _receiveAssumption = new AutoResetEvent(false);
+        private int _assumptionSolwer;
+        private readonly AutoResetEvent _receiveAssumptionSolwer = new AutoResetEvent(false);
 
         public void Assumption(int assumption)
         {
-            _assumption = assumption;
-            _receiveAssumption.Set();
+            _assumptionSolwer = assumption;
+            _receiveAssumptionSolwer.Set();
         }
 
         public int WaitAssumption()
         {
-            if (!_receiveAssumption.WaitOne(TimeoutMs))
+            if (!_receiveAssumptionSolwer.WaitOne(TimeoutMs))
                 throw new Exception($"{nameof(WaitAssumption)} timeout");
 
-            return _assumption;
+            return _assumptionSolwer;
         }
 
 
@@ -97,9 +134,13 @@ namespace IntegrationTests.OopStubs
         public void Dispose()
         {
             _receiveSolwerGreating?.Dispose();
-            _receiveAssumption?.Dispose();
+            _receiveAssumptionSolwer?.Dispose();
             _receiveGuessed?.Dispose();
             _receiveByeBye?.Dispose();
+
+            _receiveThinkerGreating.Dispose();
+            _receiveAssumptionThinker.Dispose();
+            _receiveShowResultThinker.Dispose();
         }
     }
 }

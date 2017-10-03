@@ -8,7 +8,7 @@ namespace BullsAndCows
 {
     public enum Game
     {
-        Solver = 1, Puzzle
+        Solver = 1, Thinker
     }
 
     public class Runner
@@ -28,7 +28,7 @@ namespace BullsAndCows
                         new Solwer().Run();
                         break;
 
-                    case Game.Puzzle:
+                    case Game.Thinker:
                         new Thinker().Run();
                         break;
 

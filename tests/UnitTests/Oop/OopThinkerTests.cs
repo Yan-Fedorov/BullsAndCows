@@ -29,8 +29,8 @@ namespace UnitTests.Oop
             _thinker.Run();
 
 
-            _output.Received(10).ShowEstimation(Arg.Any<int>(), false);
-            _output.Received(1).ShowResult(Arg.Any<int>(), false);
+            _output.Received(10).ShowEstimationThinker(Arg.Any<int>(), false);
+            _output.Received(1).ShowResultThinker(Arg.Any<int>(), false);
         }
 
         //[Fact]
@@ -42,8 +42,8 @@ namespace UnitTests.Oop
             _thinker.Run();
 
 
-            _output.DidNotReceiveWithAnyArgs().ShowEstimation(Arg.Any<int>(), Arg.Any<bool>());
-            _output.Received(1).ShowResult(Arg.Any<int>(), true);
+            _output.DidNotReceiveWithAnyArgs().ShowEstimationThinker(Arg.Any<int>(), Arg.Any<bool>());
+            _output.Received(1).ShowResultThinker(Arg.Any<int>(), true);
         }
     }
 }

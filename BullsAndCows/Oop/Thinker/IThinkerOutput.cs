@@ -2,8 +2,8 @@
 {
     public interface IThinkerOutput
     {
-        void PuzzleGreating();
-        void ShowEstimation(int assumption, bool isAssumptionBigger);
-        void ShowResult(int number, bool isGuessed);
+        void ThinkerGreating();
+        void ShowEstimationThinker(int assumption, bool isAssumptionBigger);
+        void ShowResultThinker(int number, bool isGuessed);
     }
 }
