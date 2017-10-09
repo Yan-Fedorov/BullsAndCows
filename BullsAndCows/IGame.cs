@@ -2,6 +2,7 @@
 {
     public interface IGame
     {
-        void Run();
+        void Run(int? number = null, int? iteration = null);
+        //int? number = null, int? iteration = null
     }
 }

@@ -5,15 +5,15 @@ namespace BullsAndCows
 {
     public class Thinker : IGame
     {
-        public void Run()
+        public void Run(int? number = null, int? iteration = null)
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var number = new Random().Next(100, 999);
+             number = new Random().Next(100, 999);
 
             Console.WriteLine("Я загадал 3-х значное число, угадывай )");
 
-            var iteration = 0;
+             iteration = 0;
             do
             {
                 Console.WriteLine();

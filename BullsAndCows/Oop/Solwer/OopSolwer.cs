@@ -15,13 +15,13 @@ namespace BullsAndCows.Oop.Solwer
             _output = output;
 
         }
-        public void Run()
+        public void Run(int? number = null, int? iteration = null)
         {
             _output.SolwerGreating();
 
             var line = 500;
             var assumption = line;
-            var iteration = 10;
+             iteration = 10;
             var guessed = false;
 
             do
