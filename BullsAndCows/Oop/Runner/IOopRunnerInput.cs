@@ -2,7 +2,7 @@
 {
     public interface IOopRunnerInput
     {
-        Game? SelectGame();
+        GameInput<Game> SelectGame();
         void PressAnyKey();
     }
 }

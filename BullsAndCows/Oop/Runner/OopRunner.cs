@@ -1,4 +1,6 @@
-﻿using BullsAndCows.Oop.GamerConsol;
+﻿using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop.GamerConsol;
+using BullsAndCows.Oop.Thinker;
 
 namespace BullsAndCows.Oop.Runner
 {
@@ -7,12 +9,14 @@ namespace BullsAndCows.Oop.Runner
         private readonly IGamerConsoleInput _input;
         private readonly IOopRunnerOutput _output;
         private readonly IBuilder _builder;
+        private readonly IGameLoader _gameLoader;
 
-        public OopRunner(IBuilder builder, IGamerConsoleInput input, IOopRunnerOutput output)
+        public OopRunner(IBuilder builder, IGamerConsoleInput input, IOopRunnerOutput output, IGameLoader gameLoader)
         {
             _builder = builder;
             _input = input;
             _output = output;
+            _gameLoader = gameLoader;
         }
        
 
@@ -21,16 +25,25 @@ namespace BullsAndCows.Oop.Runner
         {
             while (true)
             {                
-                var game = _input.SelectGame();
+                var input = _input.SelectGame();
 
-                if (game == null)
+                if (input.Option == GameInputOption.Exit)
                 {
                     _output.ByeBye();
                     _input.PressAnyKey();
                     return;
                 }
 
-                _builder.GetGame(game.Value).Run();
+                if (input.Option == GameInputOption.CallGameMenu)
+                {
+                    var thinker = _builder.GetGame(Game.Thinker);
+                    _gameLoader.Load(thinker, new OopThinkerData {Iteration = 4, Number = 200});
+                    thinker.Run();
+                }
+                else
+                    _builder.GetGame(input.Input).Run();
+
+                _input.PressAnyKey();
             }
         }
     }

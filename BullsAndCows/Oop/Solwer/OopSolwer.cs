@@ -5,7 +5,7 @@ namespace BullsAndCows.Oop.Solwer
     {
         Equal = 1, Less, More
     }
-    public class OopSolwer: IGame
+    public class OopSolwer : IGame
     {
         private readonly ISolwerInput _input;
         private readonly ISolwerOutput _output;
@@ -15,13 +15,13 @@ namespace BullsAndCows.Oop.Solwer
             _output = output;
 
         }
-        public void Run(int? number = null, int? iteration = null)
+        public void Run()
         {
             _output.SolwerGreating();
 
             var line = 500;
             var assumption = line;
-             iteration = 10;
+            var iteration = 10;
             var guessed = false;
 
             do

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BullsAndCows;
 using BullsAndCows.Oop;
+using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
 using IntegrationTests.OopStubs;
 using Xbehave;
@@ -35,7 +36,7 @@ namespace IntegrationTests
 
             "Select Thinker game".x(() =>
             {
-                _input.SendGame(Game.Solver);
+                _input.SendGame(new GameInput<Game>{Input = Game.Solver, Option = GameInputOption.GameInput});
                 _output.WaitSolwerGreating();
             });
 
@@ -67,7 +68,7 @@ namespace IntegrationTests
 
             "Exit".x(() =>
             {
-                _input.SendGame(null);
+                _input.SendGame(new GameInput<Game>{Option = GameInputOption.Exit});
                 _output.WaitByeBye();
             });
         }

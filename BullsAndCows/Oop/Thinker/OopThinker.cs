@@ -7,20 +7,23 @@ namespace BullsAndCows.Oop.Thinker
         private readonly IThinkerInput _input;
         private readonly IThinkerOutput _output;
 
+        public int Number { get; set; }
+        public int Iteration { get; set; }
+
+
         public OopThinker(IThinkerInput input, IThinkerOutput output)
         {
             _input = input;
             _output = output;
+
+            Number = new Random().Next(100, 999);
         }
 
 
         public void Run()
         {
-            var number = 591;// new Random().Next(100, 999);
-
             _output.ThinkerGreating();
 
-            var iteration = 0;
             do
             {
                 var assumption = _input.GetNumber();
@@ -36,37 +39,16 @@ namespace BullsAndCows.Oop.Thinker
                  */
 
 
-                if (assumption == number)
+                if (assumption == Number)
                     break;                
 
-                _output.ShowEstimationThinker(assumption, assumption > number);
+                _output.ShowEstimationThinker(assumption, assumption > Number);
 
                 //TODO: подумать как проверку на количество итераций вынести отсюда (аналогично для OopSolwer)
-                iteration++;
-            } while (iteration < 10);
+                Iteration++;
+            } while (Iteration < 10);
 
-            _output.ShowResultThinker(number, iteration < 10);
-        }
-
-
-        //TODO: подумать как не повторять несколько раз один и тот-же код
-        public void Run(int number, int iteration)
-        {
-            _output.ThinkerGreating();
-
-            do
-            {
-                var assumption = _input.GetNumber();
-
-                if (assumption == number)
-                    break;
-
-                _output.ShowEstimationThinker(assumption, assumption > number);
-
-                iteration++;
-            } while (iteration < 10);
-
-            _output.ShowResultThinker(number, iteration < 10);
+            _output.ShowResultThinker(Number, Iteration < 10);
         }
     }
 }

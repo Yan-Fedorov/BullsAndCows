@@ -19,17 +19,20 @@ namespace BullsAndCows.Oop.Thinker
             _output = output;
         }
 
+        public int Number { get; set; }
+        public int Iteration { get; set; }
 
-        public int? Run(int? number = null, int? iteration = null)
+
+        public int? Run()
         {
 
-            if (number == null && iteration == null)
+            if (Number == null && Iteration == null)
             {
-                number = new Random().Next(100, 999);
+                Number = new Random().Next(100, 999);
 
                 _output.ThinkerGreating();
 
-                iteration = 0;
+                Iteration = 0;
             }
             
                 var assumption = _input.GetNumber();
@@ -40,15 +43,15 @@ namespace BullsAndCows.Oop.Thinker
              */
 
 
-            if (assumption == number)
-                return number;
+            if (assumption == Number)
+                return Number;
 
-                _output.ShowEstimationThinker(assumption, assumption > number);
+                _output.ShowEstimationThinker(assumption, assumption > Number);
 
                 //TODO: подумать как проверку на количество итераций вынести отсюда (аналогично для OopSolwer)
                 
             
-            return number;
+            return Number;
 
             //_output.ShowResultThinker(number, iteration < 10);
         }

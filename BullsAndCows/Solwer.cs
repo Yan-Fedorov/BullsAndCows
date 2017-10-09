@@ -9,7 +9,7 @@ namespace BullsAndCows
 
     public class Solwer : IGame
     {
-        public void Run(int? number = null, int? iteration = null)
+        public void Run()
         {
             Console.WriteLine("Загадайте 3-х значное число");
             Console.WriteLine();
@@ -17,7 +17,7 @@ namespace BullsAndCows
 
             var line = 500;
             var assumption = line;
-             iteration = 10;
+            var iteration = 10;
             var guessed = false;
 
             do
@@ -77,6 +77,6 @@ namespace BullsAndCows
             }
         }
     }
-    
+
 }
 

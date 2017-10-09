@@ -38,20 +38,32 @@ namespace BullsAndCows.Oop.GamerConsol
             }
         }
 
-        public Game? SelectGame()
+        public GameInput<Game> SelectGame()
         {
             Console.Clear();
             Console.WriteLine(@"Укажите вариант игры:
 1 - компьютер отгадывает число
 2 - компьютер загадывает число
-3 - выход");
+3 - выход
+------------------------------
+0 - загрузить сохранённую игру
+");
 
             while (true)
             {
                 var key = Console.ReadLine();
 
-                if (int.TryParse(key, out var num) && num > 0 && num < 4)
-                    return num == 3 ? (Game?)null : (Game)num;
+                if (!int.TryParse(key, out var num) || num < 0 || num >= 4) continue;
+
+                switch (num)
+                {
+                    case 0:
+                        return new GameInput<Game>{ Option = GameInputOption.CallGameMenu};
+                    case 3:
+                        return new GameInput<Game>{Option = GameInputOption.Exit};
+                    default:
+                        return new GameInput<Game>{Option = GameInputOption.GameInput, Input = (Game)num};
+                }
             }
         }
 

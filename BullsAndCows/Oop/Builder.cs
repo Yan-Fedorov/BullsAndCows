@@ -1,4 +1,5 @@
 ﻿using System;
+using BullsAndCows.Oop.GameLoader;
 using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
@@ -16,17 +17,19 @@ namespace BullsAndCows.Oop
     {       
         private readonly IGamerConsoleInput _consoleInput;
         private readonly IGamerConsoleOutput _consoleOutput;
+        private readonly IGameLoader _gameLoader;
 
-        public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null)
+        public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null, IGameLoader gameLoader = null)
         {
             _consoleInput = consoleInput ?? new GamerConsoleInput();
             _consoleOutput = consoleOutput ?? new GamerConsoleOutput();
+            _gameLoader = gameLoader ?? new GameLoader.GameLoader();
         }
 
 
         public OopRunner GetRunner()
         {
-            return new OopRunner(this, _consoleInput, _consoleOutput);
+            return new OopRunner(this, _consoleInput, _consoleOutput, _gameLoader);
         }
 
         public IGame GetGame(Game gameKey)

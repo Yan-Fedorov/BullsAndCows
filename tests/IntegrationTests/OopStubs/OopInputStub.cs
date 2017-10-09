@@ -2,6 +2,7 @@
 using System.Threading;
 using BullsAndCows;
 using BullsAndCows.Oop.GamerConsol;
+using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
 
 namespace IntegrationTests.OopStubs
@@ -40,16 +41,16 @@ namespace IntegrationTests.OopStubs
         }
 
 
-        private Game? _game;
+        private GameInput<Game> _game;
         private readonly AutoResetEvent _sendGame = new AutoResetEvent(false);
 
-        public Game? SelectGame()
+        public GameInput<Game> SelectGame()
         {
             _sendGame.WaitOne();
             return _game;
         }
 
-        public void SendGame(Game? game)
+        public void SendGame(GameInput<Game> game)
         {
             _game = game;
             _sendGame.Set();
