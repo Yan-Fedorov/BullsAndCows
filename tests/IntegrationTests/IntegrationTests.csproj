@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OopGameLoaderTest.cs" />
     <Compile Include="OopThinkerGameTest.cs" />
     <Compile Include="OopStubs\OopInputStub.cs" />
     <Compile Include="OopStubs\OopOutputStub.cs" />
