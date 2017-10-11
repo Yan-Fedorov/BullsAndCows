@@ -2,7 +2,7 @@
 
 namespace BullsAndCows.Oop.Thinker
 {
-    public class OopThinker: IGame
+    public class OopThinker : IOopGame
     {
         private readonly IThinkerInput _input;
         private readonly IThinkerOutput _output;
@@ -20,35 +20,39 @@ namespace BullsAndCows.Oop.Thinker
         }
 
 
-        public void Run()
+        public void MakeGreating()
         {
             _output.ThinkerGreating();
-
-            do
-            {
-                var assumption = _input.GetNumber();
-
-                //ToDO: подумать как написанного в комментариях не делать здесь
-                /*
-                 * if(assumption is exit command)
-                 * {
-                 *      _saver.Save(number, iteration);
-                 *      _output.ShowExitMessage();
-                 *      return;
-                 * }
-                 */
+        }
 
 
-                if (assumption == Number)
-                    break;                
+        public bool Run()
+        {
 
+            var assumption = _input.GetNumber();
+
+            //ToDO: подумать как написанного в комментариях не делать здесь
+            /*
+             * if(assumption is exit command)
+             * {
+             *      _saver.Save(number, iteration);
+             *      _output.ShowExitMessage();
+             *      return;
+             * }
+             */
+
+            var guessed = assumption == Number;
+
+            if (!guessed)
                 _output.ShowEstimationThinker(assumption, assumption > Number);
 
-                //TODO: подумать как проверку на количество итераций вынести отсюда (аналогично для OopSolwer)
-                Iteration++;
-            } while (Iteration < 10);
+            return guessed;
+        }
 
-            _output.ShowResultThinker(Number, Iteration < 10);
+
+        public void ShowResult(bool outOfIterations)
+        {
+            _output.ShowResultThinker(Number, outOfIterations);
         }
     }
 }

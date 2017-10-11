@@ -19,10 +19,10 @@ namespace IntegrationTests
             _input = new OopInputStub();
             _output = new OopOutputStub();
         }
+
         [Scenario]
         public void S1()
         {
-
             "Given game with faked console".x(() =>
             {
                 Task.Run(() =>
@@ -70,6 +70,53 @@ namespace IntegrationTests
                 _input.SendGame(new GameInput<Game> { Option = GameInputOption.Exit });
                 _output.WaitByeBye();
             });
+        }
+
+        [Scenario]
+        public void ContinueLoadedGame()
+        {
+            "Given game with faked console".x(() =>
+            {
+                Task.Run(() =>
+                {
+                    new Builder(_input, _output)
+                        .GetRunner()
+                        .Run();
+                });
+            });
+
+
+            "Load thinker game".x(() =>
+            {
+                _input.SendGame(new GameInput<Game> { Option = GameInputOption.CallGameMenu });
+                _output.WaitThinkerGreating();
+            });
+
+
+            "Make game".x(() =>
+            {
+                _input.SendNumber(100);            
+                // ReSharper disable once PossibleInvalidOperationException
+                Assert.False(_output.WaitShowEstimationThinker().Value);
+
+
+                _input.SendNumber(300);
+                // ReSharper disable once PossibleInvalidOperationException
+                Assert.True(_output.WaitShowEstimationThinker().Value);
+
+
+
+                _input.SendNumber(200);
+                Assert.Null(_output.WaitShowEstimationThinker());
+                Assert.True(_output.WaitShowResultThinker());
+            });
+
+            "Exit".x(() =>
+            {
+                _input.SendGame(new GameInput<Game> { Option = GameInputOption.Exit });
+                _output.WaitByeBye();
+            });
+
         }
     }
 }

@@ -34,15 +34,28 @@ namespace BullsAndCows.Oop.Runner
                     return;
                 }
 
+                IOopGame game;
+
                 if (input.Option == GameInputOption.CallGameMenu)
                 {
-                    var thinker = _builder.GetGame(Game.Thinker);
-                    _gameLoader.Load(thinker, new OopThinkerData {Iteration = 4, Number = 200});
-                    thinker.Run();
+                    game = _builder.GetGame(Game.Thinker);
+                    _gameLoader.Load(game, new OopThinkerData {Iteration = 4, Number = 200});
                 }
                 else
-                    _builder.GetGame(input.Input).Run();
+                    game = _builder.GetGame(input.Input);
 
+
+                game.MakeGreating();
+
+                var iteration = 0;
+                bool isHasWin;
+                do
+                {
+                    iteration++;
+                    isHasWin = game.Run();
+                } while (iteration < 10 && !isHasWin);
+
+                game.ShowResult(iteration < 10);
                 _input.PressAnyKey();
             }
         }

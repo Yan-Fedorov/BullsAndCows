@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BullsAndCows.Oop.Thinker
 {
-    class GameBuilder 
+    class GameBuilder
     {
-        
-    
+
+
         private readonly IThinkerInput _input;
         private readonly IThinkerOutput _output;
 
@@ -34,8 +34,8 @@ namespace BullsAndCows.Oop.Thinker
 
                 Iteration = 0;
             }
-            
-                var assumption = _input.GetNumber();
+
+            var assumption = _input.GetNumber();
 
             //ToDO: подумать как написанного в комментариях не делать здесь
             /*
@@ -46,11 +46,11 @@ namespace BullsAndCows.Oop.Thinker
             if (assumption == Number)
                 return Number;
 
-                _output.ShowEstimationThinker(assumption, assumption > Number);
+            _output.ShowEstimationThinker(assumption, assumption > Number);
 
-                //TODO: подумать как проверку на количество итераций вынести отсюда (аналогично для OopSolwer)
-                
-            
+            //TODO: подумать как проверку на количество итераций вынести отсюда (аналогично для OopSolwer)
+
+
             return Number;
 
             //_output.ShowResultThinker(number, iteration < 10);
@@ -68,10 +68,10 @@ namespace BullsAndCows.Oop.Thinker
                 //    _output.ShowExitMessage();
                 //          return;
                 //     }
-               // else{
-                    gameBuilder.Run(/*number, iteration*/);
-                    iteration++;
-               // }
+                // else{
+                gameBuilder.Run(/*number, iteration*/);
+                iteration++;
+                // }
             } while (iteration < 10);
 
             _output.ShowResultThinker(number.Value, iteration < 10);
@@ -84,14 +84,14 @@ namespace BullsAndCows.Oop.Thinker
         {
             private readonly IThinkerInput _input;
             private readonly IThinkerOutput _output;
-            
+
 
             public Count(IThinkerInput input, IThinkerOutput output)
             {
                 _input = input;
                 _output = output;
             }
-            
+
 
             public delegate void MethodContainer();
             public event MethodContainer eventTry;
@@ -100,9 +100,9 @@ namespace BullsAndCows.Oop.Thinker
             public void CountTry()
             {
                 GameBuilder gameBuilder = new GameBuilder(_input, _output);
-                for (int i = 0; i<= 10; i++)
+                for (int i = 0; i <= 10; i++)
                 {
-                    if(i == 10)
+                    if (i == 10)
                     {
                         eventTry();
                     }
@@ -110,7 +110,7 @@ namespace BullsAndCows.Oop.Thinker
                 }
             }
         }
-       
+
     }
 }
 

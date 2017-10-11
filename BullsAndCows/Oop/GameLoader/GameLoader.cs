@@ -5,12 +5,12 @@ namespace BullsAndCows.Oop.GameLoader
 {
     public interface IGameLoader
     {
-        void Load(IGame game, object data);
+        void Load(IOopGame game, object data);
     }
 
     public class GameLoader : IGameLoader
     {
-        public void Load(IGame game, object data)
+        public void Load(IOopGame game, object data)
         {
             switch (game)
             {

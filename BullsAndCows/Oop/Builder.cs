@@ -10,7 +10,7 @@ namespace BullsAndCows.Oop
     public interface IBuilder
     {
         OopRunner GetRunner();
-        IGame GetGame(Game gameKey);
+        IOopGame GetGame(Game gameKey);
     }
 
     public class Builder: IBuilder
@@ -32,7 +32,7 @@ namespace BullsAndCows.Oop
             return new OopRunner(this, _consoleInput, _consoleOutput, _gameLoader);
         }
 
-        public IGame GetGame(Game gameKey)
+        public IOopGame GetGame(Game gameKey)
         {
             switch (gameKey)
             {

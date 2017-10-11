@@ -5,7 +5,7 @@ namespace BullsAndCows.Oop.Solwer
     {
         Equal = 1, Less, More
     }
-    public class OopSolwer : IGame
+    public class OopSolwer : IOopGame
     {
         private readonly ISolwerInput _input;
         private readonly ISolwerOutput _output;
@@ -15,6 +15,23 @@ namespace BullsAndCows.Oop.Solwer
             _output = output;
 
         }
+
+        public void MakeGreating()
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IOopGame.Run()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowResult(bool outOfIterations)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public void Run()
         {
             _output.SolwerGreating();
