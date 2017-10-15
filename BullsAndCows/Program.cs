@@ -11,8 +11,8 @@ namespace BullsAndCows
         // new Runner().Run();
 
             new Builder()
-                .GetRunner()
-                .Run();
+                .GetMenu()
+                .RunMainMenu();
         }
     }
 }

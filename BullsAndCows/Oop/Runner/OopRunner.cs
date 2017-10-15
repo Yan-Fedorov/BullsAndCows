@@ -1,63 +1,40 @@
-﻿using BullsAndCows.Oop.GameLoader;
-using BullsAndCows.Oop.GamerConsol;
-using BullsAndCows.Oop.Thinker;
+﻿using BullsAndCows.Oop.GamerConsol;
 
 namespace BullsAndCows.Oop.Runner
 {
-    public class OopRunner
+    public interface IOopRunner
+    {
+        void Run(IOopGame game);
+    }
+
+
+    public class OopRunner : IOopRunner
     {
         private readonly IGamerConsoleInput _input;
-        private readonly IOopRunnerOutput _output;
-        private readonly IBuilder _builder;
-        private readonly IGameLoader _gameLoader;
 
-        public OopRunner(IBuilder builder, IGamerConsoleInput input, IOopRunnerOutput output, IGameLoader gameLoader)
+        public int Iteration { get; set; }
+
+        public OopRunner(IGamerConsoleInput input)
         {
-            _builder = builder;
             _input = input;
-            _output = output;
-            _gameLoader = gameLoader;
+            Iteration = 0;
         }
-       
 
-
-        public void Run()
+        public void Run(IOopGame game)
         {
-            while (true)
-            {                
-                var input = _input.SelectGame();
+            game.MakeGreating();
 
-                if (input.Option == GameInputOption.Exit)
-                {
-                    _output.ByeBye();
-                    _input.PressAnyKey();
-                    return;
-                }
+            bool isHasWin;
+            do
+            {
+                Iteration++;
+                isHasWin = game.Run();
+            } while (Iteration < 10 && !isHasWin);
 
-                IOopGame game;
+            game.ShowResult(Iteration < 10);
+            _input.PressAnyKey();
 
-                if (input.Option == GameInputOption.CallGameMenu)
-                {
-                    game = _builder.GetGame(Game.Thinker);
-                    _gameLoader.Load(game, new OopThinkerData {Iteration = 4, Number = 200});
-                }
-                else
-                    game = _builder.GetGame(input.Input);
-
-
-                game.MakeGreating();
-
-                var iteration = 0;
-                bool isHasWin;
-                do
-                {
-                    iteration++;
-                    isHasWin = game.Run();
-                } while (iteration < 10 && !isHasWin);
-
-                game.ShowResult(iteration < 10);
-                _input.PressAnyKey();
-            }
+            Iteration = 0;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using BullsAndCows.Oop.GameLoader;
 using BullsAndCows.Oop.GamerConsol;
+using BullsAndCows.Oop.Menu;
 using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Thinker;
@@ -19,19 +20,30 @@ namespace BullsAndCows.Oop
         private readonly IGamerConsoleInput _consoleInput;
         private readonly IGamerConsoleOutput _consoleOutput;
         private readonly IGameLoader _gameLoader;
+        private readonly OopMenu _menu;
+        private readonly OopRunner _runner;
 
         public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null, IGameLoader gameLoader = null)
         {
             _consoleInput = consoleInput ?? new GamerConsoleInput();
             _consoleOutput = consoleOutput ?? new GamerConsoleOutput();
             _gameLoader = gameLoader ?? new GameLoader.GameLoader();
+
+            _runner = new OopRunner(_consoleInput);
+
         }
 
 
         public OopRunner GetRunner()
         {
-            return new OopRunner(this, _consoleInput, _consoleOutput, _gameLoader);
+            return _runner;
         }
+
+        public OopMenu GetMenu()
+        {
+            return new OopMenu(_consoleInput, _consoleOutput, _gameLoader, this, _runner);
+        }
+
 
         public IOopGame GetGame(Game gameKey)
         {

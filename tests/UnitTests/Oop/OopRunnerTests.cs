@@ -32,18 +32,12 @@ namespace UnitTests.Oop
         public void CheckIfRunnerRun10Times()
         {
             var input = Substitute.For<IGamerConsoleInput>();
-            var builder = Substitute.For<IBuilder>();
             var game = Substitute.For<IOopGame>();
-            var output = Substitute.For<IOopRunnerOutput>();
-            var runner = new OopRunner(builder, input, output, null);
+            var runner = new OopRunner(input);
 
-            input.SelectGame()
-                .ReturnsForAnyArgs(
-                new GameInput<Game>() { Option = GameInputOption.GameInput },
-                new GameInput<Game>() { Option = GameInputOption.Exit });
-            builder.GetGame(Game.Solver).ReturnsForAnyArgs(game);
 
-            runner.Run();
+            runner.Run(game);
+
 
             game.Received(10).Run();
             game.Received(1).ShowResult(false);

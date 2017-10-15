@@ -28,8 +28,8 @@ namespace IntegrationTests
                 Task.Run(() =>
                 {
                     new Builder(_input, _output)
-                        .GetRunner()
-                        .Run();
+                        .GetMenu()
+                        .RunMainMenu();
                 });
             });
 
@@ -80,8 +80,8 @@ namespace IntegrationTests
                 Task.Run(() =>
                 {
                     new Builder(_input, _output)
-                        .GetRunner()
-                        .Run();
+                        .GetMenu()
+                        .RunMainMenu();
                 });
             });
 

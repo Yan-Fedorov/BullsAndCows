@@ -23,7 +23,7 @@ namespace UnitTests.Oop
         [Fact]
         public void CheckIfItGoTo10()
         {
-            
+
             _input.GetEstimation().Returns(OopEstimation.More);
 
             _solwer.Run();
@@ -52,13 +52,13 @@ namespace UnitTests.Oop
                 });
 
             var solwer = new OopSolwer(input, output);
-            for (int i = 0; i < 10; i++)
+            var guessed = false;
+            for (int i = 0; i < 10 && !guessed; i++)
             {
-                solwer.Run();
+                guessed = solwer.Run();
             }
 
-
-           // output.Received().ShowResault(guessed: resaultOfSeach);
+            Assert.Equal(resaultOfSeach, guessed);
         }
     }
 }
