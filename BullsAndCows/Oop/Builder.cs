@@ -5,9 +5,10 @@ using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Thinker;
 
+
 namespace BullsAndCows.Oop
 {
-    public interface IBuilder
+    public interface IBuilder  
     {
         OopRunner GetRunner();
         IOopGame GetGame(Game gameKey);

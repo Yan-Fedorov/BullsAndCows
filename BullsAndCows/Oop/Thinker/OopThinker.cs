@@ -1,4 +1,6 @@
 ﻿using System;
+using BullsAndCows.Oop;
+
 
 namespace BullsAndCows.Oop.Thinker
 {
@@ -48,6 +50,7 @@ namespace BullsAndCows.Oop.Thinker
 
             return guessed;
         }
+        
 
 
         public void ShowResult(bool outOfIterations)

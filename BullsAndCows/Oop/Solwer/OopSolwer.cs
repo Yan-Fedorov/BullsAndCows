@@ -13,67 +13,87 @@ namespace BullsAndCows.Oop.Solwer
         {
             _input = input;
             _output = output;
+            Line = 500;
 
         }
+
+        public int Iteration { get; set; }
+        public int Assumption { get; set; }
+        public int Line { get; set; }
+        
 
         public void MakeGreating()
         {
-            throw new NotImplementedException();
+            _output.SolwerGreating();
         }
 
-        bool IOopGame.Run()
+        public bool Run()
         {
-            throw new NotImplementedException();
+            
+            Assumption = Line;
+            var guessed = false;
+            Line = Line / 2;
+            if (Line == 0)
+                Line = 1;
+
+            _output.Assumption(Assumption);
+
+            var estimate = _input.GetEstimation();
+            switch (estimate)
+            {
+                case OopEstimation.Equal:
+                    guessed = true;
+                    break;
+
+                case OopEstimation.Less:
+                    Assumption -= Line;
+                    break;
+
+                case OopEstimation.More:
+                    Assumption += Line;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            return guessed;
         }
 
         public void ShowResult(bool outOfIterations)
         {
-            throw new NotImplementedException();
+            _output.DisplayingResultOfGame(outOfIterations);
         }
 
 
-        public void Run()
-        {
-            _output.SolwerGreating();
+        //public void Run()
+        //{
+        //    var line = 500;
+        //    var assumption = line;
+        //    var guessed = false;
+        //        line = line / 2;
+        //        if (line == 0)
+        //            line = 1;
 
-            var line = 500;
-            var assumption = line;
-            var iteration = 10;
-            var guessed = false;
+        //        _output.Assumption(assumption);
 
-            do
-            {
-                iteration--;
+        //        var estimate = _input.GetEstimation();
+        //    switch (estimate)
+        //    {
+        //        case OopEstimation.Equal:
+        //            guessed = true;
+        //            break;
 
-                line = line / 2;
-                if (line == 0)
-                    line = 1;
+        //        case OopEstimation.Less:
+        //            assumption -= line;
+        //            break;
 
-                _output.Assumption(assumption);
+        //        case OopEstimation.More:
+        //            assumption += line;
+        //            break;
 
-                var estimate = _input.GetEstimation();
-                switch (estimate)
-                {
-                    case OopEstimation.Equal:
-                        guessed = true;
-                        break;
-
-                    case OopEstimation.Less:
-                        assumption -= line;
-                        break;
-
-                    case OopEstimation.More:
-                        assumption += line;
-                        break;
-
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-            } while (iteration > 0 && !guessed);
-
-            _output.DisplayingResultOfGame(guessed);
-
-        }
+        //        default:
+        //            throw new ArgumentOutOfRangeException();
+        //    }
+        //}
     }
 }

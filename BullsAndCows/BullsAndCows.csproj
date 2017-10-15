@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Oop\GameLoader\GameLoader.cs" />
+    <Compile Include="Oop\Solwer\OopSolwerData.cs" />
     <Compile Include="Oop\IOopGame.cs" />
+    <Compile Include="Oop\GameLoader\GameLoader.cs" />
     <Compile Include="Oop\Runner\GameInput.cs" />
     <Compile Include="Oop\Thinker\GameBuilder.cs" />
     <Compile Include="IGame.cs" />

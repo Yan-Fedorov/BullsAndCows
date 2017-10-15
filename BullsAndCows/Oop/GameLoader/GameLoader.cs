@@ -1,5 +1,6 @@
 ﻿using System;
 using BullsAndCows.Oop.Thinker;
+using BullsAndCows.Oop.Solwer;
 
 namespace BullsAndCows.Oop.GameLoader
 {
@@ -21,6 +22,14 @@ namespace BullsAndCows.Oop.GameLoader
 
                     thinker.Iteration = thinkerData.Iteration;
                     thinker.Number = thinkerData.Number;
+                    break;
+                case OopSolwer solwer:
+                    var solwerData = data as OopSolwerData;
+                    if(solwerData == null)
+                        throw new Exception("Bad solwer data");
+                    solwer.Iteration = solwerData.Iteration;
+                    solwer.Assumption = solwerData.Assumption;
+                    solwer.Line = solwerData.Line;
                     break;
 
                 default:

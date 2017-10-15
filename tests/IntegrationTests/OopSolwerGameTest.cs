@@ -34,7 +34,7 @@ namespace IntegrationTests
                 });
 
 
-            "Select Thinker game".x(() =>
+            "Select Solwer game".x(() =>
             {
                 _input.SendGame(new GameInput<Game>{Input = Game.Solver, Option = GameInputOption.GameInput});
                 _output.WaitSolwerGreating();

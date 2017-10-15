@@ -8,7 +8,7 @@ namespace UnitTests.Oop
     {
         private readonly ISolwerInput _input;
         private readonly ISolwerOutput _output;
-        private readonly OopSolwer _puzzle;
+        private readonly OopSolwer _solwer;
 
 
         public OopSolwerTests()
@@ -17,7 +17,7 @@ namespace UnitTests.Oop
 
             _output = Substitute.For<ISolwerOutput>();
 
-            _puzzle = new OopSolwer(_input, _output);
+            _solwer = new OopSolwer(_input, _output);
         }
 
         [Fact]
@@ -26,9 +26,9 @@ namespace UnitTests.Oop
             
             _input.GetEstimation().Returns(OopEstimation.More);
 
-            _puzzle.Run();
+            _solwer.Run();
 
-            _output.Received(10).Assumption(Arg.Any<int>());
+            _output.Received(1).Assumption(Arg.Any<int>());
         }
 
         [Theory]
@@ -52,13 +52,13 @@ namespace UnitTests.Oop
                 });
 
             var solwer = new OopSolwer(input, output);
-            solwer.Run();
+            for (int i = 0; i < 10; i++)
+            {
+                solwer.Run();
+            }
 
 
-            output.Received().DisplayingResultOfGame(guessed: resaultOfSeach);
+           // output.Received().ShowResault(guessed: resaultOfSeach);
         }
-
-
-
     }
 }
