@@ -14,6 +14,7 @@ namespace BullsAndCows.Oop.Solwer
             _input = input;
             _output = output;
             Line = 500;
+            Assumption = Line;
 
         }
 
@@ -30,7 +31,7 @@ namespace BullsAndCows.Oop.Solwer
         public bool Run()
         {
             
-            Assumption = Line;
+            
             var guessed = false;
             Line = Line / 2;
             if (Line == 0)

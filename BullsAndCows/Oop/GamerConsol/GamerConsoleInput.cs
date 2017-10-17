@@ -66,6 +66,18 @@ namespace BullsAndCows.Oop.GamerConsol
                 }
             }
         }
+         public void SelectSavedGame()
+        {
+            Console.Clear();
+            Console.WriteLine("Укажите сохраненную игру или укажите 0 для выхода:");
+            while (true)
+            {
+                var key = Console.ReadLine();
+
+            }
+        }
+
+
 
         public void PressAnyKey()
         {

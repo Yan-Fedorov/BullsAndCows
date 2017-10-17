@@ -6,10 +6,7 @@ using BullsAndCows.Oop;
 using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows;
 using BullsAndCows.Oop.Thinker;
-
-
-
-
+using System.Linq;
 
 namespace UnitTests.Oop
 {
@@ -17,16 +14,16 @@ namespace UnitTests.Oop
     {
         private readonly IGamerConsoleInput _input;
         private readonly IGamerConsoleOutput _output;
-        private readonly IOopGame _game;
+        
 
         public OopRunnerTests()
         {
             _input = Substitute.For<IGamerConsoleInput>();
 
             _output = Substitute.For<IGamerConsoleOutput>();
+            
 
-           // _game = new OopGame(_input, _output);  
-           // IOopGame _game = 
+            
         }
         [Fact]
         public void CheckIfRunnerRun10Times()
@@ -42,41 +39,60 @@ namespace UnitTests.Oop
             game.Received(10).Run();
             game.Received(1).ShowResult(false);
         }
-        //private readonly IGamerConsoleInput _input;
-        //private readonly IGamerConsoleOutput _outputC;
-        //private readonly IOopRunnerOutput _output;
-        //private readonly OopRunner _runner;
-        //private readonly IGameLoader _gameLoader;
-        //private readonly IBuilder _builder;
-        //private readonly IGamerConsoleInput _consoleInput;
-        //private readonly IGamerConsoleOutput _consoleOutput;
-        //private readonly OopSolwer _solwer;
+        [Fact]
+        public void CheckIsHasWin()
+        {
+            var input = Substitute.For<IGamerConsoleInput>();
+            var game = Substitute.For<IOopGame>();
+            var runner = new OopRunner(input);
 
-        //public OopRunnerTests()
-        //{
-        //    _input = Substitute.For<IGamerConsoleInput>();
-        //    _output = Substitute.For<IOopRunnerOutput>();
-        //    _runner = new OopRunner(_builder, _input, _output, _gameLoader);
-        //    _solwer = new OopSolwer(_input, _outputC);
-        //}
+            game.Run().Returns(true);
+            runner.Run(game);
+            game.Received(1).Run();
+            game.Received(1).ShowResult(true);
+        }
 
-        //[Fact]
-        ////[InlineData _solwer]
-        ////[InlineData ]
+        
+        [Theory]
+        [InlineData (0)]
+        [InlineData(4)]
+        [InlineData(9)]
+        [InlineData(10)]
+        public void CheckIfCanWinLast(int iterations)
+        {
+            var input = Substitute.For<IGamerConsoleInput>();
+            var game = Substitute.For<IOopGame>();
+            var runner = new OopRunner(input);
 
-        //public void CheckIterations(/*IOopGame _solwer*/)
-        //{
+            runner.Iteration = iterations;
+            game.Run().Returns(true);
+            runner.Run(game);
+            
 
-        //    //        _input.SelectGame().Returns(new GameInput<Game> { Input = _solwer, Option = GameInputOption.GameInput });
-        //    //    IOopGame game;
-        //    //    game = _builder.GetGame(_solwer);
-        //    //    game.Run();
-        //    //    game.Received().ShowResult(false);
-        //    IOopGame game;
-        //    game = _solwer;
-        //    game.Run();
-        //    game.Received().ShowResult(false);
+            game.Received(1).Run();
+            game.Received(1).ShowResult(true);
+        }
 
-        //}
+
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(true, false, false, true)]
+        [InlineData(true, false, false, false, false, false, false, false, false, false, true)]
+        [InlineData(false, false, false, false, false, false, false, false, false, false, false)]
+        [InlineData(false, false, false, false, false, false, false, false, false, false, false, true)]
+        [InlineData(false, false, false, false, false, false, false, false, false, false, false, false)]
+        public void CheckIfCanWinLast2(bool isWon, params bool[] returns)
+        {
+            var input = Substitute.For<IGamerConsoleInput>();
+            var game = Substitute.For<IOopGame>();
+            var runner = new OopRunner(input);
+
+            game.Run().Returns(returns.First(), returns.Skip(1).ToArray());
+            runner.Run(game);
+
+
+            game.Received(returns.Length < 10 ? returns.Length : 10).Run();
+            game.Received(1).ShowResult(isWon);
+        }
     }
 }

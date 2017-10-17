@@ -45,10 +45,10 @@ namespace BullsAndCows.Oop.Menu
                     case GameInputOption.Exit:
                         _output.ByeBye();
                         _input.PressAnyKey();
-                        return;                        
+                        return;
 
                     case GameInputOption.GameInput:
-                        game = _builder.GetGame(input.Input);                        
+                        game = _builder.GetGame(input.Input);
                         break;
 
                     default:

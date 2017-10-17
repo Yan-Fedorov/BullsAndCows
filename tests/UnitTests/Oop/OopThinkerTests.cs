@@ -24,14 +24,20 @@ namespace UnitTests.Oop
         [Fact]
         public void ЯМогуВыигратьСПервойПопытки()
         {
-            _input.GetNumber().Returns(100);
+            var number = 100;
+
+            _input.GetNumber().Returns(number);
+            _thinker.Number = number;
+            
 
 
             _thinker.Run();
+            _thinker.ShowResult(true);
 
 
             _output.DidNotReceiveWithAnyArgs().ShowEstimationThinker(Arg.Any<int>(), Arg.Any<bool>());
-            _output.Received(1).ShowResultThinker(Arg.Any<int>(), true);
+            _output.Received(1).ShowResultThinker(number, true);
+            
         }
     }
 }

@@ -6,6 +6,7 @@ using BullsAndCows.Oop.Solwer;
 using IntegrationTests.OopStubs;
 using Xbehave;
 using Xunit;
+using NSubstitute;
 
 namespace IntegrationTests
 {
@@ -21,7 +22,9 @@ namespace IntegrationTests
         }
 
         [Scenario]
-        public void S1()
+        [Example(999, false)]
+        [Example(750, true)]
+        public void S1(int number, bool isWon)
         {
             "Given game with faked console".x(() =>
                 {
@@ -46,9 +49,9 @@ namespace IntegrationTests
                 while (true)
                 {
                     var assumption = _output.WaitAssumption();
-                    var estimation = assumption == 320
+                    var estimation = assumption == number
                         ? OopEstimation.Equal
-                        : (assumption < 320
+                        : (assumption < number
                             ? OopEstimation.More
                             : OopEstimation.Less);
 
@@ -63,7 +66,7 @@ namespace IntegrationTests
             "Werify result".x(() =>
             {
                 var isGuessed = _output.WaitGuessed();
-                Assert.Equal(true, isGuessed);
+                Assert.Equal(isWon, isGuessed);
             });
 
             "Exit".x(() =>
@@ -71,6 +74,6 @@ namespace IntegrationTests
                 _input.SendGame(new GameInput<Game>{Option = GameInputOption.Exit});
                 _output.WaitByeBye();
             });
-        }
+        } 
     }
 }
