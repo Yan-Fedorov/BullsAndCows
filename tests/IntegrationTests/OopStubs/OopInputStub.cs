@@ -25,10 +25,9 @@ namespace IntegrationTests.OopStubs
             _sendNumber.Set();
         }
 
-        public GameInput<Game> SelectSavedGame(List<string> games)
+        public GameInput<int> SelectSavedGame(List<string> games)
         {
-            GameInput<Game> tmp = new GameInput<Game>();
-            return tmp;
+            return new GameInput<int>();
         }
 
 

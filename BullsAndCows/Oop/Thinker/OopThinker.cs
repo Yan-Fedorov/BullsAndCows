@@ -10,7 +10,6 @@ namespace BullsAndCows.Oop.Thinker
         private readonly IThinkerOutput _output;
 
         public int Number { get; set; }
-        public int Iteration { get; set; }
 
 
         public OopThinker(IThinkerInput input, IThinkerOutput output)

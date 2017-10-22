@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BullsAndCows.Oop.GameLoader;
 using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows.Oop.Runner;
+using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Thinker;
 
 namespace BullsAndCows.Oop.Menu
@@ -33,20 +34,20 @@ namespace BullsAndCows.Oop.Menu
             while (true)
             {
                 var input = _input.SelectGame();
-                IOopGame game;
+                IOopGame game = null;
 
                 switch (input.Option)
                 {
                     case GameInputOption.CallGameMenu:
-                        //game = _builder.GetGame(Game.Thinker);
-                        //_gameLoader.Load(game, new OopThinkerData { Iteration = 4, Number = 200 });
 
-                        var items = new List<object> { new OopThinkerData(), new OopSolwerData() };
+                        var gamesNames = _gameLoader.GetGameNames();
+                        var savedGameKey = _input.SelectSavedGame(gamesNames);
 
-                        var savedGameKey = _input.SelectSavedGame(new List<string> { "Solwer - iteration 4", "Thinker - iteretion 9" });
-                        _gameLoader.Load(_builder.GetGame(savedGameKey.Input), items);
-                        game = _builder.GetGame(savedGameKey.Input);
-                        
+                        if (savedGameKey.Option != GameInputOption.GameInput)
+                            break;
+
+                        var gameData = _gameLoader.Load(out game, savedGameKey.Input);
+                        _oopRunner.Iteration = gameData.Iteration;
                         break;
 
                     case GameInputOption.Exit:
@@ -62,7 +63,8 @@ namespace BullsAndCows.Oop.Menu
                         throw new ArgumentOutOfRangeException();
                 }
 
-                _oopRunner.Run(game);
+                if (game != null)
+                    _oopRunner.Run(game);
             }
         }
     }

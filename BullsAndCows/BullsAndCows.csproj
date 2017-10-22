@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Oop\GameLoader\OopGameData.cs" />
     <Compile Include="Oop\Menu\OopMenu.cs" />
     <Compile Include="Oop\Solwer\OopSolwerData.cs" />
     <Compile Include="Oop\IOopGame.cs" />

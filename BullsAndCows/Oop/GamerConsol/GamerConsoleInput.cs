@@ -8,7 +8,7 @@ namespace BullsAndCows.Oop.GamerConsol
 {
     public interface IGamerConsoleInput : IThinkerInput, ISolwerInput, IOopRunnerInput
     {
-        GameInput<Game> SelectSavedGame(List<string> games);
+        GameInput<int> SelectSavedGame(List<string> games);
     }
 
     public class GamerConsoleInput : IGamerConsoleInput
@@ -70,7 +70,7 @@ namespace BullsAndCows.Oop.GamerConsol
                 }
             }
         }
-        public GameInput<Game> SelectSavedGame(List<string> games)
+        public GameInput<int> SelectSavedGame(List<string> games)
         {
             if(games.Count == 0)
             {
@@ -80,7 +80,7 @@ namespace BullsAndCows.Oop.GamerConsol
             Console.WriteLine("Укажите сохраненную игру, нажав на клавиши от 0 до {0} или укажите 0 для выхода:", games.Count);
             for(int i = 0; i< games.Count; i++)
             {
-                Console.WriteLine(i+ "-"+ games[i]);
+                Console.WriteLine(i+ " - "+ games[i]);
             }
             
             Console.WriteLine();
@@ -95,10 +95,10 @@ namespace BullsAndCows.Oop.GamerConsol
                 switch (num)
                 {
                     case 0:
-                        return new GameInput<Game> { Option = GameInputOption.Exit };
+                        return new GameInput<int> { Option = GameInputOption.Exit };
 
                     default:
-                        return new GameInput<Game> { Option = GameInputOption.GameInput, Input = (Game)num };
+                        return new GameInput<int> { Option = GameInputOption.GameInput, Input = num };
                         // вот тут нужно как то выбрать загрузку сохраненной игры
 
                     // зачем нам gameLoader если он не используется,

@@ -5,6 +5,7 @@ namespace BullsAndCows.Oop.Runner
     public interface IOopRunner
     {
         void Run(IOopGame game);
+        int Iteration { set; }
     }
 
 

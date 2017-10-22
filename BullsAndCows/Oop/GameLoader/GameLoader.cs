@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
 
@@ -6,35 +8,61 @@ namespace BullsAndCows.Oop.GameLoader
 {
     public interface IGameLoader
     {
-        void Load(IOopGame game, object data);
+        OopGameData Load(out IOopGame game, int gameNumber);
+        List<string> GetGameNames();
     }
 
     public class GameLoader : IGameLoader
     {
-        public void Load(IOopGame game, object data)
+        private readonly IBuilder _builder;
+        private readonly List<OopGameData> _games = new List<OopGameData>
         {
-            switch (game)
-            {
-                case OopThinker thinker:
-                    var thinkerData = data as OopThinkerData;
-                    if (thinkerData == null)
-                        throw new Exception("Bad thinker data");
+            new OopThinkerData {Iteration = 4, Number = 300, GameScreen = @"
+Тут данные итерации
+"},
+            new OopSolwerData {Iteration = 2, Assumption = 750, Line = 250, GameScreen = @"
+Вы загадали 500 ?
 
-                    thinker.Iteration = thinkerData.Iteration;
+ 1 - да
+ 2 - моё число меньше
+ 3 - моё число больше
+Укажите соответствующий вариант: 3
+"}
+        };
+
+
+        public GameLoader(IBuilder builder)
+        {
+            _builder = builder;
+        }
+
+
+        public OopGameData Load(out IOopGame game, int gameNumber)
+        {
+            var gameData = _games[gameNumber - 1];
+            switch (gameData)
+            {
+                case OopThinkerData thinkerData:
+                    var thinker = (game = _builder.GetGame(Game.Thinker)) as OopThinker;
                     thinker.Number = thinkerData.Number;
-                    break;
-                case OopSolwer solwer:
-                    var solwerData = data as OopSolwerData;
-                    if(solwerData == null)
-                        throw new Exception("Bad solwer data");
-                    solwer.Iteration = solwerData.Iteration;
+                    return gameData;
+
+                case OopSolwerData solwerData:
+                    var solwer = (game = _builder.GetGame(Game.Solver)) as OopSolwer;
                     solwer.Assumption = solwerData.Assumption;
                     solwer.Line = solwerData.Line;
-                    break;
+                    return gameData;
 
                 default:
-                    throw new Exception($"Unnoun game {game.GetType().Name}");
+                    throw new Exception($"Unnoun game data {gameData.GetType().Name}");
             }
+        }
+
+        public List<string> GetGameNames()
+        {
+            return _games
+                .Select(x => x.GetName())
+                .ToList();
         }
     }
 }

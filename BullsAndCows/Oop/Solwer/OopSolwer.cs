@@ -18,7 +18,6 @@ namespace BullsAndCows.Oop.Solwer
 
         }
 
-        public int Iteration { get; set; }
         public int Assumption { get; set; }
         public int Line { get; set; }
         

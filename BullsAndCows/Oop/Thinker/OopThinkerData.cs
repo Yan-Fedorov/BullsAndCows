@@ -1,8 +1,9 @@
-﻿namespace BullsAndCows.Oop.Thinker
+﻿using BullsAndCows.Oop.GameLoader;
+
+namespace BullsAndCows.Oop.Thinker
 {
-    public class OopThinkerData
+    public class OopThinkerData: OopGameData
     {
         public int Number { get; set; }
-        public int Iteration { get; set; }
     }
 }

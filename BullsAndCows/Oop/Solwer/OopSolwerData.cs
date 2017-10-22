@@ -1,13 +1,10 @@
-﻿using BullsAndCows.Oop.Solwer;
+﻿using BullsAndCows.Oop.GameLoader;
 
-namespace BullsAndCows
+namespace BullsAndCows.Oop.Solwer
 {
-    public class OopSolwerData
+    public class OopSolwerData: OopGameData
     {
-        public int Iteration { get; set; }
         public int Assumption { get; set; }
         public int Line { get; set; }
-
-
     }
 }

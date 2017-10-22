@@ -27,7 +27,7 @@ namespace BullsAndCows.Oop
         {
             _consoleInput = consoleInput ?? new GamerConsoleInput();
             _consoleOutput = consoleOutput ?? new GamerConsoleOutput();
-            _gameLoader = gameLoader ?? new GameLoader.GameLoader();
+            _gameLoader = gameLoader ?? new GameLoader.GameLoader(this);
 
             _runner = new OopRunner(_consoleInput);
 
