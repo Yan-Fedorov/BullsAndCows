@@ -54,23 +54,24 @@ namespace UnitTests.Oop
 
         
         [Theory]
-        [InlineData (0)]
-        [InlineData(4)]
-        [InlineData(9)]
-        [InlineData(10)]
-        public void CheckIfCanWinLast(int iterations)
+        [InlineData(0,true)]
+        [InlineData(4,true)]
+        [InlineData(9,true)]
+        [InlineData(10, false)]
+        [InlineData(10, true)]
+        public void CheckIfCanWinLast(int iterations, bool isWon)
         {
             var input = Substitute.For<IGamerConsoleInput>();
             var game = Substitute.For<IOopGame>();
             var runner = new OopRunner(input);
 
             runner.Iteration = iterations;
-            game.Run().Returns(true);
+            game.Run().Returns(isWon);
             runner.Run(game);
             
 
             game.Received(1).Run();
-            game.Received(1).ShowResult(true);
+            game.Received(1).ShowResult(isWon);
         }
 
 

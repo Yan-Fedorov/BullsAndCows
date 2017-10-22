@@ -38,8 +38,15 @@ namespace BullsAndCows.Oop.Menu
                 switch (input.Option)
                 {
                     case GameInputOption.CallGameMenu:
-                        game = _builder.GetGame(Game.Thinker);
-                        _gameLoader.Load(game, new OopThinkerData { Iteration = 4, Number = 200 });
+                        //game = _builder.GetGame(Game.Thinker);
+                        //_gameLoader.Load(game, new OopThinkerData { Iteration = 4, Number = 200 });
+
+                        var items = new List<object> { new OopThinkerData(), new OopSolwerData() };
+
+                        var savedGameKey = _input.SelectSavedGame(new List<string> { "Solwer - iteration 4", "Thinker - iteretion 9" });
+                        _gameLoader.Load(_builder.GetGame(savedGameKey.Input), items);
+                        game = _builder.GetGame(savedGameKey.Input);
+                        
                         break;
 
                     case GameInputOption.Exit:

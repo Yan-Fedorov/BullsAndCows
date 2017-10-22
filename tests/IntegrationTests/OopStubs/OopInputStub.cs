@@ -4,6 +4,7 @@ using BullsAndCows;
 using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
+using System.Collections.Generic;
 
 namespace IntegrationTests.OopStubs
 {
@@ -22,6 +23,12 @@ namespace IntegrationTests.OopStubs
         {
             _number = number;
             _sendNumber.Set();
+        }
+
+        public GameInput<Game> SelectSavedGame(List<string> games)
+        {
+            GameInput<Game> tmp = new GameInput<Game>();
+            return tmp;
         }
 
 

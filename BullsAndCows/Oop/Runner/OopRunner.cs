@@ -24,14 +24,19 @@ namespace BullsAndCows.Oop.Runner
         {
             game.MakeGreating();
 
-            bool isHasWin;
+            bool isHasWin = false;
             do
             {
                 Iteration++;
-                isHasWin = game.Run();
-            } while (Iteration < 10 && !isHasWin);
+                if (Iteration > 10)
+                    break;
 
-            game.ShowResult(Iteration < 10);
+                isHasWin = game.Run();
+            } while (!isHasWin);
+
+            game.ShowResult(isHasWin);
+
+
             _input.PressAnyKey();
 
             Iteration = 0;
