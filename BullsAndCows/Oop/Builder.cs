@@ -20,7 +20,7 @@ namespace BullsAndCows.Oop
         private readonly IGamerConsoleInput _consoleInput;
         private readonly IGamerConsoleOutput _consoleOutput;
         private readonly IGameLoader _gameLoader;
-        private readonly OopMenu _menu;
+        private OopMenu _menu;
         private readonly OopRunner _runner;
         private readonly ITemporaryStorageSolwer _temporaryStorageSolwer;
 
@@ -44,7 +44,7 @@ namespace BullsAndCows.Oop
 
         public OopMenu GetMenu()
         {
-            return new OopMenu(_consoleInput, _consoleOutput, _gameLoader, this, _runner, _temporaryStorageSolwer);
+            return _menu = new OopMenu(_consoleInput, _consoleOutput, _gameLoader, this, _runner, _temporaryStorageSolwer);
         }
 
 

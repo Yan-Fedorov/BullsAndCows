@@ -3,5 +3,6 @@
     public interface IOopRunnerOutput
     {
         void ByeBye();
+        void ReloadGameHistory(string history);
     }
 }

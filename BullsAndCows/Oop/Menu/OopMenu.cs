@@ -53,8 +53,8 @@ namespace BullsAndCows.Oop.Menu
                         if (savedGameKey.Option != GameInputOption.GameInput)
                             break;
 
-                        var gameData = _gameLoader.Load(out game, savedGameKey.Input);
-                        _oopRunner.Iteration = gameData.Iteration;
+                        var gameHistory = _gameLoader.Load(out game, _oopRunner, savedGameKey.Input);
+                        _output.ReloadGameHistory(gameHistory);
                         break;
 
                     case GameInputOption.Exit:

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
 
@@ -8,7 +9,7 @@ namespace BullsAndCows.Oop.GameLoader
 {
     public interface IGameLoader
     {
-        OopGameData Load(out IOopGame game, int gameNumber);
+        string Load(out IOopGame game, IOopRunner runner, int gameNumber);
         List<string> GetGameNames();
     }
 
@@ -37,7 +38,7 @@ namespace BullsAndCows.Oop.GameLoader
         }
 
 
-        public OopGameData Load(out IOopGame game, int gameNumber)
+        public string Load(out IOopGame game, IOopRunner runner, int gameNumber)
         {
             var gameData = _games[gameNumber - 1];
             switch (gameData)
@@ -45,17 +46,20 @@ namespace BullsAndCows.Oop.GameLoader
                 case OopThinkerData thinkerData:
                     var thinker = (game = _builder.GetGame(Game.Thinker)) as OopThinker;
                     thinker.Number = thinkerData.Number;
-                    return gameData;
-
+                    break;
+                   
                 case OopSolwerData solwerData:
                     var solwer = (game = _builder.GetGame(Game.Solver)) as OopSolwer;
                     solwer.Assumption = solwerData.Assumption;
                     solwer.Line = solwerData.Line;
-                    return gameData;
+                    break;
 
                 default:
                     throw new Exception($"Unnoun game data {gameData.GetType().Name}");
             }
+
+            runner.Iteration = gameData.Iteration;
+            return gameData.GameScreen;
         }
 
         public List<string> GetGameNames()

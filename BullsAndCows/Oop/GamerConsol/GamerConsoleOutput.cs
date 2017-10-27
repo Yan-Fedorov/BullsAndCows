@@ -65,6 +65,11 @@ namespace BullsAndCows.Oop.GamerConsol
         {
             Console.WriteLine("Как жаль что вы уже уходите.");
         }
+
+        public void ReloadGameHistory(string history)
+        {
+            Console.WriteLine(history);
+        }
         #endregion
     }
 }
