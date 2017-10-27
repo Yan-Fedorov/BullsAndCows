@@ -23,17 +23,18 @@ namespace BullsAndCows.Oop
         private OopMenu _menu;
         private readonly OopRunner _runner;
         private readonly ITemporaryStorageSolwer _temporaryStorageSolwer;
+        private readonly TemporaryStorage _temporaryStorage;
 
-        public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null, IGameLoader gameLoader = null, ITemporaryStorageSolwer temporaryStorageSolwer = null)
+        public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null, IGameLoader gameLoader = null, ITemporaryStorageSolwer temporaryStorageSolwer = null, TemporaryStorage temporaryStorage = null)
         {
-            _consoleInput = consoleInput ?? new GamerConsoleInput();
-            _consoleOutput = consoleOutput ?? new GamerConsoleOutput();
+            _temporaryStorage = temporaryStorage ?? new TemporaryStorage();
+            _consoleInput = consoleInput ?? new GamerConsoleInput(_temporaryStorage);
+            _consoleOutput = consoleOutput ?? new GamerConsoleOutput(_temporaryStorage);
             _gameLoader = gameLoader ?? new GameLoader.GameLoader(this);
 
             _runner = new OopRunner(_consoleInput);
 
             _temporaryStorageSolwer = temporaryStorageSolwer ?? new TemporaryStorageSolwer();
-            
         }
 
 
@@ -44,7 +45,7 @@ namespace BullsAndCows.Oop
 
         public OopMenu GetMenu()
         {
-            return _menu = new OopMenu(_consoleInput, _consoleOutput, _gameLoader, this, _runner, _temporaryStorageSolwer);
+            return _menu = new OopMenu(_consoleInput, _consoleOutput, _gameLoader, this, _runner, _temporaryStorageSolwer, _temporaryStorage);
         }
 
 

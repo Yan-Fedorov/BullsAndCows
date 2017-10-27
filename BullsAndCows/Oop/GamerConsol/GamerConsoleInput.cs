@@ -3,6 +3,7 @@ using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Runner;
 using System.Collections.Generic;
+using BullsAndCows.Oop.GameLoader;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
@@ -13,32 +14,51 @@ namespace BullsAndCows.Oop.GamerConsol
 
     public class GamerConsoleInput : IGamerConsoleInput
     {
+        private readonly IConsoleHistorySaver _consoleHistorySaver;
+
+        public GamerConsoleInput(IConsoleHistorySaver consoleHistorySaver)
+        {
+            _consoleHistorySaver = consoleHistorySaver;
+        }
+
+
         public int GetNumber()
         {
+            const string msg = "Введите число: ";
             while (true)
             {
-                Console.Write("Введите число: ");
+                Console.Write(msg);
 
                 var st = Console.ReadLine();
-                if (int.TryParse(st, out var num))
-                    return num;
+                if (!int.TryParse(st, out var num)) continue;
+
+                _consoleHistorySaver.SaveGameHistory(msg + st + Environment.NewLine);
+                return num;
             }
         }
+
         public OopEstimation GetEstimation()
         {
-            Console.WriteLine(@"
+            var msg = @"
  1 - да
  2 - моё число меньше
- 3 - моё число больше");
+ 3 - моё число больше";
+            Console.WriteLine(msg);
+            _consoleHistorySaver.SaveGameHistory(msg + Environment.NewLine);
+
+            msg = "Укажите соответствующий вариант: ";
 
             while (true)
             {
-                Console.Write("Укажите соответствующий вариант: ");
+                Console.Write(msg);
 
                 var key = Console.ReadLine();
 
-                if (int.TryParse(key, out var num) && num > 0 && num <= 3)
-                    return (OopEstimation)num;
+                if (!int.TryParse(key, out var num) || num <= 0 || num > 3)
+                    continue;
+
+                _consoleHistorySaver.SaveGameHistory(msg + key + Environment.NewLine);
+                return (OopEstimation) num;
             }
         }
 
@@ -70,6 +90,8 @@ namespace BullsAndCows.Oop.GamerConsol
                 }
             }
         }
+
+
         public GameInput<int> SelectSavedGame(List<string> games)
         {
             if(games.Count == 0)

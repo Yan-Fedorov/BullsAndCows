@@ -145,6 +145,11 @@ namespace IntegrationTests.OopStubs
             _receiveByeBye.Set();
         }
 
+        public void ReloadGameHistory(string history)
+        {
+            throw new NotImplementedException();
+        }
+
         public void WaitByeBye()
         {
             if(!_receiveByeBye.WaitOne(TimeoutMs))

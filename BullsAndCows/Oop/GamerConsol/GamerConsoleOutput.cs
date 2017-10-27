@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using BullsAndCows.Oop.GameLoader;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Runner;
@@ -10,8 +11,11 @@ namespace BullsAndCows.Oop.GamerConsol
 
     public class GamerConsoleOutput : IGamerConsoleOutput
     {
-        public GamerConsoleOutput()
+        private readonly IConsoleHistorySaver _consoleHistorySaver;
+
+        public GamerConsoleOutput(IConsoleHistorySaver consoleHistorySaver)
         {
+            _consoleHistorySaver = consoleHistorySaver;
             Console.OutputEncoding = Encoding.UTF8;
         }
 
@@ -19,12 +23,16 @@ namespace BullsAndCows.Oop.GamerConsol
         #region IThinkerOutput
         public void ThinkerGreating()
         {
-            Console.WriteLine("Я загадал 3-х значное число, угадывай )");
+            const string msg = "Я загадал 3-х значное число, угадывай )";
+            _consoleHistorySaver.SaveGameHistory(msg + Environment.NewLine);
+            Console.WriteLine(msg);
         }
 
         public void ShowEstimationThinker(int assumption, bool isAssumptionBigger)
         {
-            Console.WriteLine($"Число {assumption} {(isAssumptionBigger ? "больше" : "меньше")} загаданного");
+            var msg = $"Число {assumption} {(isAssumptionBigger ? "больше" : "меньше")} загаданного";
+            _consoleHistorySaver.SaveGameHistory(msg + Environment.NewLine);
+            Console.WriteLine(msg);
         }
 
         public void ShowResultThinker(int number, bool isGuessed)
@@ -42,7 +50,9 @@ namespace BullsAndCows.Oop.GamerConsol
         #region ISolwerOutput
         public void SolwerGreating()
         {
-            Console.WriteLine("Загадайте 3-х значное число и нажмите любую клавишу");
+            var msg = "Загадайте 3-х значное число и нажмите любую клавишу";
+            _consoleHistorySaver.SaveGameHistory(msg + Environment.NewLine);
+            Console.WriteLine(msg);
         }
 
         public void Assumption(int assumption)

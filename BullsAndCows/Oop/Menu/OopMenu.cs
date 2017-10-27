@@ -19,10 +19,11 @@ namespace BullsAndCows.Oop.Menu
         private readonly IBuilder _builder;
         private readonly IOopRunner _oopRunner;
         private readonly ITemporaryStorageSolwer _temporaryStorageSolwer;
+        private readonly ITemporaryStorage _temporaryStorage;
 
 
 
-        public OopMenu(IGamerConsoleInput input, IOopRunnerOutput output, IGameLoader gameLoader, IBuilder builder, IOopRunner oopRunner, ITemporaryStorageSolwer temporaryStorageSolwer)
+        public OopMenu(IGamerConsoleInput input, IOopRunnerOutput output, IGameLoader gameLoader, IBuilder builder, IOopRunner oopRunner, ITemporaryStorageSolwer temporaryStorageSolwer, ITemporaryStorage temporaryStorage)
         {
             _input = input;
             _output = output;
@@ -30,6 +31,7 @@ namespace BullsAndCows.Oop.Menu
             _builder = builder;
             _oopRunner = oopRunner;
             _temporaryStorageSolwer = temporaryStorageSolwer;
+            _temporaryStorage = temporaryStorage;
         }
         public List<TemporaryStorageSolwer> solwerList = new List<TemporaryStorageSolwer>();
 
@@ -55,6 +57,7 @@ namespace BullsAndCows.Oop.Menu
 
                         var gameHistory = _gameLoader.Load(out game, _oopRunner, savedGameKey.Input);
                         _output.ReloadGameHistory(gameHistory);
+                        _temporaryStorage.Clear(gameHistory);
                         break;
 
                     case GameInputOption.Exit:
@@ -64,6 +67,7 @@ namespace BullsAndCows.Oop.Menu
 
                     case GameInputOption.GameInput:
                         game = _builder.GetGame(input.Input);
+                        _temporaryStorage.Clear();
                         break;
 
                     default:
@@ -72,6 +76,11 @@ namespace BullsAndCows.Oop.Menu
 
                 if (game != null)
                     _oopRunner.Run(game);
+
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine(_temporaryStorage.GetCurrentHistory());
+                _input.PressAnyKey();
                 _temporaryStorageSolwer.WriteSolwerConsole(solwerList);
             }
         }
