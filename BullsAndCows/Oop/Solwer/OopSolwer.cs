@@ -1,4 +1,9 @@
 ﻿using System;
+using BullsAndCows.Oop;
+using System.Collections.Generic;
+using BullsAndCows.Oop.Menu;
+
+
 namespace BullsAndCows.Oop.Solwer
 {
     public enum OopEstimation
@@ -9,10 +14,12 @@ namespace BullsAndCows.Oop.Solwer
     {
         private readonly ISolwerInput _input;
         private readonly ISolwerOutput _output;
-        public OopSolwer(ISolwerInput input, ISolwerOutput output)
+        private readonly OopMenu _oopMenu;
+        public OopSolwer(ISolwerInput input, ISolwerOutput output, OopMenu menu)
         {
             _input = input;
             _output = output;
+            _oopMenu = menu;
             Line = 500;
             Assumption = Line;
 
@@ -21,6 +28,7 @@ namespace BullsAndCows.Oop.Solwer
         public int Assumption { get; set; }
         public int Line { get; set; }
         
+
 
         public void MakeGreating()
         {
@@ -39,6 +47,16 @@ namespace BullsAndCows.Oop.Solwer
             _output.Assumption(Assumption);
 
             var estimate = _input.GetEstimation();
+
+
+            string stringAssumption = Assumption.ToString();
+            string variants = @"
+ 1 - да
+ 2 - моё число меньше
+ 3 - моё число больше";
+            _oopMenu.solwerList.Add(new TemporaryStorageSolwer(stringAssumption, variants, estimate));
+            
+            
             switch (estimate)
             {
                 case OopEstimation.Equal:

@@ -18,22 +18,29 @@ namespace BullsAndCows.Oop.Menu
         private readonly IGameLoader _gameLoader;
         private readonly IBuilder _builder;
         private readonly IOopRunner _oopRunner;
+        private readonly ITemporaryStorageSolwer _temporaryStorageSolwer;
 
-        public OopMenu(IGamerConsoleInput input, IOopRunnerOutput output, IGameLoader gameLoader, IBuilder builder, IOopRunner oopRunner)
+
+
+        public OopMenu(IGamerConsoleInput input, IOopRunnerOutput output, IGameLoader gameLoader, IBuilder builder, IOopRunner oopRunner, ITemporaryStorageSolwer temporaryStorageSolwer)
         {
             _input = input;
             _output = output;
             _gameLoader = gameLoader;
             _builder = builder;
             _oopRunner = oopRunner;
+            _temporaryStorageSolwer = temporaryStorageSolwer;
         }
+        public List<TemporaryStorageSolwer> solwerList = new List<TemporaryStorageSolwer>();
 
 
         public void RunMainMenu()
         {
             while (true)
             {
-                var input = _input.SelectGame();
+                
+
+        var input = _input.SelectGame();
                 IOopGame game = null;
 
                 switch (input.Option)
@@ -65,6 +72,7 @@ namespace BullsAndCows.Oop.Menu
 
                 if (game != null)
                     _oopRunner.Run(game);
+                _temporaryStorageSolwer.WriteSolwerConsole(solwerList);
             }
         }
     }
