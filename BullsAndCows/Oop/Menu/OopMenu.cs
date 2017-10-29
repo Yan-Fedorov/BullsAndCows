@@ -40,9 +40,7 @@ namespace BullsAndCows.Oop.Menu
         {
             while (true)
             {
-                
-
-        var input = _input.SelectGame();
+                var input = _input.SelectGame();
                 IOopGame game = null;
 
                 switch (input.Option)
@@ -77,12 +75,34 @@ namespace BullsAndCows.Oop.Menu
                 if (game != null)
                     _oopRunner.Run(game);
 
+
+                if (game != null)
+                {
+                    /*
+                     * var runResult =  _oopRunner.Run(game);
+                     * if(runResult==GameInputOption.CallGameMenu){
+                     *  var gameMenuResult = RunGameMenu();
+                     *  ...
+                     * }
+                     */
+                }
+
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine(_temporaryStorage.GetCurrentHistory());
                 _input.PressAnyKey();
                 _temporaryStorageSolwer.WriteSolwerConsole(solwerList);
             }
+        }
+
+        private GameMenuResult RunGameMenu()
+        {
+            return GameMenuResult.Continue;
+        }
+
+        private enum GameMenuResult
+        {
+            Continue, Exit
         }
     }
 }
