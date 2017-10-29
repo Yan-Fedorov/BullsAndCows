@@ -57,8 +57,7 @@ namespace UnitTests.Oop
         [InlineData(0,true)]
         [InlineData(4,true)]
         [InlineData(9,true)]
-        [InlineData(10, false)]
-        [InlineData(10, true)]
+        
         public void CheckIfCanWinLast(int iterations, bool isWon)
         {
             var input = Substitute.For<IGamerConsoleInput>();

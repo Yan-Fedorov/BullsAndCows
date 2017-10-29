@@ -49,12 +49,12 @@ namespace BullsAndCows.Oop.Solwer
             var estimate = _input.GetEstimation();
 
 
-            string stringAssumption = Assumption.ToString();
-            string variants = @"
- 1 - да
- 2 - моё число меньше
- 3 - моё число больше";
-            _oopMenu.solwerList.Add(new TemporaryStorageSolwer(stringAssumption, variants, estimate));
+ //           string stringAssumption = Assumption.ToString();
+ //           string variants = @"
+ //1 - да
+ //2 - моё число меньше
+ //3 - моё число больше";
+ //           _oopMenu.solwerList.Add(new TemporaryStorageSolwer(stringAssumption, variants, estimate));
             
             
             switch (estimate)
@@ -81,37 +81,5 @@ namespace BullsAndCows.Oop.Solwer
         {
             _output.DisplayingResultOfGame(outOfIterations);
         }
-
-
-        //public void Run()
-        //{
-        //    var line = 500;
-        //    var assumption = line;
-        //    var guessed = false;
-        //        line = line / 2;
-        //        if (line == 0)
-        //            line = 1;
-
-        //        _output.Assumption(assumption);
-
-        //        var estimate = _input.GetEstimation();
-        //    switch (estimate)
-        //    {
-        //        case OopEstimation.Equal:
-        //            guessed = true;
-        //            break;
-
-        //        case OopEstimation.Less:
-        //            assumption -= line;
-        //            break;
-
-        //        case OopEstimation.More:
-        //            assumption += line;
-        //            break;
-
-        //        default:
-        //            throw new ArgumentOutOfRangeException();
-        //    }
-        //}
     }
 }

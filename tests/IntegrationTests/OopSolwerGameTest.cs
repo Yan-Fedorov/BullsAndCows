@@ -39,16 +39,24 @@ namespace IntegrationTests
 
             "Select Solwer game".x(() =>
             {
-                _input.SendGame(new GameInput<Game>{Input = Game.Solver, Option = GameInputOption.GameInput});
+                _input.SendGame(new GameInput<Game> { Input = Game.Solver, Option = GameInputOption.GameInput });
                 _output.WaitSolwerGreating();
             });
 
 
             "Make game".x(() =>
             {
+                int i = 0;
+
                 while (true)
                 {
-                    var assumption = _output.WaitAssumption();
+                    var assumption = 0;
+                    i++;
+                    if (i > 10)
+                        break;
+
+                    assumption = _output.WaitAssumption();
+
                     var estimation = assumption == number
                         ? OopEstimation.Equal
                         : (assumption < number
@@ -56,6 +64,7 @@ namespace IntegrationTests
                             : OopEstimation.Less);
 
                     _input.SendEstimation(estimation);
+
 
                     if (estimation == OopEstimation.Equal)
                         break;
@@ -71,9 +80,9 @@ namespace IntegrationTests
 
             "Exit".x(() =>
             {
-                _input.SendGame(new GameInput<Game>{Option = GameInputOption.Exit});
+                _input.SendGame(new GameInput<Game> { Option = GameInputOption.Exit });
                 _output.WaitByeBye();
             });
-        } 
+        }
     }
 }

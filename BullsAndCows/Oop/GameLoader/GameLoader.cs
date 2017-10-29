@@ -22,6 +22,8 @@ namespace BullsAndCows.Oop.GameLoader
 Тут данные итерации
 "},
             new OopSolwerData {Iteration = 2, Assumption = 750, Line = 250, GameScreen = @"
+Загадайте 3-х значное число и нажмите любую клавишу
+
 Вы загадали 500 ?
 
  1 - да

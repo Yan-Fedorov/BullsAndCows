@@ -99,10 +99,10 @@ namespace BullsAndCows.Oop.GamerConsol
                 Console.WriteLine("Сохранённых игр не найдено");
             }
             Console.Clear();
-            Console.WriteLine("Укажите сохраненную игру, нажав на клавиши от 0 до {0} или укажите 0 для выхода:", games.Count);
+            Console.WriteLine("Укажите сохраненную игру, нажав на клавиши от 1 до {0} или укажите 0 для выхода:", games.Count);
             for(int i = 0; i< games.Count; i++)
             {
-                Console.WriteLine(i+ " - "+ games[i]);
+                Console.WriteLine((i+1)+ " - "+ games[i]);
             }
             
             Console.WriteLine();

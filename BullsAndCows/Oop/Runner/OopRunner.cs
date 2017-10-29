@@ -23,7 +23,10 @@ namespace BullsAndCows.Oop.Runner
 
         public void Run(IOopGame game)
         {
-            game.MakeGreating();
+            if (Iteration == 0)
+            {
+                game.MakeGreating();
+            }
 
             bool isHasWin = false;
             do

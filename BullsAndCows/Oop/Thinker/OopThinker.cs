@@ -20,27 +20,15 @@ namespace BullsAndCows.Oop.Thinker
             Number = new Random().Next(100, 999);
         }
 
-
         public void MakeGreating()
         {
             _output.ThinkerGreating();
         }
 
-
         public bool Run()
         {
 
             var assumption = _input.GetNumber();
-
-            //ToDO: подумать как написанного в комментариях не делать здесь
-            /*
-             * if(assumption is exit command)
-             * {
-             *      _saver.Save(number, iteration);
-             *      _output.ShowExitMessage();
-             *      return;
-             * }
-             */
 
             var guessed = assumption == Number;
 
