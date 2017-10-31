@@ -1,7 +1,9 @@
-﻿namespace BullsAndCows.Oop.Thinker
+﻿using BullsAndCows.Oop.Runner;
+
+namespace BullsAndCows.Oop.Thinker
 {
     public interface IThinkerInput
     {
-        int GetNumber();
+        GameInput<int> GetNumber();
     }
 }

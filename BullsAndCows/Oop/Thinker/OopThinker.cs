@@ -1,5 +1,6 @@
 ﻿using System;
 using BullsAndCows.Oop;
+using BullsAndCows.Oop.Runner;
 
 
 namespace BullsAndCows.Oop.Thinker
@@ -25,15 +26,18 @@ namespace BullsAndCows.Oop.Thinker
             _output.ThinkerGreating();
         }
 
-        public bool Run()
+        public bool? Run()
         {
 
             var assumption = _input.GetNumber();
+            if (assumption.Option != GameInputOption.GameInput)
+                return null;
 
-            var guessed = assumption == Number;
+
+            var guessed = assumption.Input == Number;
 
             if (!guessed)
-                _output.ShowEstimationThinker(assumption, assumption > Number);
+                _output.ShowEstimationThinker(assumption.Input, assumption.Input > Number);
 
             return guessed;
         }

@@ -4,7 +4,7 @@ namespace BullsAndCows.Oop.Runner
 {
     public interface IOopRunner
     {
-        void Run(IOopGame game);
+        GameInputOption Run(IOopGame game);
         int Iteration { set; }
     }
 
@@ -21,14 +21,14 @@ namespace BullsAndCows.Oop.Runner
             Iteration = 0;
         }
 
-        public void Run(IOopGame game)
+        public GameInputOption Run(IOopGame game)
         {
             if (Iteration == 0)
             {
                 game.MakeGreating();
             }
 
-            bool isHasWin = false;
+            bool? isHasWin = false;
             do
             {
                 Iteration++;
@@ -36,14 +36,18 @@ namespace BullsAndCows.Oop.Runner
                     break;
 
                 isHasWin = game.Run();
-            } while (!isHasWin);
+                if (isHasWin == null)
+                    return GameInputOption.CallGameMenu;
 
-            game.ShowResult(isHasWin);
+            } while (isHasWin == false);
+
+            game.ShowResult(isHasWin == true);
 
 
             _input.PressAnyKey();
 
             Iteration = 0;
+            return GameInputOption.Exit;
         }
     }
 }

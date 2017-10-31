@@ -10,7 +10,7 @@ namespace BullsAndCows.Oop
     public interface IOopGame
     {
         void MakeGreating();
-        bool Run();
+        bool? Run();
         void ShowResult(bool outOfIterations);
     }
 }

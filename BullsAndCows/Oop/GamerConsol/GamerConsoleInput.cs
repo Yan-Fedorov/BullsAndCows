@@ -10,6 +10,7 @@ namespace BullsAndCows.Oop.GamerConsol
     public interface IGamerConsoleInput : IThinkerInput, ISolwerInput, IOopRunnerInput
     {
         GameInput<int> SelectSavedGame(List<string> games);
+        int GetGameMenuOption();
     }
 
     public class GamerConsoleInput : IGamerConsoleInput
@@ -22,7 +23,7 @@ namespace BullsAndCows.Oop.GamerConsol
         }
 
 
-        public int GetNumber()
+        public GameInput<int> GetNumber()
         {
             const string msg = "Введите число: ";
             while (true)
@@ -30,10 +31,13 @@ namespace BullsAndCows.Oop.GamerConsol
                 Console.Write(msg);
 
                 var st = Console.ReadLine();
+                if(st=="q")
+                    return new GameInput<int>{Option = GameInputOption.CallGameMenu};
+
                 if (!int.TryParse(st, out var num)) continue;
 
                 _consoleHistorySaver.SaveGameHistory(msg + st + Environment.NewLine);
-                return num;
+                return new GameInput<int> {Option = GameInputOption.GameInput, Input = num};
             }
         }
 
@@ -133,6 +137,21 @@ namespace BullsAndCows.Oop.GamerConsol
             }
         }
 
+
+        public int GetGameMenuOption()
+        {
+            Console.Clear();
+            Console.Write(@"
+Игровое меню:
+1 - сохранить
+2 - выйти
+3 - вернуться к игре
+
+Выберите вариант: ");
+            var key = Console.ReadLine();
+            Console.Clear();
+            return 2;
+        }
 
 
         public void PressAnyKey()

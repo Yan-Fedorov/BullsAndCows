@@ -72,31 +72,36 @@ namespace BullsAndCows.Oop.Menu
                         throw new ArgumentOutOfRangeException();
                 }
 
-                if (game != null)
-                    _oopRunner.Run(game);
+                //if (game != null)
+                //    _oopRunner.Run(game);
 
 
                 if (game != null)
-                {
-                    /*
-                     * var runResult =  _oopRunner.Run(game);
-                     * if(runResult==GameInputOption.CallGameMenu){
-                     *  var gameMenuResult = RunGameMenu();
-                     *  ...
-                     * }
-                     */
-                }
+                    while (true)
+                    {
+                        var runResult = _oopRunner.Run(game);
+                        if (runResult == GameInputOption.CallGameMenu)
+                        {
+                            RunGameMenu();
+                            Console.WriteLine(_temporaryStorage.GetCurrentHistory());
+                        }
+                        else
+                            break;
 
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine(_temporaryStorage.GetCurrentHistory());
-                _input.PressAnyKey();
-                _temporaryStorageSolwer.WriteSolwerConsole(solwerList);
+                        /*
+                         * var runResult =  _oopRunner.Run(game);
+                         * if(runResult==GameInputOption.CallGameMenu){
+                         *  var gameMenuResult = RunGameMenu();
+                         *  ...
+                         * }
+                         */
+                    }
             }
         }
 
         private GameMenuResult RunGameMenu()
         {
+            _input.GetGameMenuOption();
             return GameMenuResult.Continue;
         }
 

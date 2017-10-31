@@ -35,7 +35,7 @@ namespace BullsAndCows.Oop.Solwer
             _output.SolwerGreating();
         }
 
-        public bool Run()
+        public bool? Run()
         {
             
             

@@ -35,18 +35,18 @@ namespace BullsAndCows.Oop.Thinker
                 Iteration = 0;
             }
 
-            var assumption = _input.GetNumber();
+            //var assumption = _input.GetNumber();
 
-            //ToDO: подумать как написанного в комментариях не делать здесь
-            /*
-             * 
-             */
+            ////ToDO: подумать как написанного в комментариях не делать здесь
+            ///*
+            // * 
+            // */
 
 
-            if (assumption == Number)
-                return Number;
+            //if (assumption == Number)
+            //    return Number;
 
-            _output.ShowEstimationThinker(assumption, assumption > Number);
+            //_output.ShowEstimationThinker(assumption, assumption > Number);
 
             //TODO: подумать как проверку на количество итераций вынести отсюда (аналогично для OopSolwer)
 
