@@ -5,6 +5,8 @@ using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
 using System.Collections.Generic;
+using BullsAndCows.Oop;
+using BullsAndCows.Oop.Menu;
 
 namespace IntegrationTests.OopStubs
 {
@@ -27,7 +29,7 @@ namespace IntegrationTests.OopStubs
 
         public GameInput<int> SelectSavedGame(List<string> games)
         {
-            return new GameInput<int>();
+            return new GameInput<int> { Option = GameInputOption.GameInput, Input = 1 };
         }
 
 

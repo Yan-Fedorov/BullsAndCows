@@ -6,7 +6,7 @@ using BullsAndCows.Oop.Thinker;
 using IntegrationTests.OopStubs;
 using Xbehave;
 using Xunit;
-
+using System.Collections.Generic;
 namespace IntegrationTests
 {
     public class OopThinkerGameTest
@@ -88,25 +88,30 @@ namespace IntegrationTests
 
             "Load thinker game".x(() =>
             {
+                //List<string> gamesNames = new List<string>();
+                //var savedGameKey = _input.SelectSavedGame(gamesNames);
+                //var gameHistory = _input.Load
                 _input.SendGame(new GameInput<Game> { Option = GameInputOption.CallGameMenu });
-                _output.WaitThinkerGreating();
+
+                //TODO: метод для отсылки какую игру из меню загрузки выбрали
+                //TODO: проверить что историю перезагрузили WaitReloadGameHistory
             });
 
 
             "Make game".x(() =>
             {
-                _input.SendNumber(100);            
+                _input.SendNumber(200);            
                 // ReSharper disable once PossibleInvalidOperationException
                 Assert.False(_output.WaitShowEstimationThinker().Value);
 
 
-                _input.SendNumber(300);
+                _input.SendNumber(400);
                 // ReSharper disable once PossibleInvalidOperationException
                 Assert.True(_output.WaitShowEstimationThinker().Value);
 
 
 
-                _input.SendNumber(200);
+                _input.SendNumber(300);
                 Assert.Null(_output.WaitShowEstimationThinker());
                 Assert.True(_output.WaitShowResultThinker());
             });

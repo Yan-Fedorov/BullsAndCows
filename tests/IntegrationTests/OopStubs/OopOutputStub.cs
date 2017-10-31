@@ -19,7 +19,7 @@ namespace IntegrationTests.OopStubs
         public void WaitThinkerGreating()
         {
             if (!_receiveThinkerGreating.WaitOne(TimeoutMs))
-                throw new Exception($"{nameof(WaitSolwerGreating)} timeout");
+                throw new Exception($"{nameof(WaitThinkerGreating)} timeout");
         }
         
 
@@ -147,7 +147,8 @@ namespace IntegrationTests.OopStubs
 
         public void ReloadGameHistory(string history)
         {
-            throw new NotImplementedException();
+            //TODO: сделать оббёртку как у остальных WaitReloadGameHistory и воспользоваться ею в сценариях где перезагрузку делаем
+            //throw new NotImplementedException();
         }
 
         public void WaitByeBye()
