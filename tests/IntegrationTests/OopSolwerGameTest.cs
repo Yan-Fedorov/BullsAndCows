@@ -54,19 +54,28 @@ namespace IntegrationTests
                     i++;
                     if (i > 10)
                         break;
-
+                    
                     assumption = _output.WaitAssumption();
-
-                    var estimation = assumption == number
-                        ? OopEstimation.Equal
-                        : (assumption < number
-                            ? OopEstimation.More
-                            : OopEstimation.Less);
+                    var estimation = new GameInput<int> {Option = GameInputOption.GameInput };
+            //estimation = assumption == number
+            //            ? estimation.Input = 1
+            //            : (assumption < number
+            //                ? estimation.Input = 2
+            //                : estimation.Input = 3);
+                    if (assumption == number)
+                    {
+                        estimation.Input = 1;
+                    }
+                    else if (assumption < number)
+                    {
+                        estimation.Input = 2;
+                    }
+                    else estimation.Input = 3;
 
                     _input.SendEstimation(estimation);
 
 
-                    if (estimation == OopEstimation.Equal)
+                    if (estimation.Input == 1)
                         break;
                 }
             });

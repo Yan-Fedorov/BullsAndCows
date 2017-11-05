@@ -32,8 +32,9 @@ namespace UnitTests.Oop
             var game = Substitute.For<IOopGame>();
             var runner = new OopRunner(input);
 
-
+            game.Run().Returns(false);
             runner.Run(game);
+            
 
 
             game.Received(10).Run();
@@ -81,7 +82,7 @@ namespace UnitTests.Oop
         [InlineData(false, false, false, false, false, false, false, false, false, false, false)]
         [InlineData(false, false, false, false, false, false, false, false, false, false, false, true)]
         [InlineData(false, false, false, false, false, false, false, false, false, false, false, false)]
-        public void CheckIfCanWinLast2(bool isWon, params bool[] returns)
+        public void CheckIfCanWinLast2(bool isWon, params bool?[] returns)
         {
             var input = Substitute.For<IGamerConsoleInput>();
             var game = Substitute.For<IOopGame>();

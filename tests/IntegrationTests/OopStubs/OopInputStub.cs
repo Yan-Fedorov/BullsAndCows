@@ -7,6 +7,7 @@ using BullsAndCows.Oop.Solwer;
 using System.Collections.Generic;
 using BullsAndCows.Oop;
 using BullsAndCows.Oop.Menu;
+using BullsAndCows.Oop.Thinker;
 
 namespace IntegrationTests.OopStubs
 {
@@ -33,16 +34,16 @@ namespace IntegrationTests.OopStubs
         }
 
 
-        private OopEstimation _estimation;
+        private GameInput<int> _estimation;
         private readonly AutoResetEvent _sendEstimation = new AutoResetEvent(false);
 
-        public OopEstimation GetEstimation()
+        public GameInput<int> GetEstimation()
         {
             _sendEstimation.WaitOne();
             return _estimation;
         }
 
-        public void SendEstimation(OopEstimation estimation)
+        public void SendEstimation(GameInput<int> estimation)
         {
             _estimation = estimation;
             _sendEstimation.Set();
@@ -75,6 +76,16 @@ namespace IntegrationTests.OopStubs
             _sendNumber?.Dispose();
             _sendEstimation?.Dispose();
             _sendGame?.Dispose();
+        }
+
+        public int GetGameMenuOption()
+        {
+            throw new NotImplementedException();
+        }
+
+        GameInput<int> IThinkerInput.GetNumber()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace BullsAndCows.Oop.Solwer
+﻿using BullsAndCows.Oop.Runner;
+
+namespace BullsAndCows.Oop.Solwer
 {
     public interface ISolwerInput
     {
-        OopEstimation GetEstimation();   
+        GameInput<int> GetEstimation();   
     }
 }

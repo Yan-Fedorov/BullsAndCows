@@ -2,6 +2,7 @@
 using BullsAndCows.Oop.Menu;
 using NSubstitute;
 using Xunit;
+using BullsAndCows.Oop.Runner;
 
 namespace UnitTests.Oop
 {
@@ -25,8 +26,8 @@ namespace UnitTests.Oop
         [Fact]
         public void CheckIfItGoTo10()
         {
-
-            _input.GetEstimation().Returns(OopEstimation.More);
+            var x = new GameInput<int> { Option = GameInputOption.GameInput, Input = 2 };
+            _input.GetEstimation().Returns(x);
 
             _solwer.Run();
 

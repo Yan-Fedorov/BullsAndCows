@@ -2,6 +2,7 @@
 using BullsAndCows.Oop;
 using System.Collections.Generic;
 using BullsAndCows.Oop.Menu;
+using BullsAndCows.Oop.Runner;
 
 
 namespace BullsAndCows.Oop.Solwer
@@ -22,12 +23,14 @@ namespace BullsAndCows.Oop.Solwer
             _oopMenu = menu;
             Line = 500;
             Assumption = Line;
+            Locked = true;
 
         }
 
         public int Assumption { get; set; }
         public int Line { get; set; }
-        
+        public bool Locked { get; set; }
+
 
 
         public void MakeGreating()
@@ -37,37 +40,48 @@ namespace BullsAndCows.Oop.Solwer
 
         public bool? Run()
         {
-            
-            
+
+
             var guessed = false;
-            Line = Line / 2;
-            if (Line == 0)
-                Line = 1;
+            if (Locked)
+            {
+                Line = Line / 2;
+                if (Line == 0)
+                    Line = 1;
+            }
+
 
             _output.Assumption(Assumption);
-
             var estimate = _input.GetEstimation();
 
-
- //           string stringAssumption = Assumption.ToString();
- //           string variants = @"
- //1 - да
- //2 - моё число меньше
- //3 - моё число больше";
- //           _oopMenu.solwerList.Add(new TemporaryStorageSolwer(stringAssumption, variants, estimate));
-            
-            
-            switch (estimate)
+            if (estimate.Option != GameInputOption.GameInput)
             {
-                case OopEstimation.Equal:
+                Locked = false;
+                return null;
+            }
+            else Locked = true;
+
+
+
+
+            //           string stringAssumption = Assumption.ToString();
+            //           string variants = @"
+            //1 - да
+            //2 - моё число меньше
+            //3 - моё число больше";
+            //           _oopMenu.solwerList.Add(new TemporaryStorageSolwer(stringAssumption, variants, estimate));
+
+            switch (estimate.Input)
+            {
+                case 1:
                     guessed = true;
                     break;
 
-                case OopEstimation.Less:
+                case 2:
                     Assumption -= Line;
                     break;
 
-                case OopEstimation.More:
+                case 3:
                     Assumption += Line;
                     break;
 

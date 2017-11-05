@@ -4,6 +4,7 @@ using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Runner;
 using System.Collections.Generic;
 using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
@@ -31,17 +32,17 @@ namespace BullsAndCows.Oop.GamerConsol
                 Console.Write(msg);
 
                 var st = Console.ReadLine();
-                if(st=="q")
-                    return new GameInput<int>{Option = GameInputOption.CallGameMenu};
+                if (st == "q")
+                    return new GameInput<int> { Option = GameInputOption.CallGameMenu };
 
                 if (!int.TryParse(st, out var num)) continue;
 
                 _consoleHistorySaver.SaveGameHistory(msg + st + Environment.NewLine);
-                return new GameInput<int> {Option = GameInputOption.GameInput, Input = num};
+                return new GameInput<int> { Option = GameInputOption.GameInput, Input = num };
             }
         }
 
-        public OopEstimation GetEstimation()
+        public GameInput<int> GetEstimation()
         {
             var msg = @"
  1 - да
@@ -52,17 +53,22 @@ namespace BullsAndCows.Oop.GamerConsol
 
             msg = "Укажите соответствующий вариант: ";
 
+
             while (true)
             {
                 Console.Write(msg);
 
-                var key = Console.ReadLine();
+                var st = Console.ReadLine();
 
-                if (!int.TryParse(key, out var num) || num <= 0 || num > 3)
+                if (st == "q")
+                    return new GameInput<int> { Option = GameInputOption.CallGameMenu };
+
+                if (!int.TryParse(st, out var num) || num <= 0 || num > 3)
                     continue;
 
-                _consoleHistorySaver.SaveGameHistory(msg + key + Environment.NewLine);
-                return (OopEstimation) num;
+
+                _consoleHistorySaver.SaveGameHistory(msg + st + Environment.NewLine);
+                return new GameInput<int> { Option = GameInputOption.GameInput, Input = num };
             }
         }
 
@@ -98,22 +104,22 @@ namespace BullsAndCows.Oop.GamerConsol
 
         public GameInput<int> SelectSavedGame(List<string> games)
         {
-            if(games.Count == 0)
+            if (games.Count == 0)
             {
                 Console.WriteLine("Сохранённых игр не найдено");
             }
             Console.Clear();
             Console.WriteLine("Укажите сохраненную игру, нажав на клавиши от 1 до {0} или укажите 0 для выхода:", games.Count);
-            for(int i = 0; i< games.Count; i++)
+            for (int i = 0; i < games.Count; i++)
             {
-                Console.WriteLine((i+1)+ " - "+ games[i]);
+                Console.WriteLine((i + 1) + " - " + games[i]);
             }
-            
+
             Console.WriteLine();
             while (true)
             {
                 var key = Console.ReadLine();
-                
+
 
                 if (!int.TryParse(key, out var num) || num < 0) continue;
 
@@ -127,10 +133,10 @@ namespace BullsAndCows.Oop.GamerConsol
                         return new GameInput<int> { Option = GameInputOption.GameInput, Input = num };
                         // вот тут нужно как то выбрать загрузку сохраненной игры
 
-                    // зачем нам gameLoader если он не используется,
-                   // как играм передавать параметры
+                        // зачем нам gameLoader если он не используется,
+                        // как играм передавать параметры
 
-                    // можно определять какую конкретно игру загружать по параметрам
+                        // можно определять какую конкретно игру загружать по параметрам
 
                 }
 
@@ -140,6 +146,7 @@ namespace BullsAndCows.Oop.GamerConsol
 
         public int GetGameMenuOption()
         {
+
             Console.Clear();
             Console.Write(@"
 Игровое меню:
@@ -148,10 +155,17 @@ namespace BullsAndCows.Oop.GamerConsol
 3 - вернуться к игре
 
 Выберите вариант: ");
-            var key = Console.ReadLine();
-            Console.Clear();
-            return 2;
+
+
+            while (true)
+            {
+                var key = Console.ReadLine();
+                if (int.TryParse(key, out var num) &&  0 < num && num <= 3)
+                    return num;
+            }
+
         }
+
 
 
         public void PressAnyKey()

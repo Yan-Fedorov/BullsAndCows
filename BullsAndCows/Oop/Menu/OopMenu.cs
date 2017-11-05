@@ -43,6 +43,10 @@ namespace BullsAndCows.Oop.Menu
                 var input = _input.SelectGame();
                 IOopGame game = null;
 
+                //var gamesNames = _gameLoader.GetGameNames();
+                //var savedGameKey = _input.SelectSavedGame(gamesNames);
+                //var gameHistory = _gameLoader.Load(out game, _oopRunner, savedGameKey.Input);
+
                 switch (input.Option)
                 {
                     case GameInputOption.CallGameMenu:
@@ -72,9 +76,6 @@ namespace BullsAndCows.Oop.Menu
                         throw new ArgumentOutOfRangeException();
                 }
 
-                //if (game != null)
-                //    _oopRunner.Run(game);
-
 
                 if (game != null)
                     while (true)
@@ -101,8 +102,21 @@ namespace BullsAndCows.Oop.Menu
 
         private GameMenuResult RunGameMenu()
         {
-            _input.GetGameMenuOption();
-            return GameMenuResult.Continue;
+            int tmp = _input.GetGameMenuOption();
+          
+            switch (tmp)
+            {
+                case 1:
+                    //_temporaryStorage.SaveGameHistory(message);
+                    return GameMenuResult.Continue;
+                case 2:
+                    return GameMenuResult.Exit;
+                case 3:
+                   return GameMenuResult.Continue;
+                    
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private enum GameMenuResult

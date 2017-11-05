@@ -1,6 +1,7 @@
 ﻿using BullsAndCows.Oop.Thinker;
 using NSubstitute;
 using Xunit;
+using BullsAndCows.Oop.Runner;
 
 namespace UnitTests.Oop
 {
@@ -26,7 +27,7 @@ namespace UnitTests.Oop
         {
             var number = 100;
 
-            _input.GetNumber().Returns(number);
+            _input.GetNumber().Returns(new GameInput<int> { Option = GameInputOption.GameInput, Input = number });
             _thinker.Number = number;
             
 

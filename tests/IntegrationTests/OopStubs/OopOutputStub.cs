@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using BullsAndCows.Oop.GamerConsol;
+using BullsAndCows.Oop.Runner;
 
 namespace IntegrationTests.OopStubs
 {
