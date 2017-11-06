@@ -1,7 +1,4 @@
 ﻿using System;
-using BullsAndCows.Oop;
-using System.Collections.Generic;
-using BullsAndCows.Oop.Menu;
 using BullsAndCows.Oop.Runner;
 
 
@@ -15,22 +12,22 @@ namespace BullsAndCows.Oop.Solwer
     {
         private readonly ISolwerInput _input;
         private readonly ISolwerOutput _output;
-        private readonly OopMenu _oopMenu;
-        public OopSolwer(ISolwerInput input, ISolwerOutput output, OopMenu menu)
-        {
-            _input = input;
-            _output = output;
-            _oopMenu = menu;
-            Line = 500;
-            Assumption = Line;
-            Locked = true;
-
-        }
 
         public int Assumption { get; set; }
         public int Line { get; set; }
-        public bool Locked { get; set; }
+        private bool _locked;
 
+
+        public OopSolwer(ISolwerInput input, ISolwerOutput output)
+        {
+            _input = input;
+            _output = output;
+
+            Line = 500;
+            Assumption = Line;
+
+            _locked = false;
+        }
 
 
         public void MakeGreating()
@@ -40,10 +37,8 @@ namespace BullsAndCows.Oop.Solwer
 
         public bool? Run()
         {
-
-
             var guessed = false;
-            if (Locked)
+            if (!_locked)
             {
                 Line = Line / 2;
                 if (Line == 0)
@@ -54,12 +49,9 @@ namespace BullsAndCows.Oop.Solwer
             _output.Assumption(Assumption);
             var estimate = _input.GetEstimation();
 
-            if (estimate.Option != GameInputOption.GameInput)
-            {
-                Locked = false;
+            _locked = estimate.Option == GameInputOption.CallGameMenu;
+            if (_locked)
                 return null;
-            }
-            else Locked = true;
 
 
 
@@ -90,6 +82,7 @@ namespace BullsAndCows.Oop.Solwer
             }
             return guessed;
         }
+
 
         public void ShowResult(bool outOfIterations)
         {

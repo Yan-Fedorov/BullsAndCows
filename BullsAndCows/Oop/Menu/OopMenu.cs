@@ -43,10 +43,6 @@ namespace BullsAndCows.Oop.Menu
                 var input = _input.SelectGame();
                 IOopGame game = null;
 
-                //var gamesNames = _gameLoader.GetGameNames();
-                //var savedGameKey = _input.SelectSavedGame(gamesNames);
-                //var gameHistory = _gameLoader.Load(out game, _oopRunner, savedGameKey.Input);
-
                 switch (input.Option)
                 {
                     case GameInputOption.CallGameMenu:
@@ -83,8 +79,7 @@ namespace BullsAndCows.Oop.Menu
                         var runResult = _oopRunner.Run(game);
                         if (runResult == GameInputOption.CallGameMenu)
                         {
-                            RunGameMenu();
-                            Console.WriteLine(_temporaryStorage.GetCurrentHistory());
+                            RunGameMenu(game);
                         }
                         else
                             break;
@@ -100,20 +95,25 @@ namespace BullsAndCows.Oop.Menu
             }
         }
 
-        private GameMenuResult RunGameMenu()
+        private GameMenuResult RunGameMenu(IOopGame game)
         {
             int tmp = _input.GetGameMenuOption();
-          
+
             switch (tmp)
             {
                 case 1:
-                    //_temporaryStorage.SaveGameHistory(message);
-                    return GameMenuResult.Continue;
+                    var gameName = _input.GetSaveGameName();
+                    var history = _temporaryStorage.GetCurrentHistory();
+                    _gameLoader.Save(game, _oopRunner, history, gameName);
+                    return GameMenuResult.Exit;
+
                 case 2:
                     return GameMenuResult.Exit;
+
                 case 3:
-                   return GameMenuResult.Continue;
-                    
+                    _output.ReloadGameHistory(_temporaryStorage.GetCurrentHistory());
+                    return GameMenuResult.Continue;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

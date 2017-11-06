@@ -12,6 +12,7 @@ namespace BullsAndCows.Oop.GamerConsol
     {
         GameInput<int> SelectSavedGame(List<string> games);
         int GetGameMenuOption();
+        string GetSaveGameName();
     }
 
     public class GamerConsoleInput : IGamerConsoleInput
@@ -146,9 +147,10 @@ namespace BullsAndCows.Oop.GamerConsol
 
         public int GetGameMenuOption()
         {
-
-            Console.Clear();
-            Console.Write(@"
+            while (true)
+            {
+                Console.Clear();
+                Console.Write(@"
 Игровое меню:
 1 - сохранить
 2 - выйти
@@ -156,9 +158,6 @@ namespace BullsAndCows.Oop.GamerConsol
 
 Выберите вариант: ");
 
-
-            while (true)
-            {
                 var key = Console.ReadLine();
                 if (int.TryParse(key, out var num) &&  0 < num && num <= 3)
                     return num;
@@ -166,6 +165,12 @@ namespace BullsAndCows.Oop.GamerConsol
 
         }
 
+        public string GetSaveGameName()
+        {
+            Console.WriteLine();
+            Console.Write("Введите имя для сохраняемой игры: ");
+            return Console.ReadLine();
+        }
 
 
         public void PressAnyKey()

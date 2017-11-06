@@ -5,9 +5,11 @@
         public int Iteration { get; set; }
         public string GameScreen { get; set; }
 
+        public string GameName { get; set; }
+
         public string GetName()
         {
-            return $"{GetType().Name} - {Iteration}";
+            return $"{GameName}: {GetType().Name} - {Iteration}";
         }
     }
 }

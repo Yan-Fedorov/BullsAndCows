@@ -11,6 +11,7 @@ namespace BullsAndCows.Oop.GameLoader
     {
         string Load(out IOopGame game, IOopRunner runner, int gameNumber);
         List<string> GetGameNames();
+        void Save(IOopGame game, IOopRunner runner, string gameHistory, string gameName);
     }
 
     public class GameLoader : IGameLoader
@@ -69,6 +70,39 @@ namespace BullsAndCows.Oop.GameLoader
             return _games
                 .Select(x => x.GetName())
                 .ToList();
+        }
+
+
+        public void Save(IOopGame game, IOopRunner runner, string gameHistory, string gameName)
+        {
+            OopGameData gameData;
+
+            switch (game)
+            {
+                case OopThinker thinker:
+                    gameData = new OopThinkerData
+                    {
+                        Number = thinker.Number
+                    };
+                    break;
+
+                case OopSolwer solwer:
+                    gameData = new OopSolwerData
+                    {
+                        Assumption = solwer.Assumption,
+                        Line = solwer.Line
+                    };
+                    break;
+
+                default:
+                    throw new ArgumentException("unnoun type: " + game.GetType().Name);
+            }
+
+            gameData.Iteration = runner.Iteration;
+            gameData.GameScreen = gameHistory;
+            gameData.GameName = gameName;
+
+            _games.Add(gameData);
         }
     }
 }

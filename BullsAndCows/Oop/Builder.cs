@@ -54,7 +54,7 @@ namespace BullsAndCows.Oop
             switch (gameKey)
             {
                 case Game.Solver:
-                    return new OopSolwer(_consoleInput, _consoleOutput, _menu);
+                    return new OopSolwer(_consoleInput, _consoleOutput);
 
                 case Game.Thinker:
                     return new OopThinker(_consoleInput, _consoleOutput);
