@@ -146,15 +146,20 @@ namespace IntegrationTests.OopStubs
             _receiveByeBye.Set();
         }
 
-        private bool _received;
+        private string _history;
         private readonly AutoResetEvent _receiveReload = new AutoResetEvent(false);
-        public bool WaitReloadGameHistory()
+        public string WaitReloadGameHistory()
         {
             if (!_receiveReload.WaitOne(TimeoutMs))
                 throw new Exception($"{nameof(WaitReloadGameHistory)} timeout");
-            return _received;
-            //TODO: сделать оббёртку как у остальных WaitReloadGameHistory и воспользоваться ею в сценариях где перезагрузку делаем
-            //throw new NotImplementedException();
+
+            return _history;
+        }
+
+        public void ReloadGameHistory(string history)
+        {
+            _history = history;
+            _receiveReload.Set();
         }
 
         public void WaitByeBye()
@@ -175,12 +180,6 @@ namespace IntegrationTests.OopStubs
             _receiveThinkerGreating.Dispose();
             _receiveAssumptionThinker.Dispose();
             _receiveShowResultThinker.Dispose();
-        }
-
-        public void ReloadGameHistory(string history)
-        {
-            if (!_receiveReload.WaitOne(TimeoutMs))
-                throw new Exception($"{nameof(ReloadGameHistory)} timeout");
         }
     }
 }

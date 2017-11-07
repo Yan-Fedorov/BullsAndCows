@@ -2,11 +2,10 @@
 using BullsAndCows;
 using BullsAndCows.Oop;
 using BullsAndCows.Oop.Runner;
-using BullsAndCows.Oop.Thinker;
 using IntegrationTests.OopStubs;
 using Xbehave;
 using Xunit;
-using System.Collections.Generic;
+
 namespace IntegrationTests
 {
     public class OopThinkerGameTest
@@ -36,7 +35,7 @@ namespace IntegrationTests
 
             "Select Thinker game".x(() =>
             {
-                _input.SendGame(new GameInput<Game>{Input =Game.Thinker, Option = GameInputOption.GameInput});
+                _input.SendGame(new GameInput<Game> { Input = Game.Thinker, Option = GameInputOption.GameInput });
                 _output.WaitThinkerGreating();
             });
 
@@ -44,7 +43,7 @@ namespace IntegrationTests
             "Make game".x(() =>
             {
                 var line = 500;
-                var assumption = new GameInput<int> { Input = line , Option = GameInputOption.GameInput };
+                var assumption = new GameInput<int> { Input = line, Option = GameInputOption.GameInput };
                 ////var assumption = line;
                 bool? isGuessed;
                 while (true)
@@ -52,7 +51,7 @@ namespace IntegrationTests
                     _input.SendNumber(assumption);
 
                     var isAssumptionBigger = _output.WaitShowEstimationThinker();
-                    if(isAssumptionBigger == null)
+                    if (isAssumptionBigger == null)
                         break;
 
                     line /= 2;
@@ -73,6 +72,7 @@ namespace IntegrationTests
             });
         }
 
+
         [Scenario]
         public void ContinueLoadedGame()
         {
@@ -89,13 +89,10 @@ namespace IntegrationTests
 
             "Load thinker game".x(() =>
             {
-                //List<string> gamesNames = new List<string>();
-                //var savedGameKey = _input.SelectSavedGame(gamesNames);
-                //var gameHistory = _input.Load
                 _input.SendGame(new GameInput<Game> { Option = GameInputOption.CallGameMenu });
 
-                //TODO: метод для отсылки какую игру из меню загрузки выбрали
-                //TODO: проверить что историю перезагрузили WaitReloadGameHistory
+                var history = _output.WaitReloadGameHistory();
+                Assert.Contains("Тут данные итерации", history);
             });
 
 
@@ -104,7 +101,7 @@ namespace IntegrationTests
                 var n1 = new GameInput<int> { Option = GameInputOption.GameInput, Input = 200 };
                 var n2 = new GameInput<int> { Option = GameInputOption.GameInput, Input = 400 };
                 var n3 = new GameInput<int> { Option = GameInputOption.GameInput, Input = 300 };
-                _input.SendNumber(n1);            
+                _input.SendNumber(n1);
                 // ReSharper disable once PossibleInvalidOperationException
                 Assert.False(_output.WaitShowEstimationThinker().Value);
 
@@ -127,8 +124,10 @@ namespace IntegrationTests
             });
 
         }
+
+
         [Scenario]
-        public void SaveAndExit()
+        public void ExitFromGameWithoutSaving()
         {
             "Given game with faked console".x(() =>
             {
@@ -150,14 +149,12 @@ namespace IntegrationTests
 
             "Make game".x(() =>
             {
-                _input.SendGame(new GameInput<Game> {Option = GameInputOption.CallGameMenu });
-                _input.GetGameMenuOption();
-                
+                _input.SendNumber(new GameInput<int> { Option = GameInputOption.CallGameMenu });
+
+                //TODO: отсылку в меню в игре 2-ки - выйти в главное меню без сохранения
+
                 //дальше выбрать выход и проверить что получилось выйти
-
-
-
-
+                _output.WaitByeBye();
             });
 
             "Exit".x(() =>
