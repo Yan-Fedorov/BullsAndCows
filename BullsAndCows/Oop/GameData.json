@@ -1,0 +1,17 @@
+[
+	{
+		"GameType": "OopThinkerData",
+		"Iteration": 4,
+		"Number": 300,
+		"GameScreen":"Тут данные итерации",
+		"GameName": "Game 1"
+	},
+	{
+		"GameType": "OopSolwerData",
+		"Iteration": 2,
+		"Assumption":750,
+		"Line": 200,
+		"GameScreen":"Тут данные итерации 2",
+		"GameName": "Game 2"
+	}
+]

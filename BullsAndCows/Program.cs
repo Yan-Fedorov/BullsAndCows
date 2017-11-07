@@ -1,5 +1,7 @@
 ﻿using BullsAndCows.Oop;
+using BullsAndCows.Oop.GameData;
 using BullsAndCows.Oop.Runner;
+using BullsAndCows.Oop.Thinker;
 
 namespace BullsAndCows
 {
