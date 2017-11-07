@@ -56,7 +56,7 @@ namespace IntegrationTests
                         break;
                     
                     assumption = _output.WaitAssumption();
-                    var estimation = new GameInput<int> {Option = GameInputOption.GameInput };
+                    var estimation = new GameInput<OopEstimation> {Option = GameInputOption.GameInput };
             //estimation = assumption == number
             //            ? estimation.Input = 1
             //            : (assumption < number
@@ -64,18 +64,18 @@ namespace IntegrationTests
             //                : estimation.Input = 3);
                     if (assumption == number)
                     {
-                        estimation.Input = 1;
+                        estimation.Input = OopEstimation.Equal;
                     }
                     else if (assumption < number)
                     {
-                        estimation.Input = 2;
+                        estimation.Input = OopEstimation.More;
                     }
-                    else estimation.Input = 3;
+                    else estimation.Input = OopEstimation.Less;
 
                     _input.SendEstimation(estimation);
 
 
-                    if (estimation.Input == 1)
+                    if (estimation.Input == OopEstimation.Equal)
                         break;
                 }
             });

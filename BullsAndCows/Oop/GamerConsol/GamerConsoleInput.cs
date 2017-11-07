@@ -5,6 +5,7 @@ using BullsAndCows.Oop.Runner;
 using System.Collections.Generic;
 using BullsAndCows.Oop.GameLoader;
 using BullsAndCows.Oop;
+using BullsAndCows.Oop.Menu;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
@@ -43,7 +44,7 @@ namespace BullsAndCows.Oop.GamerConsol
             }
         }
 
-        public GameInput<int> GetEstimation()
+        public GameInput<OopEstimation> GetEstimation()
         {
             var msg = @"
  1 - да
@@ -62,14 +63,14 @@ namespace BullsAndCows.Oop.GamerConsol
                 var st = Console.ReadLine();
 
                 if (st == "q")
-                    return new GameInput<int> { Option = GameInputOption.CallGameMenu };
+                    return new GameInput<OopEstimation> { Option = GameInputOption.CallGameMenu };
 
                 if (!int.TryParse(st, out var num) || num <= 0 || num > 3)
                     continue;
 
 
                 _consoleHistorySaver.SaveGameHistory(msg + st + Environment.NewLine);
-                return new GameInput<int> { Option = GameInputOption.GameInput, Input = num };
+                return new GameInput<OopEstimation> { Option = GameInputOption.GameInput, Input = (OopEstimation) num };
             }
         }
 

@@ -20,13 +20,13 @@ namespace UnitTests.Oop
 
             _output = Substitute.For<ISolwerOutput>();
 
-            _solwer = new OopSolwer(_input, _output, _menu);
+            _solwer = new OopSolwer(_input, _output);
         }
 
         [Fact]
         public void CheckIfItGoTo10()
         {
-            var x = new GameInput<int> { Option = GameInputOption.GameInput, Input = 2 };
+            var x = new GameInput<OopEstimation> { Option = GameInputOption.GameInput, Input = OopEstimation.More };
             _input.GetEstimation().Returns(x);
 
             _solwer.Run();

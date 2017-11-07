@@ -65,15 +65,15 @@ namespace BullsAndCows.Oop.Solwer
 
             switch (estimate.Input)
             {
-                case 1:
+                case OopEstimation.Equal:
                     guessed = true;
                     break;
 
-                case 2:
+                case OopEstimation.Less:
                     Assumption -= Line;
                     break;
 
-                case 3:
+                case OopEstimation.More:
                     Assumption += Line;
                     break;
 

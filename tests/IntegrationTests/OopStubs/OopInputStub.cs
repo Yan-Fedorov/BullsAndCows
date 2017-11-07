@@ -13,16 +13,16 @@ namespace IntegrationTests.OopStubs
 {
     public class OopInputStub : IGamerConsoleInput, IDisposable
     {
-        private int _number;
+        private GameInput<int> _number;
         private readonly AutoResetEvent _sendNumber = new AutoResetEvent(false);
 
-        public int GetNumber()
+        public GameInput<int> GetNumber()
         {
             _sendNumber.WaitOne();
             return _number;
         }
 
-        public void SendNumber(int number)
+        public void SendNumber(GameInput<int> number)
         {
             _number = number;
             _sendNumber.Set();
@@ -34,16 +34,16 @@ namespace IntegrationTests.OopStubs
         }
 
 
-        private GameInput<int> _estimation;
+        private GameInput<OopEstimation> _estimation;
         private readonly AutoResetEvent _sendEstimation = new AutoResetEvent(false);
 
-        public GameInput<int> GetEstimation()
+        public GameInput<OopEstimation> GetEstimation()
         {
             _sendEstimation.WaitOne();
             return _estimation;
         }
 
-        public void SendEstimation(GameInput<int> estimation)
+        public void SendEstimation(GameInput<OopEstimation> estimation)
         {
             _estimation = estimation;
             _sendEstimation.Set();
@@ -80,12 +80,14 @@ namespace IntegrationTests.OopStubs
 
         public int GetGameMenuOption()
         {
-            throw new NotImplementedException();
+            return 2;
         }
 
-        GameInput<int> IThinkerInput.GetNumber()
+        string st = "Name";
+        public string GetSaveGameName()
         {
-            throw new NotImplementedException();
+
+            return st;
         }
     }
 }

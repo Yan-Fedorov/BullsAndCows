@@ -40,58 +40,60 @@ namespace BullsAndCows.Oop.Menu
         {
             while (true)
             {
-                var input = _input.SelectGame();
+               
+                    var input = _input.SelectGame();
                 IOopGame game = null;
-
-                switch (input.Option)
-                {
-                    case GameInputOption.CallGameMenu:
-
-                        var gamesNames = _gameLoader.GetGameNames();
-                        var savedGameKey = _input.SelectSavedGame(gamesNames);
-
-                        if (savedGameKey.Option != GameInputOption.GameInput)
-                            break;
-
-                        var gameHistory = _gameLoader.Load(out game, _oopRunner, savedGameKey.Input);
-                        _output.ReloadGameHistory(gameHistory);
-                        _temporaryStorage.Clear(gameHistory);
-                        break;
-
-                    case GameInputOption.Exit:
-                        _output.ByeBye();
-                        _input.PressAnyKey();
-                        return;
-
-                    case GameInputOption.GameInput:
-                        game = _builder.GetGame(input.Input);
-                        _temporaryStorage.Clear();
-                        break;
-
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-
-                if (game != null)
-                    while (true)
+                
+                    switch (input.Option)
                     {
-                        var runResult = _oopRunner.Run(game);
-                        if (runResult == GameInputOption.CallGameMenu)
-                        {
-                            RunGameMenu(game);
-                        }
-                        else
+                        case GameInputOption.CallGameMenu:
+
+                            var gamesNames = _gameLoader.GetGameNames();
+                            var savedGameKey = _input.SelectSavedGame(gamesNames);
+
+                            if (savedGameKey.Option != GameInputOption.GameInput)
+                                break;
+
+                            var gameHistory = _gameLoader.Load(out game, _oopRunner, savedGameKey.Input);
+                            _output.ReloadGameHistory(gameHistory);
+                            _temporaryStorage.Clear(gameHistory);
                             break;
 
-                        /*
-                         * var runResult =  _oopRunner.Run(game);
-                         * if(runResult==GameInputOption.CallGameMenu){
-                         *  var gameMenuResult = RunGameMenu();
-                         *  ...
-                         * }
-                         */
+                        case GameInputOption.Exit:
+                            _output.ByeBye();
+                            _input.PressAnyKey();
+                            return;
+
+                        case GameInputOption.GameInput:
+                            game = _builder.GetGame(input.Input);
+                            _temporaryStorage.Clear();
+                            break;
+
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
+
+
+                    if (game != null)
+                        while (true)
+                        {
+                            var runResult = _oopRunner.Run(game);
+                            if (runResult == GameInputOption.CallGameMenu)
+                            {
+
+                                var tmp = RunGameMenu(game);
+                              if(tmp == GameMenuResult.Exit) { 
+                                    _output.ByeBye();
+                                    _input.PressAnyKey();
+                                    
+                                    break; 
+                                }
+
+                            }
+                            else
+                                break;
+                        }
+                
             }
         }
 
