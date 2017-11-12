@@ -144,7 +144,10 @@ namespace BullsAndCows.Oop.GamerConsol
 
             }
         }
-
+       public enum Save
+        {
+            SaveAndExit, Exit, Continue
+        }
 
         public int GetGameMenuOption()
         {
@@ -161,6 +164,11 @@ namespace BullsAndCows.Oop.GamerConsol
 
                 var key = Console.ReadLine();
                 if (int.TryParse(key, out var num) &&  0 < num && num <= 3)
+                    //switch (num)
+                    //{
+                    //    case 1:
+                    //        return SaveAndExit;
+                    //}
                     return num;
             }
 

@@ -121,9 +121,9 @@ namespace BullsAndCows.Oop.Menu
             }
         }
 
-        private enum GameMenuResult
+        public enum GameMenuResult
         {
-            Continue, Exit
+            Continue, Exit, Save
         }
     }
 }

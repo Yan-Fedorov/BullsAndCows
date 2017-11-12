@@ -78,9 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="Oop\GameData.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Oop\GameData.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

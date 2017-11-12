@@ -5,6 +5,7 @@ using BullsAndCows.Oop.Menu;
 using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Thinker;
+using BullsAndCows.Oop.GameData;
 
 
 namespace BullsAndCows.Oop
@@ -24,17 +25,21 @@ namespace BullsAndCows.Oop
         private readonly OopRunner _runner;
         private readonly ITemporaryStorageSolwer _temporaryStorageSolwer;
         private readonly TemporaryStorage _temporaryStorage;
+        private readonly IGameDataService _dataService;
 
-        public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null, IGameLoader gameLoader = null, ITemporaryStorageSolwer temporaryStorageSolwer = null, TemporaryStorage temporaryStorage = null)
+        public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null, IGameLoader gameLoader = null, ITemporaryStorageSolwer temporaryStorageSolwer = null, TemporaryStorage temporaryStorage = null, IGameDataService dataSevice = null)
         {
+            _dataService = dataSevice ?? new GameDataService();
             _temporaryStorage = temporaryStorage ?? new TemporaryStorage();
             _consoleInput = consoleInput ?? new GamerConsoleInput(_temporaryStorage);
             _consoleOutput = consoleOutput ?? new GamerConsoleOutput(_temporaryStorage);
-            _gameLoader = gameLoader ?? new GameLoader.GameLoader(this);
+            _gameLoader = gameLoader ?? new GameLoader.GameLoader(this,_dataService);
 
             _runner = new OopRunner(_consoleInput);
 
             _temporaryStorageSolwer = temporaryStorageSolwer ?? new TemporaryStorageSolwer();
+
+            
         }
 
 
