@@ -62,6 +62,7 @@
     <Compile Include="Oop\OopRunnerTests.cs" />
     <Compile Include="Oop\OopThinkerTests.cs" />
     <Compile Include="Oop\OopSolwerTests.cs" />
+    <Compile Include="Oop\TreeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
