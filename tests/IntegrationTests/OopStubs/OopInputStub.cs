@@ -78,9 +78,9 @@ namespace IntegrationTests.OopStubs
             _sendGame?.Dispose();
         }
 
-        public int GetGameMenuOption()
+        public GamerConsoleInput.Save GetGameMenuOption()
         {
-            return 2;
+            return GamerConsoleInput.Save.Exit;
         }
 
         string st = "Name";

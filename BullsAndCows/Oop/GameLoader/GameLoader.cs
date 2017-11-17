@@ -24,24 +24,6 @@ namespace BullsAndCows.Oop.GameLoader
 
         private Lazy<List<OopGameData>> _games;
 
-        // private readonly List<OopGameData> _games = new List<OopGameData>() {  new OopGameData()}; // этот список нужно загружать из файла
-        //        {
-        //            new OopThinkerData {Iteration = 4, Number = 300, GameScreen = @"
-        //Тут данные итерации
-        //"},
-        //            new OopSolwerData {Iteration = 2, Assumption = 750, Line = 250, GameScreen = @"
-        //Загадайте 3-х значное число и нажмите любую клавишу
-
-        //Вы загадали 500 ?
-
-        // 1 - да
-        // 2 - моё число меньше
-        // 3 - моё число больше
-        //Укажите соответствующий вариант: 3
-        //"}
-        //        };
-
-
         public GameLoader(IBuilder builder, IGameDataService dataService)
         {
             _builder = builder;
@@ -50,11 +32,11 @@ namespace BullsAndCows.Oop.GameLoader
         }
 
 
-        // GameDataService DATASERVICE = new GameDataService();
+   
 
         public string Load(out IOopGame game, IOopRunner runner, int gameNumber)
         {
-            var gameData = _games.Value[gameNumber - 1]; // загрузка не работает из за нуля + в консоль инпуте метод определения выбранной игры не пашет
+            var gameData = _games.Value[gameNumber - 1];
             switch (gameData)
             {
                 case OopThinkerData thinkerData:
@@ -75,7 +57,7 @@ namespace BullsAndCows.Oop.GameLoader
             runner.Iteration = gameData.Iteration;
             return gameData.GameScreen;
         }
-        // почему при обьявлении списка в конструкторе его не видно
+        
 
         public List<string> GetGameNames()
         {
@@ -88,7 +70,6 @@ namespace BullsAndCows.Oop.GameLoader
         public void Save(IOopGame game, IOopRunner runner, string gameHistory, string gameName)
         {
             OopGameData gameData;
-            //GameDataService DATASERVICE = new GameDataService();
 
             switch (game)
             {
@@ -113,7 +94,7 @@ namespace BullsAndCows.Oop.GameLoader
                     throw new ArgumentException("unnoun type: " + game.GetType().Name);
             }
             var tp = gameData.GetType().ToString();
-            gameData.Iteration = runner.Iteration;
+            gameData.Iteration = runner.Iteration - 1;
             gameData.GameScreen = gameHistory;
             gameData.GameName = gameName;
             gameData.GameType = tp;

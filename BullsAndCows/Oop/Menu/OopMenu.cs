@@ -99,20 +99,20 @@ namespace BullsAndCows.Oop.Menu
 
         private GameMenuResult RunGameMenu(IOopGame game)
         {
-            int tmp = _input.GetGameMenuOption();
+            var tmp = _input.GetGameMenuOption();
 
             switch (tmp)
             {
-                case 1:
+                case GamerConsoleInput.Save.SaveAndExit:
                     var gameName = _input.GetSaveGameName();
                     var history = _temporaryStorage.GetCurrentHistory();
                     _gameLoader.Save(game, _oopRunner, history, gameName);
                     return GameMenuResult.Exit;
 
-                case 2:
+                case GamerConsoleInput.Save.Exit:
                     return GameMenuResult.Exit;
 
-                case 3:
+                case GamerConsoleInput.Save.Continue:
                     _output.ReloadGameHistory(_temporaryStorage.GetCurrentHistory());
                     return GameMenuResult.Continue;
 

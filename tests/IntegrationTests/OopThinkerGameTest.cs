@@ -2,6 +2,7 @@
 using BullsAndCows;
 using BullsAndCows.Oop;
 using BullsAndCows.Oop.Runner;
+using BullsAndCows.Oop.GamerConsol;
 using IntegrationTests.OopStubs;
 using Xbehave;
 using Xunit;

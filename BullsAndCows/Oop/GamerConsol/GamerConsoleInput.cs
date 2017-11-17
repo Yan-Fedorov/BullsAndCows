@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using BullsAndCows.Oop.GameLoader;
 using BullsAndCows.Oop;
 using BullsAndCows.Oop.Menu;
+using static BullsAndCows.Oop.GamerConsol.GamerConsoleInput;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
     public interface IGamerConsoleInput : IThinkerInput, ISolwerInput, IOopRunnerInput
     {
         GameInput<int> SelectSavedGame(List<string> games);
-        int GetGameMenuOption();
+        Save GetGameMenuOption();
         string GetSaveGameName();
     }
 
@@ -106,7 +107,7 @@ namespace BullsAndCows.Oop.GamerConsol
 
         public GameInput<int> SelectSavedGame(List<string> games)
         {
-            if (games.Count == 0)
+             if (games.Count == 0)
             {
                 Console.WriteLine("Сохранённых игр не найдено");
             }
@@ -149,7 +150,7 @@ namespace BullsAndCows.Oop.GamerConsol
             SaveAndExit, Exit, Continue
         }
 
-        public int GetGameMenuOption()
+        public Save GetGameMenuOption()
         {
             while (true)
             {
@@ -164,12 +165,19 @@ namespace BullsAndCows.Oop.GamerConsol
 
                 var key = Console.ReadLine();
                 if (int.TryParse(key, out var num) &&  0 < num && num <= 3)
-                    //switch (num)
-                    //{
-                    //    case 1:
-                    //        return SaveAndExit;
-                    //}
-                    return num;
+                    switch (num)
+                    {
+                        case 1:
+                            return Save.SaveAndExit;
+                        case 2:
+                            return Save.Exit;
+                        case 3:
+                            return Save.Continue;
+                        default:
+                            throw new ArgumentException();
+
+                    }
+                
             }
 
         }

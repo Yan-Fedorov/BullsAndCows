@@ -31,7 +31,7 @@ namespace BullsAndCows.Oop.GameData
             {
                 var data = file.ReadToEnd();
                 var jObject = JArray.Parse(data);
-                return jObject.Select(x => x["GameType"].ToString() == "OopThinkerData"
+                return jObject.Select(x => x["GameType"].ToString() == "BullsAndCows.Oop.Thinker.OopThinkerData"
                         ? (OopGameData)x.ToObject<OopThinkerData>()
                         : (OopGameData)x.ToObject<OopSolwerData>())
                     .ToList();

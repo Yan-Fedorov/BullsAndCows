@@ -26,7 +26,6 @@ namespace UnitTests.Oop
         public void ЯМогуВыигратьСПервойПопытки()
         {
             var number = 100;
-
             _input.GetNumber().Returns(new GameInput<int> { Option = GameInputOption.GameInput, Input = number });
             _thinker.Number = number;
             
