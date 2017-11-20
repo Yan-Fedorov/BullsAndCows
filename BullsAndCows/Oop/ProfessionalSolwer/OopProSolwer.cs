@@ -5,7 +5,7 @@ using NLog;
 
 namespace BullsAndCows.Oop.ProSolwer
 {
- 
+
     public class OopProSolwer : IOopGame
     {
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
@@ -16,7 +16,7 @@ namespace BullsAndCows.Oop.ProSolwer
         public int Assumption { get; set; }
         public int Line { get; set; }
         private bool _locked;
-        private int I ;
+        private int I;
         private OopEstimation TMP;
 
 
@@ -41,19 +41,30 @@ namespace BullsAndCows.Oop.ProSolwer
 
         public bool? Run()
         {
-           
-            
+
+
             var guessed = false;
             if (I == 1)
             {
-                    if (!_locked)
-                    {
-                        Line = (Line/2) +(Line/4);
-                        if (Line == 0)
-                            Line = 1;
-                    }
-                    I = 0;
-             
+                if (!_locked)
+                {
+                    Line = Line / 2;
+                    if (Line == 0)
+                        Line = 1;
+
+                    if (TMP == OopEstimation.Less)
+                        Assumption -= Line;
+                    else
+                        Assumption += Line;
+                    //Line = (Line/2) +(Line/4);
+
+                    Line = Line / 2;
+                    if (Line == 0)
+                        Line = 1;
+
+                }
+                I = -1;
+
             }
             else
             {
@@ -70,7 +81,7 @@ namespace BullsAndCows.Oop.ProSolwer
             _output.Assumption(Assumption);
             var estimate = _input.GetEstimation();
 
-            if(estimate.Input == TMP)
+            if (estimate.Input == TMP)
             {
                 I++;
             }
