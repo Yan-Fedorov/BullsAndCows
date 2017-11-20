@@ -6,6 +6,7 @@ using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.GameData;
+using BullsAndCows.Oop.ProSolwer;
 
 
 namespace BullsAndCows.Oop
@@ -63,6 +64,9 @@ namespace BullsAndCows.Oop
 
                 case Game.Thinker:
                     return new OopThinker(_consoleInput, _consoleOutput);
+
+                case Game.ProSolwer:
+                    return new OopProSolwer(_consoleInput, _consoleOutput);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameKey), gameKey, null);

@@ -103,6 +103,33 @@ namespace BullsAndCows.Oop.GamerConsol
                 }
             }
         }
+        public GameInput<Game> SelectSolwerGame()
+        {
+            Console.Clear();
+            Console.WriteLine(@"Укажите вариант игры:
+1 - уровень 1
+2 - уровень 2
+3 - выход
+");
+
+            while (true)
+            {
+                var key = Console.ReadLine();
+
+                if (!int.TryParse(key, out var num) || num < 0 || num >= 4) continue;
+
+                switch (num)
+                {
+                    case 3:
+                        return new GameInput<Game> { Option = GameInputOption.Exit };
+                    default:
+                        if (num == 2) {
+                            num++;
+                                }
+                        return new GameInput<Game> { Option = GameInputOption.GameInput, Input = (Game)num };
+                }
+            }
+        }
 
 
         public GameInput<int> SelectSavedGame(List<string> games)

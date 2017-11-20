@@ -40,60 +40,68 @@ namespace BullsAndCows.Oop.Menu
         {
             while (true)
             {
-               
-                    var input = _input.SelectGame();
+
+                var input = _input.SelectGame();
                 IOopGame game = null;
-                
-                    switch (input.Option)
-                    {
-                        case GameInputOption.CallGameMenu:
 
-                            var gamesNames = _gameLoader.GetGameNames();
-                            var savedGameKey = _input.SelectSavedGame(gamesNames);
+                switch (input.Option)
+                {
+                    case GameInputOption.CallGameMenu:
 
-                            if (savedGameKey.Option != GameInputOption.GameInput)
-                                break;
+                        var gamesNames = _gameLoader.GetGameNames();
+                        var savedGameKey = _input.SelectSavedGame(gamesNames);
 
-                            var gameHistory = _gameLoader.Load(out game, _oopRunner, savedGameKey.Input);
-                            _output.ReloadGameHistory(gameHistory);
-                            _temporaryStorage.Clear(gameHistory);
+                        if (savedGameKey.Option != GameInputOption.GameInput)
                             break;
 
-                        case GameInputOption.Exit:
-                            _output.ByeBye();
-                            _input.PressAnyKey();
-                            return;
+                        var gameHistory = _gameLoader.Load(out game, _oopRunner, savedGameKey.Input);
+                        _output.ReloadGameHistory(gameHistory);
+                        _temporaryStorage.Clear(gameHistory);
+                        break;
 
-                        case GameInputOption.GameInput:
-                            game = _builder.GetGame(input.Input);
+                    case GameInputOption.Exit:
+                        _output.ByeBye();
+                        _input.PressAnyKey();
+                        return;
+
+                    case GameInputOption.GameInput:
+                        if (input.Input == Game.Solver)
+                        {
+                            var inputSolwer = _input.SelectSolwerGame();
+                            game = _builder.GetGame(inputSolwer.Input);
                             _temporaryStorage.Clear();
                             break;
+                        }
+                        game = _builder.GetGame(input.Input);
+                        _temporaryStorage.Clear();
+                        break;
 
-                        default:
-                            throw new ArgumentOutOfRangeException();
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+
+                if (game != null)
+                    while (true)
+                    {
+                        var runResult = _oopRunner.Run(game);
+                        if (runResult == GameInputOption.CallGameMenu)
+                        {
+
+                            var tmp = RunGameMenu(game);
+                            if (tmp == GameMenuResult.Exit)
+                            {
+                                _output.ByeBye();
+                                _input.PressAnyKey();
+
+                                break;
+                            }
+
+                        }
+                        else
+                            break;
                     }
 
-
-                    if (game != null)
-                        while (true)
-                        {
-                            var runResult = _oopRunner.Run(game);
-                            if (runResult == GameInputOption.CallGameMenu)
-                            {
-
-                                var tmp = RunGameMenu(game);
-                              if(tmp == GameMenuResult.Exit) { 
-                                    _output.ByeBye();
-                                    _input.PressAnyKey();
-                                    
-                                    break; 
-                                }
-
-                            }
-                            else
-                                break;
-                        }
-                
             }
         }
 

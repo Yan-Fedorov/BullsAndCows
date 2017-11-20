@@ -8,7 +8,7 @@ namespace BullsAndCows
 {
     public enum Game
     {
-        Solver = 1, Thinker
+        Solver = 1, Thinker, ProSolwer
     }
 
     public class Runner

@@ -36,6 +36,9 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +53,7 @@
     <Compile Include="Oop\GameLoader\IConsoleHistorySaver.cs" />
     <Compile Include="Oop\GameLoader\OopGameData.cs" />
     <Compile Include="Oop\Menu\OopMenu.cs" />
+    <Compile Include="Oop\ProfessionalSolwer\OopProSolwer.cs" />
     <Compile Include="Oop\Solwer\OopSolwerData.cs" />
     <Compile Include="Oop\IOopGame.cs" />
     <Compile Include="Oop\GameLoader\GameLoader.cs" />
