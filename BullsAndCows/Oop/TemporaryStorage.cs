@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Autofac.Extras.NLog;
 using BullsAndCows.Oop.GameLoader;
 using BullsAndCows.Oop.Solwer;
 
@@ -16,7 +17,13 @@ namespace BullsAndCows.Oop
     public class TemporaryStorage : IConsoleHistorySaver, ITemporaryStorage
     {
         private readonly StringBuilder _builder = new StringBuilder();
+        private readonly ILogger _logger;
 
+        public TemporaryStorage(ILogger logger)
+        {
+            _logger = logger;
+            _logger.Info("Create");
+        }
 
         public void SaveGameHistory(string message)
         {

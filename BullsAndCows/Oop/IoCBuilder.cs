@@ -8,6 +8,7 @@ using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.GameData;
 using BullsAndCows.Oop.ProSolwer;
 using Autofac;
+using Autofac.Extras.NLog;
 using BullsAndCows.Oop;
 
 namespace BullsAndCows
@@ -23,12 +24,17 @@ namespace BullsAndCows
 
             builder.RegisterType<TemporaryStorage>().AsImplementedInterfaces();
             builder.RegisterType<GameDataService>().As<IGameDataService>();
-            builder.RegisterType<GamerConsoleInput>().As<IGamerConsoleInput>();
-            builder.RegisterType<GamerConsoleOutput>().As<IGamerConsoleOutput>();
+            builder.RegisterType<GamerConsoleInput>().AsImplementedInterfaces();
+            builder.RegisterType<GamerConsoleOutput>().AsImplementedInterfaces();
             builder.RegisterType<GameLoader>().As<IGameLoader>().InstancePerLifetimeScope();
   
-            builder.RegisterType<OopRunner>().As<OopRunner>();
+            builder.RegisterType<OopRunner>()
+                .As<OopRunner>()
+                .As<IOopRunner>();
             builder.RegisterType<OopMenu>().As<OopMenu>();
+
+            builder.RegisterModule<NLogModule>();
+
             return builder.Build();
         }
     }

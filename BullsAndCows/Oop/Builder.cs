@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using BullsAndCows.Oop.GameLoader;
 using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows.Oop.Menu;
@@ -22,40 +23,25 @@ namespace BullsAndCows.Oop
     {       
         private readonly IGamerConsoleInput _consoleInput;
         private readonly IGamerConsoleOutput _consoleOutput;
-        private readonly IGameLoader _gameLoader;
-        private OopMenu _menu;
-        private readonly OopRunner _runner;
-        private readonly ITemporaryStorageSolwer _temporaryStorageSolwer;
-        private readonly TemporaryStorage _temporaryStorage;
-        private readonly IGameDataService _dataService;
-        private readonly Lazy<IBuilder> _builder;
+        private readonly ILifetimeScope _scope;
      
 
-        public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null, IGameLoader gameLoader = null, ITemporaryStorageSolwer temporaryStorageSolwer = null, TemporaryStorage temporaryStorage = null, IGameDataService dataSevice = null)
+        public Builder(IGamerConsoleInput consoleInput, IGamerConsoleOutput consoleOutput, ILifetimeScope scope)
         {
-            _dataService = dataSevice ?? new GameDataService();
-            _temporaryStorage = temporaryStorage ?? new TemporaryStorage();
-            _consoleInput = consoleInput ?? new GamerConsoleInput(_temporaryStorage);
-            _consoleOutput = consoleOutput ?? new GamerConsoleOutput(_temporaryStorage);
-            _gameLoader = gameLoader ?? new GameLoader.GameLoader(_builder, _dataService); // вместо билдера был this, как он работал?
-
-
-            _runner = new OopRunner(_consoleInput);
-
-            _temporaryStorageSolwer = temporaryStorageSolwer ?? new TemporaryStorageSolwer();
-
-            
+            _scope = scope;
+            _consoleInput = consoleInput;
+            _consoleOutput = consoleOutput;
         }
 
 
         public OopRunner GetRunner()
         {
-            return _runner;
+            return _scope.Resolve<OopRunner>();
         }
 
         public OopMenu GetMenu()
         {
-            return _menu = new OopMenu(_consoleInput, _consoleOutput, _gameLoader, this, _runner, _temporaryStorageSolwer, _temporaryStorage);
+            return _scope.Resolve<OopMenu>();
         }
 
 
