@@ -80,6 +80,10 @@ namespace BullsAndCows.Oop.GamerConsol
         {
             Console.WriteLine(history);
         }
+        public void Exeption()
+        {
+            Console.WriteLine("Сохранённых игр не найдено");
+        }
         #endregion
     }
 }

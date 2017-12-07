@@ -7,6 +7,7 @@ using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.GameData;
 using BullsAndCows.Oop.ProSolwer;
+using BullsAndCows.Oop.ProfessionalSolwer;
 
 
 namespace BullsAndCows.Oop
@@ -27,6 +28,8 @@ namespace BullsAndCows.Oop
         private readonly ITemporaryStorageSolwer _temporaryStorageSolwer;
         private readonly TemporaryStorage _temporaryStorage;
         private readonly IGameDataService _dataService;
+        private readonly Lazy<IBuilder> _builder;
+     
 
         public Builder(IGamerConsoleInput consoleInput = null, IGamerConsoleOutput consoleOutput = null, IGameLoader gameLoader = null, ITemporaryStorageSolwer temporaryStorageSolwer = null, TemporaryStorage temporaryStorage = null, IGameDataService dataSevice = null)
         {
@@ -34,7 +37,8 @@ namespace BullsAndCows.Oop
             _temporaryStorage = temporaryStorage ?? new TemporaryStorage();
             _consoleInput = consoleInput ?? new GamerConsoleInput(_temporaryStorage);
             _consoleOutput = consoleOutput ?? new GamerConsoleOutput(_temporaryStorage);
-            _gameLoader = gameLoader ?? new GameLoader.GameLoader(this,_dataService);
+            _gameLoader = gameLoader ?? new GameLoader.GameLoader(_builder, _dataService); // вместо билдера был this, как он работал?
+
 
             _runner = new OopRunner(_consoleInput);
 
@@ -67,6 +71,8 @@ namespace BullsAndCows.Oop
 
                 case Game.ProSolwer:
                     return new OopProSolwer(_consoleInput, _consoleOutput);
+                case Game.SolwerDividesBy3:
+                    return new SolwerDividesBy3(_consoleInput, _consoleOutput);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameKey), gameKey, null);

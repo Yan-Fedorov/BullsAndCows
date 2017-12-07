@@ -109,7 +109,8 @@ namespace BullsAndCows.Oop.GamerConsol
             Console.WriteLine(@"Укажите вариант игры:
 1 - уровень 1
 2 - уровень 2
-3 - выход
+3 - уровень 3
+4 - выход
 ");
 
             while (true)
@@ -120,10 +121,10 @@ namespace BullsAndCows.Oop.GamerConsol
 
                 switch (num)
                 {
-                    case 3:
+                    case 4:
                         return new GameInput<Game> { Option = GameInputOption.Exit };
                     default:
-                        if (num == 2) {
+                        if (num >= 2) {
                             num++;
                                 }
                         return new GameInput<Game> { Option = GameInputOption.GameInput, Input = (Game)num };

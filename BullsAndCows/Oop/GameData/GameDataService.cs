@@ -19,6 +19,7 @@ namespace BullsAndCows.Oop.GameData
     {
         private readonly string _path;
 
+
         public GameDataService()
         {
             var localPath = Path.GetDirectoryName(GetType().Assembly.Location);
@@ -27,15 +28,19 @@ namespace BullsAndCows.Oop.GameData
 
         public List<OopGameData> LoadDatas()
         {
-            using (var file = File.OpenText(_path))
-            {
-                var data = file.ReadToEnd();
-                var jObject = JArray.Parse(data);
-                return jObject.Select(x => x["GameType"].ToString() == "BullsAndCows.Oop.Thinker.OopThinkerData"
-                        ? (OopGameData)x.ToObject<OopThinkerData>()
-                        : (OopGameData)x.ToObject<OopSolwerData>())
-                    .ToList();
-            }
+            
+                using (var file = File.OpenText(_path))
+                {
+                    var data = file.ReadToEnd();
+                    var jObject = JArray.Parse(data);
+                    return jObject.Select(x => x["GameType"].ToString() == "BullsAndCows.Oop.Thinker.OopThinkerData"
+                            ? (OopGameData)x.ToObject<OopThinkerData>()
+                            : (OopGameData)x.ToObject<OopSolwerData>())
+                        .ToList();
+                }
+                // файла нет - создать, игр нет - написать что нет
+            
+            
         }
 
         public void Save(OopGameData gameData)

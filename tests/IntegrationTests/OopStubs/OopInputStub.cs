@@ -89,5 +89,10 @@ namespace IntegrationTests.OopStubs
 
             return st;
         }
+
+        public GameInput<Game> SelectSolwerGame()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

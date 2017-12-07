@@ -1,4 +1,6 @@
 ﻿using BullsAndCows.Oop;
+using Autofac;
+using BullsAndCows.Oop.GameLoader;
 
 namespace BullsAndCows
 {
@@ -8,11 +10,24 @@ namespace BullsAndCows
         public static void Main()
         {
             // new Runner().Run();
-          
-            
-            new Builder()
-                .GetMenu()
-                .RunMainMenu();
-        }
-    }
+            //IContainer container = IoCBuilder.Building();
+            using (var container = IoCBuilder.Building())
+            {
+                using (var scope = container.BeginLifetimeScope())
+                {
+                    var app = scope.TryResolve<Builder>(out var a);
+                    a.GetMenu().RunMainMenu();
+
+                }
+               
+            }
+
+
+                //new Builder()
+                //    .GetMenu()
+                //    .RunMainMenu();
+            }
+
 }
+}
+

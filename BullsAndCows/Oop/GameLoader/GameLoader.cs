@@ -19,12 +19,12 @@ namespace BullsAndCows.Oop.GameLoader
 
     public class GameLoader : IGameLoader
     {
-        private readonly IBuilder _builder;
+        private readonly Lazy<IBuilder> _builder;
         private readonly IGameDataService _dataService;
 
         private Lazy<List<OopGameData>> _games;
 
-        public GameLoader(IBuilder builder, IGameDataService dataService)
+        public GameLoader(Lazy<IBuilder> builder, IGameDataService dataService)
         {
             _builder = builder;
             _dataService = dataService;
@@ -36,16 +36,17 @@ namespace BullsAndCows.Oop.GameLoader
 
         public string Load(out IOopGame game, IOopRunner runner, int gameNumber)
         {
+            
             var gameData = _games.Value[gameNumber - 1];
             switch (gameData)
             {
                 case OopThinkerData thinkerData:
-                    var thinker = (game = _builder.GetGame(Game.Thinker)) as OopThinker;
+                    var thinker = (game = _builder.Value.GetGame(Game.Thinker)) as OopThinker;
                     thinker.Number = thinkerData.Number;
                     break;
 
                 case OopSolwerData solwerData:
-                    var solwer = (game = _builder.GetGame(Game.Solver)) as OopSolwer;
+                    var solwer = (game = _builder.Value.GetGame(Game.Solver)) as OopSolwer;
                     solwer.Assumption = solwerData.Assumption;
                     solwer.Line = solwerData.Line;
                     break;
