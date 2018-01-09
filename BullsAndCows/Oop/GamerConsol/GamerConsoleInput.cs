@@ -71,7 +71,7 @@ namespace BullsAndCows.Oop.GamerConsol
 
 
                 _consoleHistorySaver.SaveGameHistory(msg + st + Environment.NewLine);
-                return new GameInput<OopEstimation> { Option = GameInputOption.GameInput, Input = (OopEstimation) num };
+                return new GameInput<OopEstimation> { Option = GameInputOption.GameInput, Input = (OopEstimation)num };
             }
         }
 
@@ -124,9 +124,10 @@ namespace BullsAndCows.Oop.GamerConsol
                     case 4:
                         return new GameInput<Game> { Option = GameInputOption.Exit };
                     default:
-                        if (num >= 2) {
+                        if (num >= 2)
+                        {
                             num++;
-                                }
+                        }
                         return new GameInput<Game> { Option = GameInputOption.GameInput, Input = (Game)num };
                 }
             }
@@ -135,10 +136,13 @@ namespace BullsAndCows.Oop.GamerConsol
 
         public GameInput<int> SelectSavedGame(List<string> games)
         {
-             if (games.Count == 0)
+            if (games.Count == 0)
             {
-                Console.WriteLine("Сохранённых игр не найдено");
+                Console.WriteLine("Сохранённых игр не найдено.");
+                PressAnyKey();
+                return new GameInput<int> { Option = GameInputOption.Exit };
             }
+
             Console.Clear();
             Console.WriteLine("Укажите сохраненную игру, нажав на клавиши от 1 до {0} или укажите 0 для выхода:", games.Count);
             for (int i = 0; i < games.Count; i++)
@@ -147,6 +151,7 @@ namespace BullsAndCows.Oop.GamerConsol
             }
 
             Console.WriteLine();
+
             while (true)
             {
                 var key = Console.ReadLine();
@@ -172,8 +177,9 @@ namespace BullsAndCows.Oop.GamerConsol
                 }
 
             }
+
         }
-       public enum Save
+        public enum Save
         {
             SaveAndExit, Exit, Continue
         }
@@ -192,7 +198,7 @@ namespace BullsAndCows.Oop.GamerConsol
 Выберите вариант: ");
 
                 var key = Console.ReadLine();
-                if (int.TryParse(key, out var num) &&  0 < num && num <= 3)
+                if (int.TryParse(key, out var num) && 0 < num && num <= 3)
                     switch (num)
                     {
                         case 1:
@@ -205,7 +211,7 @@ namespace BullsAndCows.Oop.GamerConsol
                             throw new ArgumentException();
 
                     }
-                
+
             }
 
         }

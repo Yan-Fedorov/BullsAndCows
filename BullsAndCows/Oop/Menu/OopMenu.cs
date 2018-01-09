@@ -8,6 +8,7 @@ using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Thinker;
+using Autofac;
 
 namespace BullsAndCows.Oop.Menu
 {
@@ -21,17 +22,20 @@ namespace BullsAndCows.Oop.Menu
         private readonly ITemporaryStorageSolwer _temporaryStorageSolwer;
         private readonly ITemporaryStorage _temporaryStorage;
 
+        private readonly ILifetimeScope _scope;
 
 
-        public OopMenu(IGamerConsoleInput input, IOopRunnerOutput output, IGameLoader gameLoader, IBuilder builder, IOopRunner oopRunner, ITemporaryStorageSolwer temporaryStorageSolwer, ITemporaryStorage temporaryStorage)
+
+        public OopMenu(IGamerConsoleInput input, IOopRunnerOutput output, IGameLoader gameLoader, IBuilder builder, IOopRunner oopRunner,
+            ITemporaryStorage temporaryStorage, ILifetimeScope scope)
         {
             _input = input;
             _output = output;
             _gameLoader = gameLoader;
             _builder = builder;
             _oopRunner = oopRunner;
-            _temporaryStorageSolwer = temporaryStorageSolwer;
             _temporaryStorage = temporaryStorage;
+            _scope = scope;
         }
         public List<TemporaryStorageSolwer> solwerList = new List<TemporaryStorageSolwer>();
 
@@ -43,6 +47,7 @@ namespace BullsAndCows.Oop.Menu
 
                 var input = _input.SelectGame();
                 IOopGame game = null;
+                // создать LiveTimeScope для игры. Дальше все зависимости будем получать из него
 
                 switch (input.Option)
                 {
@@ -82,6 +87,7 @@ namespace BullsAndCows.Oop.Menu
 
 
                 if (game != null)
+                {
                     while (true)
                     {
                         var runResult = _oopRunner.Run(game);
@@ -101,6 +107,8 @@ namespace BullsAndCows.Oop.Menu
                         else
                             break;
                     }
+                    // уничтожить liveTimeScope игры
+                }
 
             }
         }

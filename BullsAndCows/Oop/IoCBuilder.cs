@@ -7,6 +7,7 @@ using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.GameData;
 using BullsAndCows.Oop.ProSolwer;
+using BullsAndCows.Oop.ProfessionalSolwer;
 using Autofac;
 using Autofac.Extras.NLog;
 using BullsAndCows.Oop;
@@ -27,11 +28,19 @@ namespace BullsAndCows
             builder.RegisterType<GamerConsoleInput>().AsImplementedInterfaces();
             builder.RegisterType<GamerConsoleOutput>().AsImplementedInterfaces();
             builder.RegisterType<GameLoader>().As<IGameLoader>().InstancePerLifetimeScope();
-  
+            builder.RegisterType<OopSolwer>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<OopThinker>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<OopProSolwer>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<SolwerDividesBy3>().AsSelf().InstancePerLifetimeScope();
+            // регистрация как самого себяя или интерфейс
+            // InstancePerLifetimeScope и какие ещё есть
+
+
             builder.RegisterType<OopRunner>()
                 .As<OopRunner>()
                 .As<IOopRunner>();
-            builder.RegisterType<OopMenu>().As<OopMenu>();
+            builder.RegisterType<OopMenu>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
+            //builder.RegisterType<OopMenu>().As<OopMenu>();
 
             builder.RegisterModule<NLogModule>();
 

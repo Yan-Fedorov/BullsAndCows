@@ -15,7 +15,6 @@ namespace BullsAndCows.Oop
 {
     public interface IBuilder  
     {
-        OopRunner GetRunner();
         IOopGame GetGame(Game gameKey);
     }
 
@@ -34,31 +33,20 @@ namespace BullsAndCows.Oop
         }
 
 
-        public OopRunner GetRunner()
-        {
-            return _scope.Resolve<OopRunner>();
-        }
-
-        public OopMenu GetMenu()
-        {
-            return _scope.Resolve<OopMenu>();
-        }
-
-
         public IOopGame GetGame(Game gameKey)
         {
             switch (gameKey)
             {
                 case Game.Solver:
-                    return new OopSolwer(_consoleInput, _consoleOutput);
+                    return _scope.Resolve<OopSolwer>();
 
                 case Game.Thinker:
-                    return new OopThinker(_consoleInput, _consoleOutput);
+                    return _scope.Resolve<OopThinker>();
 
                 case Game.ProSolwer:
-                    return new OopProSolwer(_consoleInput, _consoleOutput);
+                    return _scope.Resolve<OopProSolwer>();
                 case Game.SolwerDividesBy3:
-                    return new SolwerDividesBy3(_consoleInput, _consoleOutput);
+                    return _scope.Resolve<SolwerDividesBy3>();
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameKey), gameKey, null);

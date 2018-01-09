@@ -28,19 +28,25 @@ namespace BullsAndCows.Oop.GameData
 
         public List<OopGameData> LoadDatas()
         {
-            
-                using (var file = File.OpenText(_path))
-                {
-                    var data = file.ReadToEnd();
-                    var jObject = JArray.Parse(data);
-                    return jObject.Select(x => x["GameType"].ToString() == "BullsAndCows.Oop.Thinker.OopThinkerData"
-                            ? (OopGameData)x.ToObject<OopThinkerData>()
-                            : (OopGameData)x.ToObject<OopSolwerData>())
-                        .ToList();
-                }
-                // файла нет - создать, игр нет - написать что нет
-            
-            
+            // проверить существует ли файл
+            if (!File.Exists(_path))
+                return new List<OopGameData>();
+
+
+            using (var file = File.OpenText(_path))
+            {
+                var data = file.ReadToEnd();
+                var jObject = JArray.Parse(data);
+                return jObject.Select(x => x["GameType"].ToString() == "BullsAndCows.Oop.Thinker.OopThinkerData"
+                        ? (OopGameData)x.ToObject<OopThinkerData>()
+                        : (OopGameData)x.ToObject<OopSolwerData>())
+                    .ToList();
+            }
+
+            // файла нет - создать, игр нет - написать что нет
+            //var list = new List<OopGameData>();
+            //list.Add(new OopGameData() { GameName = "Игр не найдено", GameType = "Что бы загрузить сохраненную игру, нужно сначала её сохранить" });
+            //return list;
         }
 
         public void Save(OopGameData gameData)
