@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop.OopGameLoader;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Thinker;
 using Newtonsoft.Json;

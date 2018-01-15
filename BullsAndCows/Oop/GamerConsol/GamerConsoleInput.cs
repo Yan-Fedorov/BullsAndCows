@@ -3,7 +3,7 @@ using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Runner;
 using System.Collections.Generic;
-using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop.OopGameLoader;
 using BullsAndCows.Oop;
 using BullsAndCows.Oop.Menu;
 using static BullsAndCows.Oop.GamerConsol.GamerConsoleInput;

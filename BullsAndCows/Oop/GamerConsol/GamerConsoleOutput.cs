@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop.OopGameLoader;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Runner;

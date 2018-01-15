@@ -8,7 +8,7 @@ using BullsAndCows.Oop.GameData;
 
 
 
-namespace BullsAndCows.Oop.GameLoader
+namespace BullsAndCows.Oop.OopGameLoader
 {
     public interface IGameLoader
     {
@@ -41,7 +41,7 @@ namespace BullsAndCows.Oop.GameLoader
             switch (gameData)
             {
                 case OopThinkerData thinkerData:
-                    var thinker = (game = _builder.Value.GetGame(Game.Thinker)) as OopThinker;
+                    var thinker = (game = _builder.Value.GetGame(Game.Thinker)) as OopThinker; // _scope.Resolve<OopThinker>();
                     thinker.Number = thinkerData.Number;
                     break;
 

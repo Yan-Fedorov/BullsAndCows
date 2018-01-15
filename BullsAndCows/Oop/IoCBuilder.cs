@@ -1,5 +1,5 @@
 ﻿using System;
-using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop.OopGameLoader;
 using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows.Oop.Menu;
 using BullsAndCows.Oop.Runner;
@@ -11,6 +11,7 @@ using BullsAndCows.Oop.ProfessionalSolwer;
 using Autofac;
 using Autofac.Extras.NLog;
 using BullsAndCows.Oop;
+using BullsAndCows.Oop.ActiveGame;
 
 namespace BullsAndCows
 {
@@ -19,27 +20,49 @@ namespace BullsAndCows
         public static IContainer Building()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<Builder>()
-                .AsSelf()
-                .AsImplementedInterfaces().InstancePerLifetimeScope();
 
-            builder.RegisterType<TemporaryStorage>().AsImplementedInterfaces();
-            builder.RegisterType<GameDataService>().As<IGameDataService>();
-            builder.RegisterType<GamerConsoleInput>().AsImplementedInterfaces();
-            builder.RegisterType<GamerConsoleOutput>().AsImplementedInterfaces();
-            builder.RegisterType<GameLoader>().As<IGameLoader>().InstancePerLifetimeScope();
-            builder.RegisterType<OopSolwer>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<OopThinker>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<OopProSolwer>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<SolwerDividesBy3>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<TemporaryStorage>().AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<GameDataService>().As<IGameDataService>()
+                .SingleInstance();
+
+            builder.RegisterType<GamerConsoleInput>().AsImplementedInterfaces()
+                .SingleInstance();
+            builder.RegisterType<GamerConsoleOutput>().AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder.RegisterType<Builder>()
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            //TODO: подмать в каком он скоупе, можер выделить метод GetGameNames в отдельный сингл инстанс
+            builder.RegisterType<GameLoader>().As<IGameLoader>();
+                //.InstancePerLifetimeScope();
+
+            builder.RegisterType<OopSolwer>().AsSelf()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<OopThinker>().AsSelf()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<OopProSolwer>().AsSelf()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<SolwerDividesBy3>().AsSelf()
+                .InstancePerLifetimeScope();
             // регистрация как самого себяя или интерфейс
             // InstancePerLifetimeScope и какие ещё есть
 
+            builder.RegisterType<ActiveGameService>()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
 
             builder.RegisterType<OopRunner>()
                 .As<OopRunner>()
-                .As<IOopRunner>();
-            builder.RegisterType<OopMenu>().AsSelf().AsImplementedInterfaces().InstancePerLifetimeScope();
+                .As<IOopRunner>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<OopMenu>().AsSelf().AsImplementedInterfaces()
+                //.InstancePerLifetimeScope();
+                .SingleInstance();
             //builder.RegisterType<OopMenu>().As<OopMenu>();
 
             builder.RegisterModule<NLogModule>();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Autofac.Extras.NLog;
-using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop.OopGameLoader;
 using BullsAndCows.Oop.Solwer;
 
 

@@ -1,4 +1,4 @@
-﻿namespace BullsAndCows.Oop.GameLoader
+﻿namespace BullsAndCows.Oop.OopGameLoader
 {
     public interface IOopGameData
     {

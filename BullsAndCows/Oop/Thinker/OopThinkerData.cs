@@ -1,4 +1,4 @@
-﻿using BullsAndCows.Oop.GameLoader;
+﻿using BullsAndCows.Oop.OopGameLoader;
 
 namespace BullsAndCows.Oop.Thinker
 {

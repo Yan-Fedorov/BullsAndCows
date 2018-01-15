@@ -1,6 +1,6 @@
 ﻿using BullsAndCows.Oop;
 using Autofac;
-using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop.OopGameLoader;
 using BullsAndCows.Oop.Menu;
 
 namespace BullsAndCows

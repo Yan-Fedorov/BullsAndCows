@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop.OopGameLoader;
 using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows.Oop.Menu;
 using BullsAndCows.Oop.Runner;
@@ -9,7 +9,8 @@ using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.GameData;
 using BullsAndCows.Oop.ProSolwer;
 using BullsAndCows.Oop.ProfessionalSolwer;
-
+using BullsAndCows.Oop.ActiveGame;
+using System.Collections.Generic;
 
 namespace BullsAndCows.Oop
 {
@@ -18,23 +19,35 @@ namespace BullsAndCows.Oop
         IOopGame GetGame(Game gameKey);
     }
 
+    //TODO: Удалить из тестов
     public class Builder: IBuilder
     {       
-        private readonly IGamerConsoleInput _consoleInput;
-        private readonly IGamerConsoleOutput _consoleOutput;
         private readonly ILifetimeScope _scope;
-     
+        private readonly IActiveGameStore _activeGameStore;
 
-        public Builder(IGamerConsoleInput consoleInput, IGamerConsoleOutput consoleOutput, ILifetimeScope scope)
+        private readonly Dictionary<Game, Type> _gamesDictionary = new Dictionary<Game, Type>
+        {
+            { Game.Solver, typeof(OopSolwer)}
+        };
+
+
+        public Builder(ILifetimeScope scope, IActiveGameStore activeGameStore)
         {
             _scope = scope;
-            _consoleInput = consoleInput;
-            _consoleOutput = consoleOutput;
+            _activeGameStore = activeGameStore;
         }
 
 
         public IOopGame GetGame(Game gameKey)
         {
+
+            if(!_gamesDictionary.TryGetValue(gameKey, out var gameType))
+                throw new ArgumentOutOfRangeException(nameof(gameKey), gameKey, null);
+
+            var game = _scope.Resolve(gameType) as IOopGame;
+            _activeGameStore.StoreGame(game);
+            return game;
+
             switch (gameKey)
             {
                 case Game.Solver:

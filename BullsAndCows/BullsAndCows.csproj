@@ -59,16 +59,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Oop\ActiveGame\ActiveGameService.cs" />
+    <Compile Include="Oop\ActiveGame\IActiveGameProvider.cs" />
+    <Compile Include="Oop\ActiveGame\IActiveGameStore.cs" />
     <Compile Include="Oop\IoCBuilder.cs" />
     <Compile Include="Oop\GameData\GameDataService.cs" />
-    <Compile Include="Oop\GameLoader\IConsoleHistorySaver.cs" />
-    <Compile Include="Oop\GameLoader\OopGameData.cs" />
+    <Compile Include="Oop\OopGameLoader\IConsoleHistorySaver.cs" />
+    <Compile Include="Oop\OopGameLoader\OopGameData.cs" />
     <Compile Include="Oop\Menu\OopMenu.cs" />
     <Compile Include="Oop\ProfessionalSolwer\OopProSolwer.cs" />
     <Compile Include="Oop\ProfessionalSolwer\SolwerDividesBy3.cs" />
     <Compile Include="Oop\Solwer\OopSolwerData.cs" />
     <Compile Include="Oop\IOopGame.cs" />
-    <Compile Include="Oop\GameLoader\GameLoader.cs" />
+    <Compile Include="Oop\OopGameLoader\GameLoader.cs" />
     <Compile Include="Oop\Runner\GameInput.cs" />
     <Compile Include="Oop\Thinker\GameBuilder.cs" />
     <Compile Include="IGame.cs" />

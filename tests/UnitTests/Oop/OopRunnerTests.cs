@@ -1,7 +1,7 @@
 ﻿using BullsAndCows.Oop.Runner;
 using NSubstitute;
 using Xunit;
-using BullsAndCows.Oop.GameLoader;
+using BullsAndCows.Oop.OopGameLoader;
 using BullsAndCows.Oop;
 using BullsAndCows.Oop.GamerConsol;
 using BullsAndCows;
