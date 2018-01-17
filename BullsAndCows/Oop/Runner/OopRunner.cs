@@ -1,10 +1,11 @@
-﻿using BullsAndCows.Oop.GamerConsol;
+﻿using BullsAndCows.Oop.ActiveGame;
+using BullsAndCows.Oop.GamerConsol;
 
 namespace BullsAndCows.Oop.Runner
 {
     public interface IOopRunner
     {
-        GameInputOption Run(IOopGame game);
+        GameInputOption Run();
         int Iteration { set; get; }
     }
 
@@ -12,17 +13,21 @@ namespace BullsAndCows.Oop.Runner
     public class OopRunner : IOopRunner
     {
         private readonly IGamerConsoleInput _input;
+        private readonly IActiveGameProvider _activeGameProvider;
 
         public int Iteration { get; set; }
 
-        public OopRunner(IGamerConsoleInput input)
+        public OopRunner(IGamerConsoleInput input, IActiveGameProvider activeGameProvider)
         {
             _input = input;
+            _activeGameProvider = activeGameProvider;
             Iteration = 0;
         }
 
-        public GameInputOption Run(IOopGame game)
+        public GameInputOption Run()
         {
+            var game = _activeGameProvider.GetGame();
+
             if (Iteration == 0)
             {
                 game.MakeGreating();

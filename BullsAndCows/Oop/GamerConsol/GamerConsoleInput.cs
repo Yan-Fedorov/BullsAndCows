@@ -4,17 +4,14 @@ using BullsAndCows.Oop.Solwer;
 using BullsAndCows.Oop.Runner;
 using System.Collections.Generic;
 using BullsAndCows.Oop.OopGameLoader;
-using BullsAndCows.Oop;
-using BullsAndCows.Oop.Menu;
-using static BullsAndCows.Oop.GamerConsol.GamerConsoleInput;
+using BullsAndCows.Oop.GameContext;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
-    public interface IGamerConsoleInput : IThinkerInput, ISolwerInput, IOopRunnerInput
+    public interface IGamerConsoleInput : IThinkerInput, ISolwerInput, IOopRunnerInput, IGameMenuInput
     {
         GameInput<int> SelectSavedGame(List<string> games);
-        Save GetGameMenuOption();
-        string GetSaveGameName();
+        new void PressAnyKey();
     }
 
     public class GamerConsoleInput : IGamerConsoleInput

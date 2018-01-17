@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using BullsAndCows.Oop.GameContext;
 using BullsAndCows.Oop.OopGameLoader;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
@@ -7,7 +8,9 @@ using BullsAndCows.Oop.Runner;
 
 namespace BullsAndCows.Oop.GamerConsol
 {
-    public interface IGamerConsoleOutput : IThinkerOutput, ISolwerOutput, IOopRunnerOutput { }
+    public interface IGamerConsoleOutput : IThinkerOutput, ISolwerOutput,
+        IOopRunnerOutput, IGameMenuOutput
+    { }
 
     public class GamerConsoleOutput : IGamerConsoleOutput
     {

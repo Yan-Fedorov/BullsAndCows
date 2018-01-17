@@ -62,6 +62,10 @@
     <Compile Include="Oop\ActiveGame\ActiveGameService.cs" />
     <Compile Include="Oop\ActiveGame\IActiveGameProvider.cs" />
     <Compile Include="Oop\ActiveGame\IActiveGameStore.cs" />
+    <Compile Include="Oop\GameContext\GameContext.cs" />
+    <Compile Include="Oop\GameContext\IGameMenuInput.cs" />
+    <Compile Include="Oop\GameContext\IGameMenuOutput.cs" />
+    <Compile Include="Oop\GameData\GameDataCached.cs" />
     <Compile Include="Oop\IoCBuilder.cs" />
     <Compile Include="Oop\GameData\GameDataService.cs" />
     <Compile Include="Oop\OopGameLoader\IConsoleHistorySaver.cs" />

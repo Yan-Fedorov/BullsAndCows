@@ -12,6 +12,7 @@ using Autofac;
 using Autofac.Extras.NLog;
 using BullsAndCows.Oop;
 using BullsAndCows.Oop.ActiveGame;
+using BullsAndCows.Oop.GameContext;
 
 namespace BullsAndCows
 {
@@ -36,9 +37,12 @@ namespace BullsAndCows
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
-            //TODO: подмать в каком он скоупе, можер выделить метод GetGameNames в отдельный сингл инстанс
-            builder.RegisterType<GameLoader>().As<IGameLoader>();
-                //.InstancePerLifetimeScope();
+            builder.RegisterType<GameContext>()
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<GameLoader>().As<IGameLoader>()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<OopSolwer>().AsSelf()
                 .InstancePerLifetimeScope();
@@ -53,7 +57,7 @@ namespace BullsAndCows
 
             builder.RegisterType<ActiveGameService>()
                 .AsImplementedInterfaces()
-                .InstancePerDependency();
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<OopRunner>()
                 .As<OopRunner>()
@@ -62,6 +66,8 @@ namespace BullsAndCows
 
             builder.RegisterType<OopMenu>().AsSelf().AsImplementedInterfaces()
                 //.InstancePerLifetimeScope();
+                .SingleInstance();
+            builder.RegisterType<GameDataCached>().AsImplementedInterfaces()
                 .SingleInstance();
             //builder.RegisterType<OopMenu>().As<OopMenu>();
 

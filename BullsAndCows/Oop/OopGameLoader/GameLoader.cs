@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using BullsAndCows.Oop.ActiveGame;
 using BullsAndCows.Oop.Runner;
 using BullsAndCows.Oop.Thinker;
 using BullsAndCows.Oop.Solwer;
@@ -12,41 +11,45 @@ namespace BullsAndCows.Oop.OopGameLoader
 {
     public interface IGameLoader
     {
-        string Load(out IOopGame game, IOopRunner runner, int gameNumber);
-        List<string> GetGameNames();
-        void Save(IOopGame game, IOopRunner runner, string gameHistory, string gameName);
+        string Load(int gameNumber);
+        void Save(string gameHistory, string gameName);
     }
 
     public class GameLoader : IGameLoader
     {
         private readonly Lazy<IBuilder> _builder;
-        private readonly IGameDataService _dataService;
+        private readonly IGameDataCached _dataCached;
+        private readonly IActiveGameStore _activeGameStore;        
+        private readonly IOopRunner _oopRunner;
+        private readonly IActiveGameProvider _activeGameProvider;
 
-        private Lazy<List<OopGameData>> _games;
 
-        public GameLoader(Lazy<IBuilder> builder, IGameDataService dataService)
+        public GameLoader(Lazy<IBuilder> builder, IGameDataCached dataCached, IActiveGameStore activeGameStore, IOopRunner oopRunner, IActiveGameProvider activeGameProvider)
         {
             _builder = builder;
-            _dataService = dataService;
-            _games = new Lazy<List<OopGameData>>(_dataService.LoadDatas);
+            _dataCached = dataCached;
+            _activeGameStore = activeGameStore;
+            _oopRunner = oopRunner;
+            _activeGameProvider = activeGameProvider;
         }
 
 
    
 
-        public string Load(out IOopGame game, IOopRunner runner, int gameNumber)
+        public string Load(int gameNumber)
         {
+            var gameData = _dataCached.Get(gameNumber - 1);
+            IOopGame game;
             
-            var gameData = _games.Value[gameNumber - 1];
             switch (gameData)
             {
                 case OopThinkerData thinkerData:
-                    var thinker = (game = _builder.Value.GetGame(Game.Thinker)) as OopThinker; // _scope.Resolve<OopThinker>();
+                    var thinker = (game = _builder.Value.CreateGame(Game.Thinker)) as OopThinker; // _scope.Resolve<OopThinker>();
                     thinker.Number = thinkerData.Number;
                     break;
 
                 case OopSolwerData solwerData:
-                    var solwer = (game = _builder.Value.GetGame(Game.Solver)) as OopSolwer;
+                    var solwer = (game = _builder.Value.CreateGame(Game.Solver)) as OopSolwer;
                     solwer.Assumption = solwerData.Assumption;
                     solwer.Line = solwerData.Line;
                     break;
@@ -55,22 +58,18 @@ namespace BullsAndCows.Oop.OopGameLoader
                     throw new Exception($"Unnoun game data {gameData.GetType().Name}");
             }
 
-            runner.Iteration = gameData.Iteration;
+            _oopRunner.Iteration = gameData.Iteration;
+            _activeGameStore.StoreGame(game);
+
             return gameData.GameScreen;
         }
         
 
-        public List<string> GetGameNames()
-        {
-            return _games.Value
-                .Select(x => x.GetName())
-                .ToList();
-        }
 
-
-        public void Save(IOopGame game, IOopRunner runner, string gameHistory, string gameName)
+        public void Save(string gameHistory, string gameName)
         {
             OopGameData gameData;
+            var game = _activeGameProvider.GetGame();
 
             switch (game)
             {
@@ -78,8 +77,6 @@ namespace BullsAndCows.Oop.OopGameLoader
                     gameData = new OopThinkerData
                     {
                         Number = thinker.Number
-
-
                     };
                     break;
 
@@ -94,14 +91,16 @@ namespace BullsAndCows.Oop.OopGameLoader
                 default:
                     throw new ArgumentException("unnoun type: " + game.GetType().Name);
             }
+
             var tp = gameData.GetType().ToString();
-            gameData.Iteration = runner.Iteration - 1;
+
+            gameData.Iteration = _oopRunner.Iteration - 1;
+
             gameData.GameScreen = gameHistory;
             gameData.GameName = gameName;
             gameData.GameType = tp;
 
-            _dataService.Save(gameData);
-            _games = new Lazy<List<OopGameData>>(_dataService.LoadDatas);
+            _dataCached.Save(gameData);
         }
     }
 }
